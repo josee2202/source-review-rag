@@ -1,0 +1,52 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  tests:
+    name: Tests (Qdrant in memory, test doubles for Ollama)
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: requirements*.txt
+      - run: pip install -r requirements-dev.txt
+      - run: pytest -q
+
+  smoke-retrieval:
+    name: Three modes with real embeddings (Ollama + embedded Qdrant, no LLM)
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: requirements*.txt
+      - run: pip install -r requirements.txt
+      - name: Install Ollama and the embedding model
+        run: |
+          curl -fsSL https://ollama.com/install.sh | OLLAMA_VERSION=0.40.11 sh
+          for i in $(seq 1 30); do curl -sf localhost:11434/api/version && break; sleep 1; done
+          ollama pull nomic-embed-text
+      - name: Start the API
+        run: |
+          nohup uvicorn api_rag:app --app-dir IA-modulable --port 8010 > api.log 2>&1 &
+          for i in $(seq 1 60); do curl -sf localhost:8010/colecciones && break; sleep 1; done
+      - name: Run the end-to-end check
+        run: python tests/smoke_e2e.py
+      - name: API log
+        if: always()
+        run: cat api.log

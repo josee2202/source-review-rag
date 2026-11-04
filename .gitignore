@@ -1,0 +1,25 @@
+# --- Entornos, cachés y sistema ---
+venv/
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+.ipynb_checkpoints/
+.DS_Store
+*.log
+
+# --- Credenciales y configuración local ---
+.env
+.env.*
+!.env.example
+
+# --- Índice local de este proyecto (se reconstruye a partir de tus documentos) ---
+qdrant_storage/
+
+# --- Los resultados exportados pueden citar los documentos revisados ---
+*.xlsx
+
+# --- Tus documentos, fuera del repositorio ---
+/private/
+/my_documents/

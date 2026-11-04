@@ -1,0 +1,8 @@
+[server]
+port = 8511
+
+[browser]
+gatherUsageStats = false
+
+[client]
+toolbarMode = "minimal"
