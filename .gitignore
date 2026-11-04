@@ -1,0 +1,25 @@
+# Environments, caches and OS files
+venv/
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+.ipynb_checkpoints/
+.DS_Store
+*.log
+
+# Credentials and local configuration
+.env
+.env.*
+!.env.example
+
+# Local vector store of this project (rebuilt from your documents on demand)
+qdrant_storage/
+
+# Results exported from the UI may quote the documents you reviewed
+*.xlsx
+
+# Keep your own documents out of the repository
+/private/
+/my_documents/

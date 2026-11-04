@@ -1,0 +1,71 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  tests:
+    name: Tests (Qdrant in memory, test doubles for Ollama)
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: requirements*.txt
+      - run: pip install -r requirements-dev.txt
+      - run: pytest -q
+
+  demo-retrieval:
+    name: Demo with real embeddings (Ollama + Qdrant, no LLM)
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    services:
+      qdrant:
+        image: qdrant/qdrant:v1.14.1
+        ports:
+          - 6333:6333
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: requirements*.txt
+      - run: pip install -r requirements.txt
+      - name: Install Ollama and the embedding model
+        run: |
+          curl -fsSL https://ollama.com/install.sh | OLLAMA_VERSION=0.40.11 sh
+          for i in $(seq 1 30); do curl -sf localhost:11434/api/version && break; sleep 1; done
+          ollama pull nomic-embed-text
+      - name: Start the API
+        working-directory: IA-modulable
+        run: |
+          for i in $(seq 1 30); do curl -sf localhost:6333/readyz && break; sleep 1; done
+          nohup uvicorn api_rag:app --port 8000 > ../api.log 2>&1 &
+          for i in $(seq 1 60); do curl -sf localhost:8000/colecciones && break; sleep 1; done
+      - name: Run the demo (retrieval only) and check the evidence returned
+        run: |
+          python examples/run_demo.py --sin-agente --solo "Normativo vs Funcional"
+          python examples/run_demo.py --sin-agente --solo "Funcional vs Técnico"
+          python - <<'EOF'
+          import json, pathlib
+          for f in ["normativo_vs_funcional_sin_agente.json", "funcional_vs_tecnico_sin_agente.json"]:
+              res = json.loads(pathlib.Path("examples/outputs", f).read_text())
+              assert res, f"{f}: sin resultados"
+              for r in res:
+                  assert len(r["relevant_chunks"]) == 3 and len(r["sources"]) == 3, r
+                  assert all(0 < s <= 1 for s in r["scores"]), r["scores"]
+              print(f"{f}: {len(res)} fragmentos, 3 evidencias trazables cada uno")
+          EOF
+      - name: API log
+        if: always()
+        run: cat api.log
