@@ -2,7 +2,7 @@
 
 Los tests no necesitan Ollama ni un servidor Qdrant: usan Qdrant en memoria y una función de
 embedding sustituta (bolsa de palabras con hash). Validan la lógica del pipeline y de la API,
-no la calidad de los modelos; esa se mide con eval/run_eval.py contra Ollama real.
+no la calidad de los modelos. tests/smoke_e2e.py comprueba el recorrido con modelos reales.
 """
 import hashlib
 import os
@@ -17,7 +17,7 @@ import pytest
 ROOT = Path(__file__).resolve().parents[1]
 os.environ["QDRANT_LOCATION"] = ":memory:"  # antes de importar config
 sys.path.insert(0, str(ROOT / "IA-modulable"))
-sys.path.insert(0, str(ROOT / "examples"))
+sys.path.insert(0, str(ROOT / "front-end"))
 
 SYNTHETIC = ROOT / "examples" / "synthetic"
 
@@ -54,6 +54,6 @@ def fake_embeddings():
 
 
 @pytest.fixture
-def coleccion():
-    """Nombre de colección único: el cliente en memoria se comparte entre tests."""
-    return f"test_{uuid.uuid4().hex[:8]}"
+def unico():
+    """Marca única: el cliente en memoria se comparte entre tests y un corpus igual reutilizaría su índice."""
+    return f"marca{uuid.uuid4().hex[:10]}"

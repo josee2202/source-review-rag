@@ -1,72 +1,77 @@
+import json
+import os
+import shutil
+import sys
+import tempfile
+from typing import List, Optional
+from urllib.parse import urlparse
+
 from fastapi import FastAPI, UploadFile, File, Form, HTTPException
 from fastapi.responses import JSONResponse
-from typing import List
-import shutil
-import tempfile
+from langchain_core.documents import Document
 
-import os
-import sys
+# El backend se puede arrancar desde cualquier directorio
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
-# ? Añadimos dinámicamente la carpeta padre al path
-parent_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), os.pardir))
-if parent_dir not in sys.path:
-    sys.path.insert(0, parent_dir)
-
+from config import config
+from modalidades import MODALIDADES
+from prompt import PROMPTS_MODALIDAD
 from RAG3 import RAG
-from prompt import prompt_definitivos
-from X_AGENT import agente_dinamico  # Asegúrate de que esté inicializado
+from X_AGENT import agente_dinamico
+from X_FUNCTIONS import EntradaInvalida
+from X_qderant import PREFIJO_COLECCION
 
-def split_by_consulta_pattern(query_docs):
-    import re
-    from langchain.schema import Document
-    
-    # Si es una lista de Documents, extraer el texto
-    if isinstance(query_docs, list):
-        # Concatenar todo el contenido de los documentos
-        full_text = "\n".join([doc.page_content for doc in query_docs])
-    elif isinstance(query_docs, str):
-        full_text = query_docs
-    else:
-        # Si es un solo Document
-        full_text = query_docs.page_content
-    
-    # Dividir por el patrón "Consulta N:"
-    parts = re.split(r'Consulta \d+:', full_text)
-    
-    # Filtrar partes vacías y crear Documents
-    documents = []
-    for i, part in enumerate(parts):
-        if part.strip():
-            documents.append(Document(
-                page_content=part.strip(),
-                metadata={"chunk_id": i, "source": "consulta_split"}
-            ))
-    
-    print(f"✂️ Split por consultas: {len(documents)} chunks generados")
-    return documents    
+CAMPOS_METADATOS = ("title", "outlet", "date", "url")
+_chunking = config.cfg_param['chunking']
+
+app = FastAPI(title="Source Review RAG")
 
 
+def obtener_modalidad(modalidad: Optional[str]):
+    """Valida el ID recibido: nunca se recurre a una modalidad o prompt por defecto."""
+    if modalidad not in MODALIDADES:
+        raise EntradaInvalida(f"Modalidad desconocida: {modalidad!r}. Valores admitidos: {', '.join(MODALIDADES)}.")
+    return MODALIDADES[modalidad]
 
-def get_prompt_by_validation_type(tipo_validacion):
-    """
-    Retorna el prompt correspondiente según el tipo de validación.
-    
-    Args:
-        tipo_validacion (str): Tipo de validación seleccionado
-        
-    Returns:
-        ChatPromptTemplate: Prompt correspondiente
-    """
-    prompts = {
-        "Normativo vs Funcional": prompt_definitivos['evaluar_alineacion_normativa'],
-        "Funcional vs Técnico": prompt_definitivos['evaluar_tecnico_funcional'],
-        "Código vs Técnico": prompt_definitivos['evaluar_descriptivo_tecnico'],
-        "Código vs Estadístico": prompt_definitivos['evaluar_alineacion_normativa']
-    }
-    
-    return prompts.get(tipo_validacion, prompt_definitivos['evaluar_alineacion_normativa'])
 
-app = FastAPI()
+def seleccionar_entrada(archivos: List[UploadFile], texto: Optional[str], nombre_entrada: str):
+    """Cada entrada es o bien texto pegado o bien archivos: nunca se combinan."""
+    archivos = [f for f in archivos if f is not None and f.filename]
+    hay_texto = bool(texto and texto.strip())
+    if archivos and hay_texto:
+        raise EntradaInvalida(f"{nombre_entrada}: se han recibido a la vez un archivo y texto pegado. "
+                              "Envía solo uno de los dos; no se combinan.")
+    if not archivos and not hay_texto:
+        raise EntradaInvalida(f"{nombre_entrada}: no hay contenido. Pega texto o sube un archivo.")
+    return archivos, (texto if hay_texto else None)
+
+
+def parsear_metadatos(ref_metadata: Optional[str], n_referencias: int) -> List[dict]:
+    """Metadatos opcionales de cada referencia, en el orden de las referencias. Nunca se inventan."""
+    if not ref_metadata or not ref_metadata.strip():
+        return [{} for _ in range(n_referencias)]
+    try:
+        lista = json.loads(ref_metadata)
+    except json.JSONDecodeError as e:
+        raise EntradaInvalida(f"ref_metadata no es un JSON válido: {e}")
+    if not isinstance(lista, list) or len(lista) != n_referencias or not all(isinstance(m, dict) for m in lista):
+        raise EntradaInvalida(f"ref_metadata debe ser una lista con un objeto por referencia ({n_referencias}).")
+
+    limpios = []
+    for meta in lista:
+        desconocidos = set(meta) - set(CAMPOS_METADATOS)
+        if desconocidos:
+            raise EntradaInvalida(f"Campos no admitidos en ref_metadata: {', '.join(sorted(desconocidos))}. "
+                                  f"Admitidos: {', '.join(CAMPOS_METADATOS)}.")
+        limpio = {k: str(v).strip() for k, v in meta.items() if v is not None and str(v).strip()}
+        if "url" in limpio:
+            # La URL solo se conserva como enlace: nunca se descarga
+            url = urlparse(limpio["url"])
+            if url.scheme not in ("http", "https") or not url.netloc:
+                raise EntradaInvalida(f"URL no válida en ref_metadata: {limpio['url']!r}. Debe empezar por http(s)://.")
+        limpios.append(limpio)
+    return limpios
+
 
 def guardar_upload(upload: UploadFile, carpeta: str) -> str:
     """Guarda un fichero subido conservando su nombre original (aparece como fuente en los resultados)."""
@@ -77,157 +82,121 @@ def guardar_upload(upload: UploadFile, carpeta: str) -> str:
     return ruta
 
 
-@app.post("/validar")
-async def validar_documentos(file_ref: List[UploadFile] = File(...),
-                            file_query: UploadFile = File(...), 
-                            collection_name: str = Form(...),
-                            doc_sample_ratio: float = Form(1.0),
-                            usar_agente: bool = Form(False),
-                            tipo_validacion: str = Form("Normativo vs Funcional")):
-    
-    print(f"⚙️ Porcentaje solicitado: {doc_sample_ratio * 100}%")
-    print(f"🤖 ¿Validación con agente?: {'Sí' if usar_agente else 'No'}")
-    print(f"🔍 Tipo de validación: {tipo_validacion}")
+def leer_archivo(rag: RAG, upload: UploadFile, carpeta: str) -> List[Document]:
+    rag.path = guardar_upload(upload, carpeta)
+    docs = [d for d in rag.clean(rag.read_document()) if d.page_content.strip()]
+    if not docs:
+        raise EntradaInvalida(f"'{upload.filename}' no contiene texto extraíble (¿está vacío o es un PDF escaneado?).")
+    return docs
 
+
+def leer_pegado(rag: RAG, texto: str, nombre: str) -> List[Document]:
+    return rag.clean([Document(page_content=texto, metadata={"filename": nombre})])
+
+
+def leer_referencias(rag: RAG, archivos, texto, metadatos, tmp) -> List[Document]:
+    """Lee todas las referencias. Cada una tiene su carpeta: dos archivos con el mismo nombre no se pisan."""
+    if texto is not None:
+        lecturas = [leer_pegado(rag, texto, "Texto pegado (referencia)")]
+    else:
+        lecturas = [leer_archivo(rag, f, f"{tmp}/ref/{i}") for i, f in enumerate(archivos)]
+
+    docs = []
+    for i, (lectura, meta) in enumerate(zip(lecturas, metadatos), start=1):
+        for doc in lectura:
+            doc.metadata.update(ref_id=f"R{i}", **meta)
+        docs.extend(lectura)
+    return docs
+
+
+@app.post("/validar")
+async def validar_documentos(modalidad: Optional[str] = Form(None),
+                             file_ref: List[UploadFile] = File(default=[]),
+                             texto_ref: Optional[str] = Form(None),
+                             ref_metadata: Optional[str] = Form(None),
+                             file_query: Optional[UploadFile] = File(None),
+                             texto_query: Optional[str] = Form(None),
+                             fraccion_inicial: float = Form(1.0),
+                             usar_agente: bool = Form(False)):
+    print(f"🔍 Modalidad: {modalidad} · 🤖 Comentario: {'sí' if usar_agente else 'no'}")
     try:
-        return _ejecutar_validacion(file_ref, file_query, collection_name, doc_sample_ratio, usar_agente, tipo_validacion)
-    except (ValueError, TypeError, FileNotFoundError) as e:
-        # Entrada no válida: formato no soportado, documento sin texto extraíble...
+        return _ejecutar_revision(modalidad, file_ref, texto_ref, ref_metadata, file_query, texto_query,
+                                  fraccion_inicial, usar_agente)
+    except EntradaInvalida as e:
         raise HTTPException(status_code=400, detail=str(e))
     except Exception as e:
-        # Antes los fallos de Ollama/Qdrant se silenciaban y se devolvía 200 sin evidencias
-        raise HTTPException(status_code=500, detail=f"Error en el pipeline (¿están Ollama y Qdrant en marcha?): {e}")
+        # Un fallo de embeddings o búsqueda nunca se devuelve como un éxito vacío
+        raise HTTPException(status_code=500, detail=f"Error en el pipeline (¿está Ollama en marcha y el modelo "
+                                                    f"de embeddings descargado?): {type(e).__name__}: {e}")
 
 
-def _ejecutar_validacion(file_ref, file_query, collection_name, doc_sample_ratio, usar_agente, tipo_validacion):
+def _ejecutar_revision(modalidad, file_ref, texto_ref, ref_metadata, file_query, texto_query,
+                       fraccion_inicial, usar_agente):
+    config_modalidad = obtener_modalidad(modalidad)
+    if not 0 < fraccion_inicial <= 1:
+        raise EntradaInvalida("fraccion_inicial debe estar entre 0 (excluido) y 1.")
+
+    archivos_ref, pegado_ref = seleccionar_entrada(file_ref, texto_ref, "Referencia")
+    archivos_rev, pegado_rev = seleccionar_entrada([file_query], texto_query, "Texto a revisar")
+
+    n_referencias = 1 if pegado_ref is not None else len(archivos_ref)
+    if n_referencias > 1 and not config_modalidad.multiples_referencias:
+        raise EntradaInvalida(f"La modalidad '{config_modalidad.nombre}' admite una sola referencia "
+                              f"y se han recibido {n_referencias}.")
+    metadatos = parsear_metadatos(ref_metadata, n_referencias)
+
     with tempfile.TemporaryDirectory() as tmp:
-        # Guardar archivos (la referencia puede ser uno o varios documentos)
-        ref_paths = [guardar_upload(f, f"{tmp}/ref") for f in file_ref]
-        query_path = guardar_upload(file_query, f"{tmp}/query")
+        # El mismo recorrido para las tres modalidades: indexar la referencia, buscar cada fragmento revisado
+        referencia = RAG()
+        docs = leer_referencias(referencia, archivos_ref, pegado_ref, metadatos, tmp)
+        chunks = referencia.split(docs, _chunking['reference']['size'], _chunking['reference']['overlap'])
+        indice = referencia.qdrant_record(chunks)
 
-        # Ejecutar pipeline
-        supervisor = RAG(ref_paths[0])
-        docs = []
-        for ref_path in ref_paths:
-            supervisor.path = ref_path
-            docs.extend(supervisor.read_document())
-        docs = supervisor.clean(docs)
-        chunks = supervisor.split(docs, chunk_ss=800, chunk_so=200)
-        supervisor.qdrant_record(chunks, collection_name=collection_name)
+        consulta = RAG(embeddings_func=referencia.embeddings_func)
+        if pegado_rev is not None:
+            query_docs = leer_pegado(consulta, pegado_rev, "Texto pegado (revisado)")
+        else:
+            query_docs = leer_archivo(consulta, archivos_rev[0], f"{tmp}/query")
+        query_chunks = consulta.split_query(query_docs, _chunking['review']['size'], _chunking['review']['overlap'],
+                                            fraccion_inicial=fraccion_inicial)
+        if not query_chunks:
+            raise EntradaInvalida("El texto a revisar no contiene texto procesable.")
 
-        # El código SAS se traduce primero a texto, sea cual sea el tipo de validación
-        # (antes solo en "Código vs Técnico": en "Código vs Estadístico" un .sas fallaba)
-        if query_path.lower().endswith(".sas"):
-            from Codigo_sas import ProcesarSAS
-            procesador_sas = ProcesarSAS()
-            
-            # Crear directorio para el archivo SAS
-            sas_dir = f"{tmp}/sas_files"
-            os.makedirs(sas_dir, exist_ok=True)
-            
-            # Mover el archivo SAS al directorio
-            sas_file_path = f"{sas_dir}/{os.path.basename(query_path)}"
-            shutil.copy2(query_path, sas_file_path)
-            
-            # Cargar y procesar documentos SAS desde el directorio
-            sas_docs = procesador_sas.read_directory(sas_dir)
-            split_documents = procesador_sas.split_documents_2(sas_docs)
-            
-            # Agrupar bloques en chunks largos optimizados
-            grupos = procesador_sas.agrupar_bloques_por_longitud(split_documents, max_length=2400)
-            
-            # Generar los textos explicando los bloques de código
-            respuestas = procesador_sas.generar_respuestas(grupos)
-            
-            # Guardar el Word en el directorio temporal y asegurar que query_path tenga la ruta correcta
-            word_path = f"{tmp}/resultados_bloques_definitivo.docx"
-            procesador_sas.guardar_respuestas_en_word(respuestas, word_path)
-            query_path = word_path  # Asegurar que query_path tenga la ruta correcta
-            
-            print(f"📄 Archivo Word guardado en: {query_path}")  # Debug
-
-        consulta = RAG(query_path, embeddings_func=supervisor.embeddings_func)
-        
-        # Verificar que query_path no sea None
-        if query_path is None:
-            raise ValueError("Error: query_path es None después del procesamiento SAS")
-            
-        print(f"🔍 Leyendo documento desde: {query_path}")  # Debug
-        query_docs = consulta.read_document()
-        query_docs = consulta.clean(query_docs)
-        if not any(d.page_content.strip() for d in query_docs):
-            raise ValueError("El documento de consulta no contiene texto extraíble (¿PDF escaneado?).")
-        query_chunks = consulta.split_query(query_docs, 600, 200, sample_ratio=doc_sample_ratio)
-        # query_chunks = split_by_consulta_pattern(query_docs)
-        results = consulta.process_query_chunks_v2(query_chunks, collection_name=collection_name)
-
-        consulta.results = results
+        results = consulta.process_query_chunks_v2(query_chunks, collection_name=indice["coleccion"])
 
         if usar_agente:
-            print("🧠 Generando respuestas con agente...")
-            
-            # Obtener el prompt después de procesar el código SAS
-            prompt_seleccionado = get_prompt_by_validation_type(tipo_validacion)
-            agente_dinamico.set_prompt(prompt_seleccionado)
-            
+            print("🧠 Generando comentarios...")
+            agente_dinamico.set_prompt(PROMPTS_MODALIDAD[config_modalidad.id])
             consulta.generar_respuesta(agente_dinamico)
             results = consulta.results
 
-            print("Respuesta generada con éxito")
-            
-        return JSONResponse(content={"resultados": results})
+        referencias = []
+        vistos = set()
+        for doc in docs:
+            if doc.metadata["ref_id"] not in vistos:
+                vistos.add(doc.metadata["ref_id"])
+                referencias.append({c: doc.metadata.get(c) for c in ("ref_id", "filename") + CAMPOS_METADATOS})
 
+        return JSONResponse(content={
+            "modalidad": config_modalidad.id,
+            "modalidad_nombre": config_modalidad.nombre,
+            "comentario_solicitado": usar_agente,
+            "referencias": referencias,
+            "indice": indice,
+            "texto_revisado": {
+                "filename": query_docs[0].metadata.get("filename"),
+                "fragmentos_totales": consulta.fragmentos_totales,
+                "fragmentos_revisados": len(query_chunks),
+                "fragmentos_sin_revisar": consulta.fragmentos_totales - len(query_chunks),
+                "sin_revisar_desde": consulta.sin_revisar_desde,
+            },
+            "resultados": results,
+        })
 
-
-
-# @app.post("/validar")
-# async def validar_documentos(file_ref: UploadFile = File(...),
-#                             file_query: UploadFile = File(...), 
-#                             collection_name: str = Form(...),
-#                             doc_sample_ratio: float = Form(1.0),
-#                             usar_agente: bool = Form(False)):
-    
-#     print(f"⚙️ Porcentaje solicitado: {doc_sample_ratio * 100}%")
-#     print(f"🤖 ¿Validación con agente?: {'Sí' if usar_agente else 'No'}")
-    
-#     with tempfile.TemporaryDirectory() as tmp:
-#         # Guardar archivos
-#         ref_path = f"{tmp}/ref_{file_ref.filename}"
-#         with open(ref_path, "wb") as f:
-#             shutil.copyfileobj(file_ref.file, f)
-
-#         query_path = f"{tmp}/query_{file_query.filename}"
-#         with open(query_path, "wb") as f:
-#             shutil.copyfileobj(file_query.file, f)
-
-#         # Ejecutar pipeline
-#         supervisor = RAG(ref_path)
-#         docs = supervisor.read_document()
-#         docs = supervisor.clean(docs)
-#         chunks = supervisor.split(docs, chunk_ss=800, chunk_so=200)
-#         supervisor.qdrant_record(chunks, collection_name=collection_name)
-
-#         consulta = RAG(query_path, embeddings_func=supervisor.embeddings_func)
-#         query_docs = consulta.read_document()
-#         query_docs = consulta.clean(query_docs)
-#         query_chunks = consulta.split_query(query_docs, 600, 200, sample_ratio=doc_sample_ratio)
-#         results = consulta.process_query_chunks_v2(query_chunks, collection_name=collection_name)
-
-#         consulta.results = results  # Asignamos resultados para el método
-
-#         if usar_agente:
-#             print("🧠 Generando respuestas con agente...")
-#             consulta.generar_respuesta()
-#             results = consulta.results  # actualizar con respuestas
-
-#         return JSONResponse(content={"resultados": results})
-    
 
 @app.get("/colecciones")
 def listar_colecciones():
+    """Diagnóstico: colecciones de este proyecto en el almacenamiento configurado."""
     from X_qderant import get_qdrant_client
     collections = get_qdrant_client().get_collections().collections
-    nombres = [col.name for col in collections]
-    return {"colecciones": nombres}
-
-
+    return {"colecciones": [col.name for col in collections if col.name.startswith(PREFIJO_COLECCION)]}

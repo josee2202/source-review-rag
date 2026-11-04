@@ -1,4 +1,4 @@
-# Environments, caches and OS files
+# --- Entornos, cachés y sistema ---
 venv/
 .venv/
 __pycache__/
@@ -9,17 +9,17 @@ __pycache__/
 .DS_Store
 *.log
 
-# Credentials and local configuration
+# --- Credenciales y configuración local ---
 .env
 .env.*
 !.env.example
 
-# Local vector store of this project (rebuilt from your documents on demand)
+# --- Índice local de este proyecto (se reconstruye a partir de tus documentos) ---
 qdrant_storage/
 
-# Results exported from the UI may quote the documents you reviewed
+# --- Los resultados exportados pueden citar los documentos revisados ---
 *.xlsx
 
-# Keep your own documents out of the repository
+# --- Tus documentos, fuera del repositorio ---
 /private/
 /my_documents/

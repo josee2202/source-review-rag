@@ -6,7 +6,11 @@ llm:
     name: nomic-embed-text
     batch_size: 32        # textos por petición a Ollama; lotes de ~250+ provocan errores en /tokenize
   text:
-    name: llama3.2:1b     # etiqueta oficial de Ollama (el desarrollo original usó un alias local del mismo modelo)
-    max_tokens: 1024      # límite de tokens generados por respuesta; sin él, el modelo de 1B puede entrar en bucle
+    name: llama3.2:1b     # solo para el comentario opcional
+    max_tokens: 512       # límite de tokens generados por comentario; sin él, el modelo de 1B puede entrar en bucle
+    timeout_s: 300        # un comentario que no responde se registra como fallo y no bloquea el resto
+chunking:                 # forma parte de la huella del índice: cambiarlo fuerza una indexación nueva
+  reference: {size: 800, overlap: 200}
+  review: {size: 600, overlap: 200}
 qdrant:
-  location: http://localhost:6333   # URL del servidor, ":memory:" o ruta local para el modo embebido
+  location: qdrant_storage   # ruta relativa a la raíz del proyecto (modo embebido), URL de un servidor o ":memory:"
