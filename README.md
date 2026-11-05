@@ -30,7 +30,7 @@ all the news items at once; no verdicts from earlier comparisons are added up.
 
 ## Quick start
 
-Checked on macOS (Intel, CPU only) with Python 3.12 and Ollama 0.40.11.
+Checked on macOS (Intel, CPU only) with Python 3.12 and Ollama 0.40.11 and 0.40.14.
 
 **Prerequisites:** Python 3.12 and [Ollama](https://ollama.com/download) running. Docker is not needed:
 Qdrant runs embedded in the API process and stores its data in `qdrant_storage/` inside this folder.
@@ -42,6 +42,10 @@ python3.12 -m venv .venv
 ollama pull nomic-embed-text      # embeddings (274 MB), required
 ollama pull llama3.2:1b           # optional comment (1.3 GB)
 ```
+
+Comments are off by default and experimental. `llama3.2:1b` is still the configured model, but
+`qwen3.5:4b-q4_K_M` did far better in [the model comparison](docs/model-comparison.md). To try it, run
+`ollama pull qwen3.5:4b-q4_K_M` (3.3 GB) and start the API with `LLM_MODEL=qwen3.5:4b-q4_K_M`.
 
 Start the backend and the UI in two terminals, both from the project root:
 
@@ -179,27 +183,50 @@ overridden with environment variables or a `.env` file in the project root (see
 |---|---|---|
 | `OLLAMA_HOST_NAME` / `OLLAMA_PORT` | `localhost` / `11434` | Ollama server |
 | `EMBED_MODEL` | `nomic-embed-text` | Embedding model |
-| `LLM_MODEL` | `llama3.2:1b` | Model for the optional comment |
+| `LLM_MODEL` | `llama3.2:1b` | Model for the optional comment; see [the comparison](docs/model-comparison.md) |
 | `LLM_MAX_TOKENS` / `LLM_TIMEOUT_S` | `512` / `300` | Limits per comment; long comments are cut off |
 | `QDRANT_LOCATION` | `qdrant_storage` | Local path relative to the project root, a server URL or `:memory:` |
 | `API_URL` | `http://localhost:8010` | Backend URL used by the UI |
 
+## Model comparison
+
+Is a larger local model worth its cost for the optional comment? Three models labelled the same 30 claims
+against the same passages, on one CPU-only laptop, in two passes, with the protocol and the choice rule
+fixed in advance. Full method, tables and failures are in [docs/model-comparison.md](docs/model-comparison.md).
+
+| Model | Correct labels (pass 1, pass 2) | False supports (pass 1, pass 2) | Critical false supports (pass 1) | Median per warm request (pass 1) |
+|---|---|---|---|---|
+| `llama3.2:1b` | 8/30, 9/30 | 14/20, 13/20 | 13/18 | 8.1 s |
+| `qwen3.5:4b-q4_K_M` | 29/30, 30/30 | 1/20, 0/20 | 1/18 | 21.8 s |
+| `qwen3.5:9b-q4_K_M` | 27/30, 28/30 | 0/20, 0/20 | 0/18 | 38.8 s |
+
+A false support is labelling a claim as supported when it is contradicted or has no evidence in the passages.
+
+**Outcome:** the 4B is the recommended model if you turn comments on. The 4B and the 9B are too close to
+separate, so the rule prefers the cheaper one, and `llama3.2:1b` is clearly weaker. Comments stay off by
+default and experimental, because the 4B's critical false support is unresolved.
+
+**How far this goes:** the cases and labels are synthetic and were written by the assistant that ran the
+comparison (Claude Code), with no human review. This is not an independent benchmark or a representative
+sample of real news. The labels exist only in the benchmark, to make the models scorable; the app's
+free-text comments were not scored.
+
 ## Limitations
 
-- **Quality has not been measured.** There is no evaluation of retrieval or comments for these three
-  modes, and this README makes no accuracy claim. The bank-document metrics of the original thesis do not
-  apply here.
+- **Quality is measured only on a small synthetic set.** [The model comparison](docs/model-comparison.md)
+  covers 30 cases with the evidence already given. Retrieval has not been evaluated, the comments the app
+  shows have not been scored, and no person has reviewed the models' explanations. The bank-document metrics
+  of the original thesis do not apply here.
 - **Similarity is not support.** It measures closeness between texts. Up to three passages are always
   returned, even when none is relevant.
 - **Top-3 is not the whole document.** A fact missing from the retrieved passages may still be in the
   reference.
-- **The default comment model is unreliable.** In manual checks during development, `llama3.2:1b` read
-  figures wrongly, attributed claims to organisations that appeared in none of the texts, and missed a
-  60-versus-90-day discrepancy even though the relevant passage had been retrieved first. Treat comments
-  as hints and read the passages. Using a larger model through `LLM_MODEL` is possible but has not been
-  assessed either.
-- **Speed.** Comments took tens of seconds per fragment on a CPU-only laptop; this is an observation, not
-  a benchmark. Requests are handled one at a time, and embedded Qdrant allows a single API process.
+- **The default comment model is unreliable.** In the comparison, `llama3.2:1b` wrongly supported 14 of 20
+  claims and cited no passage, and some of its comments state a figure found in no input. Whichever model you
+  use, treat comments as hints and read the passages.
+- **Speed.** On the CPU-only laptop of the comparison, the median comment took 12 to 20 s per fragment with
+  `llama3.2:1b` and 23 to 35 s with `qwen3.5:4b-q4_K_M`, across three small documents. Other machines will
+  differ. Requests are handled one at a time, and embedded Qdrant allows a single API process.
 - **Segmentation.** Headings become their own fragments in texts with blank lines. PDF text usually has no
   blank lines, so PDFs are reviewed per page in chunks of up to 600 characters.
 - **Not covered.** No OCR for scanned PDFs, no automatic separation of pasted articles, no importing from
@@ -220,9 +247,19 @@ overridden with environment variables or a `.env` file in the project root (see
 | `pytest` (`tests/test_*.py`) | Modes and prompt selection, input formats and errors, aggregated search, sources through to Excel, index fingerprint and partial indexes, retrieval without LLM, UI with `AppTest` | None: in-memory Qdrant and **test doubles** for embeddings and the LLM |
 | `tests/smoke_e2e.py` | The three modes against a running API, with minimal temporary inputs. Add `--con-comentario` to also generate comments | **Real** embeddings and embedded Qdrant; real LLM with the flag |
 
-The smoke script confirms the path works; it does not assess quality. The GitHub Actions workflow in
-`.github/workflows/ci.yml` runs both without the LLM, but it has not been run yet because this repository
-has no remote.
+These are three different kinds of check:
+
+- **Software tests** (`pytest`) check the logic with test doubles, including the harness of the model
+  comparison. They say nothing about any model.
+- **Integration with models** (`tests/smoke_e2e.py`) confirms that the path runs with real services. It does
+  not assess quality.
+- **Quality evaluation** ([`benchmarks/`](benchmarks/README.md)) measures labels and cost on the synthetic
+  cases. It needs about 10 GB of models and hours on a CPU, so it is not part of CI.
+
+GitHub Actions (`.github/workflows/ci.yml`) runs `pytest` and the smoke script, with no LLM and no large
+models. The `pytest` job passes. The smoke job currently fails before it reaches the app: its Ollama
+installation step ends with `could not connect to ollama server`, on `main` as well. Until that is fixed, the
+smoke path is only checked by running the script locally.
 
 ## Origin
 
@@ -239,6 +276,8 @@ and the new prompts.
 IA-modulable/          backend: FastAPI app, modes, pipeline, Qdrant handler, prompts, config
 front-end/             Streamlit UI (app.py) and its testable helpers (presentacion.py)
 tests/                 pytest suite and the end-to-end smoke script
+benchmarks/            model comparison: protocol, datasets, runner, saved results
+docs/                  model comparison report
 examples/synthetic/    fictitious PDF and DOCX files used by the tests
 .streamlit/            UI port and settings
 ```
