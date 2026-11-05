@@ -5,6 +5,11 @@ chart are generated from the saved results of one frozen run ([`benchmarks/resul
 and one separate follow-up ([`benchmarks/results/2026-11-05_app-comments-followup/`](../benchmarks/results/2026-11-05_app-comments-followup/));
 the text around them was written after reading those results.
 
+> **Later update, not part of this comparison.** The text below is what was concluded at the time and is kept as written. Afterwards the
+> owner chose `qwen3.5:4b-q4_K_M` as the configured model and replaced the free-text comment with the structured judge evaluated here,
+> still off by default. The result of that work on the production code is in [the integration check](integration-check.md). The numbers
+> on this page describe the benchmark's judge on 30 synthetic cases, not the application as a whole.
+
 ## Result in short
 
 **If you turn comments on, use `qwen3.5:4b-q4_K_M`, and treat them as experimental.** Comments stay off by default. The default
