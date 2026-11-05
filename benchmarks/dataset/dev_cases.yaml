@@ -1,0 +1,121 @@
+# Development set: 6 cases, kept apart from the evaluation set. Used only to fix format and integration problems
+# before the freeze and, once frozen, for the three-case pilot. Never counted in the quality results.
+split: dev
+review_status: Constructed and reviewed by the assistant (Claude Code). No human review.
+pilot_cases: [DV-01, DV-03, DV-05]
+scenarios:
+  D1:
+    modality: text_vs_text
+    passages:
+      A:
+        source: Folleto del Parque Natural de Sierra Umbría
+        text: >-
+          El Parque Natural de Sierra Umbría abre sus senderos de 9:00 a 18:00 de marzo a octubre. La entrada es gratuita
+          para los residentes en la comarca y cuesta 4 euros para el resto de visitantes. Los perros deben ir atados en
+          todo momento y no se permite acampar dentro del parque, ni siquiera en las zonas de descanso señalizadas.
+      B:
+        source: Folleto del Parque Natural de Sierra Umbría
+        text: >-
+          El centro de visitantes, situado en Robledal, organiza rutas guiadas los fines de semana para grupos de un máximo
+          de 15 personas. Las reservas se hacen por teléfono con al menos tres días de antelación. La ruta del Hayedo tiene
+          una longitud de 8 kilómetros y una dificultad media, por lo que se recomienda llevar calzado adecuado.
+      C:
+        source: Boletín de la Mancomunidad de Robledal
+        text: >-
+          La Mancomunidad de Robledal ha abierto un albergue municipal con 40 plazas junto a la estación de autobuses. El
+          albergue permanece abierto todo el año y admite mascotas en dos de sus habitaciones. Los precios se publicarán en
+          la web de la mancomunidad cuando termine el periodo de prueba, previsto para el mes de mayo.
+    cases:
+      - id: DV-01
+        claim: Quienes viven en la comarca no pagan por entrar en el Parque Natural de Sierra Umbría.
+        passage_order: [C, A, B]
+        label: supported
+        evidence: [A]
+        quote: La entrada es gratuita para los residentes en la comarca
+        tags: [paraphrase]
+        rationale: Reformula la gratuidad para residentes.
+      - id: DV-02
+        claim: La ruta del Hayedo tiene una longitud de 12 kilómetros.
+        passage_order: [A, B, C]
+        label: contradicted
+        evidence: [B]
+        quote: una longitud de 8 kilómetros
+        required_values: ["12", "8"]
+        critical: true
+        tags: [figure, unit]
+        rationale: El folleto indica 8 kilómetros.
+  D2:
+    modality: report_vs_news
+    passages:
+      A:
+        source: Informe de la Autoridad Portuaria de Isla Verde
+        text: >-
+          La Autoridad Portuaria de Isla Verde exige a las navieras presentar el plan de residuos con 30 días de antelación
+          a cada temporada. Quien incumpla ese plazo no podrá operar hasta regularizar su situación. La autoridad revisará
+          los planes presentados y comunicará a cada naviera el resultado antes de que empiece la temporada.
+      B:
+        source: Informe de la Autoridad Portuaria de Isla Verde
+        text: >-
+          En 2024 hicieron escala 214 cruceros, un 6 % más que el año anterior, con un total de 410.000 pasajeros. La mayor
+          parte de las escalas se concentró entre abril y octubre. El informe atribuye el aumento a la nueva terminal
+          inaugurada en la primavera de 2023 y a los acuerdos firmados con dos navieras.
+      C:
+        source: Informe de la Autoridad Portuaria de Isla Verde
+        text: >-
+          El servicio de ferris entre Isla Verde y el continente mantuvo sus seis salidas diarias. Las empresas de ferris
+          deben presentar su calendario con 45 días de antelación ante la consejería de transportes, un trámite que no
+          depende de la Autoridad Portuaria. El precio del billete se actualizará según el índice de precios en enero.
+    cases:
+      - id: DV-03
+        claim: Las navieras deben presentar el plan de residuos con 45 días de antelación.
+        passage_order: [A, C, B]
+        label: contradicted
+        evidence: [A]
+        quote: presentar el plan de residuos con 30 días de antelación
+        required_values: ["45", "30"]
+        critical: true
+        tags: [figure, lexical_distractor]
+        rationale: Para el plan de residuos son 30 días. Los 45 días son del calendario de ferris.
+      - id: DV-04
+        claim: La nueva terminal redujo las emisiones del puerto de Isla Verde.
+        passage_order: [C, B, A]
+        label: insufficient_evidence
+        tags: [absent]
+        rationale: La terminal aparece, pero ningún pasaje habla de emisiones.
+  D3:
+    modality: news_vs_newsletter
+    passages:
+      A:
+        source: Diario de Ciudad Alba, 05/05/2025
+        text: >-
+          La startup Lumenar, con sede en Ciudad Alba, ha cerrado una ronda de financiación de 6 millones de euros liderada
+          por el fondo Capital Norte. La empresa desarrolla sensores para redes de riego y prevé contratar a 25 personas
+          este año. Su fundadora, Irene Sagasti, dijo que el dinero servirá para abrir una oficina en la costa.
+      B:
+        source: Economía Abierta, 06/05/2025
+        text: >-
+          La empresa de drones Airelia, también de Ciudad Alba, ha presentado un concurso de acreedores tras perder su mayor
+          contrato. La compañía tiene 80 empleados y una deuda de 11 millones de euros. El juzgado mercantil deberá nombrar
+          un administrador concursal en las próximas semanas, según fuentes de la empresa.
+      C:
+        source: Agenda Tecnológica, 07/05/2025
+        text: >-
+          Ciudad Alba acogerá en octubre su feria anual de tecnología agrícola, con 120 expositores confirmados. La
+          organización espera superar los 9.000 visitantes de la pasada edición. Las entradas se podrán comprar por internet
+          a partir de septiembre y serán gratuitas para los estudiantes de formación profesional.
+    cases:
+      - id: DV-05
+        claim: Lumenar participará en la feria de tecnología agrícola de Ciudad Alba.
+        passage_order: [C, A, B]
+        label: insufficient_evidence
+        critical: true
+        tags: [lexical_distractor]
+        rationale: Lumenar y la feria aparecen en noticias distintas. Ninguna dice que Lumenar vaya a participar.
+      - id: DV-06
+        claim: El fondo Capital Norte lideró la ronda de 6 millones de euros de Lumenar.
+        passage_order: [B, A, C]
+        label: supported
+        evidence: [A]
+        quote: una ronda de financiación de 6 millones de euros liderada por el fondo Capital Norte
+        tags: [paraphrase, figure]
+        rationale: Mismos datos con el orden de la frase cambiado.
