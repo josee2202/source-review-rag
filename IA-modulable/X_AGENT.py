@@ -30,7 +30,9 @@ class Agente:
             prompt: El template de prompt a usar
         """
         self.prompt = prompt
-        self.chain = self.prompt | self.llm
+        # think=False: un modelo con razonamiento (Qwen3.5) gasta si no todo num_predict pensando y el comentario queda vacío.
+        # Los modelos sin razonamiento lo aceptan igual (comprobado con llama3.2:1b y Ollama 0.40.14).
+        self.chain = self.prompt | self.llm.bind(think=False)
 
     def get_answer(self, contexto, pregunta):
         """

@@ -24,6 +24,25 @@ def test_agente_limita_la_generacion():
     assert X_AGENT.agente_dinamico.llm.client_kwargs["timeout"] == X_AGENT.llm_timeout_s
 
 
+def test_el_comentario_desactiva_el_razonamiento_del_modelo():
+    """Con Qwen3.5 y sin esta opción, los 512 tokens se iban en pensar y todos los comentarios quedaban vacíos."""
+    from langchain_core.prompts import PromptTemplate
+    import X_AGENT
+
+    peticiones = []
+
+    class ClienteFalso:
+        def generate(self, **kwargs):
+            peticiones.append(kwargs)
+            yield {"response": "comentario", "done": True}
+
+    agente = X_AGENT.Agente("http://localhost:1", "un-modelo")
+    agente.llm._client = ClienteFalso()
+    agente.set_prompt(PromptTemplate(input_variables=["contexto", "pregunta"], template="{contexto} {pregunta}"))
+    assert agente.get_answer("c", "p") == "comentario"
+    assert peticiones[0]["think"] is False and peticiones[0]["prompt"] == "c p"
+
+
 # * === Prompts ==================================================================================
 
 @pytest.mark.parametrize("modalidad,clave", [
