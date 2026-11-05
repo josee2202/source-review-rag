@@ -1,0 +1,11 @@
+{
+  "protocol_version": 1,
+  "frozen_at": "2026-11-05T10:25:18+00:00",
+  "note": "Protocol v1 frozen after the development pass on dev cases. No evaluation case has been sent to a model for an answer; only token counts of the three longest prompts were taken, with the output discarded.",
+  "files": {
+    "protocol.yaml": "4fc661f33e16aca3d71db3ba1facfc2b118264b048b91c89a0b5e37fb37b5f6f",
+    "dataset/eval_cases.yaml": "7cc9c2776a553d76fd0204a73651b9cf67c2fd084a70110297851de93ad4243e",
+    "dataset/dev_cases.yaml": "babaa2e6929aac8b34586b67dd16fe5e4af92bebf91f08a75455d86d80f36039",
+    "dataset/e2e_examples.yaml": "4ab731b89b60e120f8576a84239626d40c5ecc31149446f876adfbc11b45649b"
+  }
+}

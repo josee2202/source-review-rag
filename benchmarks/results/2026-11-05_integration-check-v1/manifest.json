@@ -1,0 +1,87 @@
+{
+  "run_id": "2026-11-05_integration-check-v1",
+  "kind": "integration check of the production judge; outside the frozen comparison",
+  "started_at": "2026-11-05T16:11:38Z",
+  "commit": "92200b5ba715c3bea35db5e1b640af84727559e1",
+  "review": "Cases and labels by the assistant. No human review.",
+  "ollama_version": "0.40.14",
+  "hardware": {
+    "cpu": "Intel(R) Core(TM) i9-9880H CPU @ 2.30GHz",
+    "physical_cores": 8,
+    "logical_cores": 16,
+    "memory_gib": 16.0,
+    "os": "macOS 14.5 (23F79)",
+    "gpus_reported_by_system": [
+      "Intel UHD Graphics 630",
+      "AMD Radeon Pro 5500M"
+    ]
+  },
+  "model": {
+    "tag": "qwen3.5:4b-q4_K_M",
+    "digest": "d8b0f5e9760cd1682034f292d7ef72ec46f432149be0df7574bf2d6e92e38c04",
+    "size_bytes": 3324173934
+  },
+  "request": {
+    "stream": true,
+    "think": false,
+    "keep_alive": "5m",
+    "options": {
+      "temperature": 0,
+      "seed": 42,
+      "top_k": 40,
+      "top_p": 0.9,
+      "min_p": 0,
+      "presence_penalty": 0,
+      "frequency_penalty": 0,
+      "repeat_penalty": 1.0,
+      "num_ctx": 4096,
+      "num_predict": 256,
+      "num_thread": 8
+    }
+  },
+  "timeout_s": 120,
+  "context_limit_tokens": 2048,
+  "response_schema": {
+    "type": "object",
+    "properties": {
+      "passage_ids": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      },
+      "quote": {
+        "type": "string"
+      },
+      "explanation": {
+        "type": "string",
+        "minLength": 20
+      },
+      "label": {
+        "type": "string",
+        "enum": [
+          "supported",
+          "contradicted",
+          "insufficient_evidence"
+        ]
+      }
+    },
+    "required": [
+      "passage_ids",
+      "quote",
+      "explanation",
+      "label"
+    ]
+  },
+  "prompt_template_sha256": "8a5c0e0240cda609f367c837d61b78bea05963112f5bb11fff9047c87047643b",
+  "stages": [
+    "regression",
+    "controls",
+    "e2e"
+  ],
+  "dataset_sha256": {
+    "eval_cases.yaml": "7cc9c2776a553d76fd0204a73651b9cf67c2fd084a70110297851de93ad4243e",
+    "integration_cases.yaml": "a5d2704881d6c8fc0b222627a290fb00e4d3e5cd34367b37c299ee2dee277f2f",
+    "e2e_examples.yaml": "4ab731b89b60e120f8576a84239626d40c5ecc31149446f876adfbc11b45649b"
+  }
+}

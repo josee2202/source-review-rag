@@ -1,0 +1,98 @@
+{
+  "updated_at": "2026-11-05T13:02:09+00:00",
+  "budget_used_hours": 2.602,
+  "budget_hours": 6,
+  "viability": {
+    "1B": {
+      "viable": true,
+      "reasons": []
+    },
+    "4B": {
+      "viable": true,
+      "reasons": []
+    },
+    "9B": {
+      "viable": true,
+      "reasons": []
+    }
+  },
+  "blocks": {
+    "eval|1B|1": {
+      "planned": 30,
+      "statuses": {
+        "ok": 30
+      },
+      "not_executed": []
+    },
+    "eval|4B|1": {
+      "planned": 30,
+      "statuses": {
+        "ok": 30
+      },
+      "not_executed": []
+    },
+    "eval|9B|1": {
+      "planned": 30,
+      "statuses": {
+        "ok": 30
+      },
+      "not_executed": []
+    },
+    "eval|9B|2": {
+      "planned": 30,
+      "statuses": {
+        "ok": 29,
+        "truncated": 1
+      },
+      "not_executed": []
+    },
+    "eval|4B|2": {
+      "planned": 30,
+      "statuses": {
+        "ok": 30
+      },
+      "not_executed": []
+    },
+    "eval|1B|2": {
+      "planned": 30,
+      "statuses": {
+        "ok": 30
+      },
+      "not_executed": []
+    },
+    "pilot|1B": {
+      "planned": 3,
+      "attempted": 3
+    },
+    "pilot|4B": {
+      "planned": 3,
+      "attempted": 3
+    },
+    "pilot|9B": {
+      "planned": 3,
+      "attempted": 3
+    },
+    "legacy|1B": {
+      "planned": 6,
+      "attempted": 6
+    }
+  },
+  "e2e_examples_finished": {
+    "1B": [
+      "text_vs_text",
+      "report_vs_news",
+      "news_vs_newsletter"
+    ],
+    "4B": [
+      "text_vs_text",
+      "report_vs_news",
+      "news_vs_newsletter"
+    ],
+    "9B": [
+      "text_vs_text",
+      "report_vs_news",
+      "news_vs_newsletter"
+    ]
+  },
+  "server_log_truncation_lines": 0
+}

@@ -1,0 +1,56 @@
+frozen DV-01 esperada supported | validado supported 26.7s tokens 756
+     El pasaje P2 confirma que la entrada es gratuita para los residentes de la comarca, lo cual coincide con el fragmento. ['La entrada es gratuita para los residentes en la comarca']
+frozen DV-02 esperada contradicted | validado contradicted 18.4s tokens 749
+     El pasaje P2 afirma que la ruta mide 8 kilómetros, lo cual contradice directamente la afirmación del fragmento de 12 kilómetros. ['La ruta del Hayedo tiene una longitud de 8 kilómetros']
+frozen DV-03 esperada contradicted | validado contradicted 22.0s tokens 761
+     El pasaje P1 establece un plazo de 30 días para la presentación del plan de residuos, mientras que el fragmento afirma incorrectamente que es de 45 días. ['La Autoridad Portuaria de Isla Verde exige a las navieras presentar el plan de residuos con 30 días de antelación a cada temporada']
+frozen DV-04 esperada insufficient_evidence | validado insufficient_evidence 15.9s tokens 756
+     Los pasajes mencionan la inauguración de la nueva terminal y el aumento de pasajeros, pero no contienen ninguna información sobre las emisiones del puerto. []
+frozen DV-05 esperada insufficient_evidence | validado insufficient_evidence 16.0s tokens 752
+     Los pasajes mencionan a Lumenar y a la feria, pero ninguno establece una conexión entre ambas entidades. []
+frozen DV-06 esperada supported | validado supported 24.4s tokens 756
+     El pasaje P2 confirma que el fondo Capital Norte lideró la ronda de financiación de 6 millones de euros para la empresa Lumenar, coincidiendo exactamente con el fragmento revisado. ['La startup Lumenar, con sede en Ciudad Alba, ha cerrado una ronda de financiación de 6 millones de euros liderada por el fondo Capital Norte']
+frozen M1 esperada contradicted | validado insufficient_evidence 13.9s tokens 548
+     Los pasajes proporcionados no contienen información sobre la tarifa del carné de usuario ni sobre la existencia o cantidad de libros en una sala infantil. []
+frozen M2 esperada contradicted | validado contradicted 18.3s tokens 520
+     El pasaje confirma la apertura en mayo y la piscina de 25 metros, pero contradice la fecha de marzo y el costo de cuatro millones de euros que no se mencionan en la referencia. ['El polideportivo abrirá en mayo y contará con una piscina de 25 metros']
+frozen M3 esperada insufficient_evidence | validado insufficient_evidence 18.0s tokens 517
+     El pasaje confirma la duración del viaje y el número de salidas, pero no menciona el precio del billete, por lo que no se puede verificar ni refutar esa afirmación. ['El tren une las dos ciudades en dos horas. Hay seis salidas diarias']
+frozen M4 esperada supported | validado supported 16.7s tokens 522
+     El pasaje confirma tanto el número de expositores (200) como el mes de celebración (octubre) del fragmento. ['La feria del libro de Valdemar reúne a 200 expositores en octubre']
+frozen v1-report_vs_news-1 esperada contradicted | validado contradicted 27.5s tokens 1055
+     El pasaje establece un umbral de 90 días para el default, lo cual contradice el valor de 60 días del fragmento. ['La entidad considerará que una exposición está en situación de default cuando el deudor acumule más de 90 días de impago']
+frozen v1-report_vs_news-4 esperada insufficient_evidence | validado insufficient_evidence 22.0s tokens 1044
+     Los pasajes proporcionados no mencionan ningún requisito de publicación pública de modelos de PD en páginas web. []
+frozen v1-text_vs_text-4 esperada contradicted | validado contradicted 26.4s tokens 885
+     El pasaje confirma la extensión de 60 km, pero indica una reducción del 25% en desplazamientos en coche, no del 40%, y no menciona la inclusión de una línea de tranvía. ['La red de carriles bici pasará de 22 a 60 kilómetros']
+frozen total 12 / 13
+short_rule DV-01 esperada supported | validado supported 21.6s tokens 811
+     El pasaje P2 confirma que la entrada es gratuita para los residentes en la comarca, lo cual coincide con la afirmación del fragmento. ['La entrada es gratuita para los residentes en la comarca']
+short_rule DV-02 esperada contradicted | validado contradicted 21.1s tokens 804
+     El pasaje P2 afirma que la ruta mide 8 kilómetros, lo cual contradice la afirmación del fragmento de que mide 12 kilómetros. ['La ruta del Hayedo tiene una longitud de 8 kilómetros']
+short_rule DV-03 esperada contradicted | validado contradicted 24.3s tokens 816
+     El pasaje P1 establece un plazo de 30 días para las navieras, mientras que el fragmento afirma incorrectamente que el plazo es de 45 días. ['La Autoridad Portuaria de Isla Verde exige a las navieras presentar el plan de residuos con 30 días de antelación a cada temporada']
+short_rule DV-04 esperada insufficient_evidence | validado insufficient_evidence 19.2s tokens 811
+     El fragmento afirma que la nueva terminal redujo las emisiones, pero los pasajes solo mencionan que la terminal contribuyó al aumento de cruceros y pasajeros; no hay datos sobre emisiones. []
+short_rule DV-05 esperada insufficient_evidence | validado insufficient_evidence 21.5s tokens 807
+     El fragmento afirma que Lumenar participará en la feria, pero ningún pasaje menciona esta empresa en ese contexto; P2 habla de su financiación y P1 menciona la feria sin citar a Lumenar. []
+short_rule DV-06 esperada supported | validado supported 25.4s tokens 811
+     El pasaje P2 confirma que el fondo Capital Norte lideró la ronda de financiación de 6 millones de euros para la empresa Lumenar, coincidiendo exactamente con las afirmaciones del fragmento. ['La startup Lumenar, con sede en Ciudad Alba, ha cerrado una ronda de financiación de 6 millones de euros liderada por el fondo Capital Norte']
+short_rule M1 esperada contradicted | no_validado None 16.8s tokens 603
+     Falta la evidencia: esta etiqueta exige un pasaje citado y una cita literal. []
+     bruto { "passage_ids": [], "quote": "", "explanation": "El fragmento afirma que el carné cuesta tres euros, pero el pasaje P1 indica que cuesta cinco euros; además, el fragmento menciona una sala infantil con dos mil libros, información que no se encuentra en los pasajes.", "label": "contradicted" }
+short_rule M2 esperada contradicted | validado contradicted 18.0s tokens 575
+     El pasaje confirma la apertura en mayo y la piscina de 25 metros, pero contradice la fecha de marzo y la cifra de cuatro millones de euros del fragmento. ['El polideportivo abrirá en mayo y contará con una piscina de 25 metros']
+short_rule M3 esperada insufficient_evidence | validado insufficient_evidence 17.8s tokens 572
+     El pasaje confirma la primera y segunda afirmación del fragmento, pero no menciona el precio del billete, por lo que no se puede verificar ni refutar esa parte. ['El tren une las dos ciudades en dos horas. Hay seis salidas diarias']
+short_rule M4 esperada supported | validado supported 17.2s tokens 577
+     El pasaje confirma que la feria reúne a 200 expositores y se celebra en octubre, coincidiendo exactamente con las afirmaciones del fragmento. ['La feria del libro de Valdemar reúne a 200 expositores en octubre']
+short_rule v1-report_vs_news-1 esperada contradicted | validado contradicted 29.1s tokens 1110
+     El pasaje establece un umbral de 90 días para el default, lo cual contradice el valor de 60 días afirmado en el fragmento. ['La entidad considerará que una exposición está en situación de default cuando el deudor acumule más de 90 días de impago']
+short_rule v1-report_vs_news-4 esperada insufficient_evidence | validado insufficient_evidence 26.9s tokens 1099
+     Los pasajes mencionan la definición de default, escenarios macroeconómicos, validación independiente y otros requisitos, pero no contienen ninguna referencia a la obligación de publicar los modelos en páginas web. []
+short_rule v1-text_vs_text-4 esperada contradicted | validado contradicted 28.7s tokens 940
+     El pasaje confirma la extensión de 60 km, pero afirma una reducción del 25% en desplazamientos en coche, no del 40%, y no menciona la inclusión de una línea de tranvía. ['La red de carriles bici pasará de 22 a 60 kilómetros']
+short_rule total 12 / 13
+exit: 0

@@ -69,7 +69,7 @@ def tramos_por_parrafo(texto: str):
 
 
 def formatear_contexto(hits: List[dict]) -> str:
-    """Pasajes para el prompt, cada uno con la etiqueta que el modelo debe citar."""
+    """Pasajes como un solo texto, cada uno con la etiqueta de su procedencia (campo context de la API)."""
     bloques = []
     for h in hits:
         datos = " · ".join(str(h[c]) for c in ("filename", "title", "outlet", "date", "url") if h.get(c))
@@ -243,18 +243,3 @@ class RAG:
         self.results = results
 
         return results
-
-    def generar_respuesta(self, agente):
-        """
-        Añade el comentario opcional. Un fallo se registra en el fragmento sin perder sus pasajes.
-        """
-        for result in self.results:
-            try:
-                answer = agente.get_answer(contexto=result['context'],
-                                           pregunta=neutralizar_delimitadores(result['chunk']))
-                if not str(answer).strip():
-                    raise RuntimeError("el modelo ha devuelto una respuesta vacía")
-                result['comentario'] = answer
-            except Exception as e:
-                result['comentario'] = None
-                result['comentario_error'] = f"{type(e).__name__}: {e}"

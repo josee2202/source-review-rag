@@ -1,0 +1,31 @@
+{
+  "configured_model_only": [
+    "modelo-no-instalado:1b"
+  ],
+  "requests_equal_fragments": true,
+  "states": [
+    "no_disponible"
+  ],
+  "labels": [
+    "None"
+  ],
+  "reason": "El modelo modelo-no-instalado:1b no está instalado en Ollama. Instálalo con: ollama pull modelo-no-instalado:1b",
+  "ui_titles": [
+    "Fragmento 1 · párr. 1 · Análisis no disponible",
+    "Fragmento 2 · párr. 2 · Análisis no disponible",
+    "Fragmento 3 · párr. 3 · Análisis no disponible",
+    "Fragmento 4 · párr. 4 · Análisis no disponible"
+  ],
+  "ui_shows_install_command": true,
+  "ui_warns_count": true,
+  "ui_no_label_shown": true,
+  "ui_passages_kept": true,
+  "excel_status": [
+    "Análisis no disponible"
+  ],
+  "excel_reason_has_command": true,
+  "excel_passages_kept": true,
+  "browser_errors": [],
+  "ui_wait_s": 2.819,
+  "all_ok": true
+}

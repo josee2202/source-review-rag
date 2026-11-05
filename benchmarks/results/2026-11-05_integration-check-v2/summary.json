@@ -1,0 +1,1735 @@
+{
+  "run_id": "2026-11-05_integration-check-v2",
+  "manifest": {
+    "run_id": "2026-11-05_integration-check-v2",
+    "kind": "integration check of the production judge; outside the frozen comparison",
+    "started_at": "2026-11-05T16:46:32Z",
+    "commit": "9892f6ef4f2930b75ed09ea2499574978fa6f740",
+    "review": "Cases and labels by the assistant. No human review.",
+    "ollama_version": "0.40.14",
+    "hardware": {
+      "cpu": "Intel(R) Core(TM) i9-9880H CPU @ 2.30GHz",
+      "physical_cores": 8,
+      "logical_cores": 16,
+      "memory_gib": 16.0,
+      "os": "macOS 14.5 (23F79)",
+      "gpus_reported_by_system": [
+        "Intel UHD Graphics 630",
+        "AMD Radeon Pro 5500M"
+      ]
+    },
+    "model": {
+      "tag": "qwen3.5:4b-q4_K_M",
+      "digest": "d8b0f5e9760cd1682034f292d7ef72ec46f432149be0df7574bf2d6e92e38c04",
+      "size_bytes": 3324173934
+    },
+    "request": {
+      "stream": true,
+      "think": false,
+      "keep_alive": "5m",
+      "options": {
+        "temperature": 0,
+        "seed": 42,
+        "top_k": 40,
+        "top_p": 0.9,
+        "min_p": 0,
+        "presence_penalty": 0,
+        "frequency_penalty": 0,
+        "repeat_penalty": 1.0,
+        "num_ctx": 4096,
+        "num_predict": 256,
+        "num_thread": 8
+      }
+    },
+    "timeout_s": 120,
+    "context_limit_tokens": 2048,
+    "response_schema": {
+      "type": "object",
+      "properties": {
+        "passage_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "quote": {
+          "type": "string"
+        },
+        "explanation": {
+          "type": "string",
+          "minLength": 20
+        },
+        "label": {
+          "type": "string",
+          "enum": [
+            "supported",
+            "contradicted",
+            "insufficient_evidence"
+          ]
+        }
+      },
+      "required": [
+        "passage_ids",
+        "quote",
+        "explanation",
+        "label"
+      ]
+    },
+    "prompt_template_sha256": "632773207705d092249521add6a136d59adf025af879974eb6bc0afdc8946dbb",
+    "stages": [
+      "regression",
+      "controls",
+      "e2e"
+    ],
+    "dataset_sha256": {
+      "eval_cases.yaml": "7cc9c2776a553d76fd0204a73651b9cf67c2fd084a70110297851de93ad4243e",
+      "integration_cases.yaml": "47a97c451e5d7dd990055bd9097ab29e45260a8c54bf6fcd56cc1b541d08c602",
+      "e2e_examples.yaml": "4ab731b89b60e120f8576a84239626d40c5ecc31149446f876adfbc11b45649b"
+    }
+  },
+  "run_status": {
+    "status": "completed",
+    "finished_at": "2026-11-05T17:11:55Z",
+    "inference_s": 1507.6476510639986,
+    "shown_equals_evaluated": true
+  },
+  "regression": {
+    "planned": 30,
+    "attempted": 30,
+    "accepted": 28,
+    "rejected": 2,
+    "unavailable": 0,
+    "without_result": 2,
+    "rejected_cases": [
+      {
+        "case_id": "EV-27",
+        "raw_label": "contradicted",
+        "expected": "insufficient_evidence",
+        "reason": "Falta la evidencia: esta etiqueta exige un pasaje citado y una cita literal."
+      },
+      {
+        "case_id": "EV-07",
+        "raw_label": "supported",
+        "expected": "supported",
+        "reason": "La cita no aparece literalmente en los pasajes citados."
+      }
+    ],
+    "unavailable_cases": [],
+    "raw": {
+      "planned": 30,
+      "attempted": 30,
+      "not_executed": 0,
+      "ok": 30,
+      "format_error": 0,
+      "truncated": 0,
+      "timeout": 0,
+      "request_error": 0,
+      "completion_rate": 1.0,
+      "correct": 29,
+      "accuracy_over_attempted": 0.9666666666666667,
+      "accuracy_ci95": [
+        0.8332924860304112,
+        0.9940915620051425
+      ],
+      "macro_f1": 0.9665831244778613,
+      "per_class": {
+        "supported": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "tp": 10,
+          "predicted": 10,
+          "actual": 10
+        },
+        "contradicted": {
+          "precision": 0.9090909090909091,
+          "recall": 1.0,
+          "f1": 0.9523809523809523,
+          "tp": 10,
+          "predicted": 11,
+          "actual": 10
+        },
+        "insufficient_evidence": {
+          "precision": 1.0,
+          "recall": 0.9,
+          "f1": 0.9473684210526316,
+          "tp": 9,
+          "predicted": 9,
+          "actual": 10
+        }
+      },
+      "confusion": {
+        "supported": {
+          "supported": 10,
+          "contradicted": 0,
+          "insufficient_evidence": 0,
+          "no_valid_answer": 0
+        },
+        "contradicted": {
+          "supported": 0,
+          "contradicted": 10,
+          "insufficient_evidence": 0,
+          "no_valid_answer": 0
+        },
+        "insufficient_evidence": {
+          "supported": 0,
+          "contradicted": 1,
+          "insufficient_evidence": 9,
+          "no_valid_answer": 0
+        }
+      },
+      "false_support": 0,
+      "negatives_attempted": 20,
+      "false_support_rate": 0.0,
+      "false_support_ci95": [
+        0.0,
+        0.16113012549493322
+      ],
+      "critical_false_support": 0,
+      "critical_false_support_cases": [],
+      "false_support_cases": [],
+      "traceable_correct": 28,
+      "unknown_id_answers": 0,
+      "answers": 30,
+      "expected_evidence_cited": 20,
+      "expected_evidence_denominator": 20,
+      "quote_found_in_cited": 20,
+      "quote_denominator": 21,
+      "both_values_named": 6,
+      "both_values_denominator": 6,
+      "answers_with_number_not_in_inputs": 0,
+      "answers_with_capitalized_not_in_inputs": 0
+    },
+    "accepted_view": {
+      "planned": 30,
+      "attempted": 30,
+      "not_executed": 0,
+      "ok": 28,
+      "format_error": 0,
+      "truncated": 0,
+      "timeout": 0,
+      "request_error": 0,
+      "completion_rate": 0.9333333333333333,
+      "correct": 28,
+      "accuracy_over_attempted": 0.9333333333333333,
+      "accuracy_ci95": [
+        0.7867618227892791,
+        0.9815233646723066
+      ],
+      "macro_f1": 0.9649122807017544,
+      "per_class": {
+        "supported": {
+          "precision": 1.0,
+          "recall": 0.9,
+          "f1": 0.9473684210526316,
+          "tp": 9,
+          "predicted": 9,
+          "actual": 10
+        },
+        "contradicted": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "tp": 10,
+          "predicted": 10,
+          "actual": 10
+        },
+        "insufficient_evidence": {
+          "precision": 1.0,
+          "recall": 0.9,
+          "f1": 0.9473684210526316,
+          "tp": 9,
+          "predicted": 9,
+          "actual": 10
+        }
+      },
+      "confusion": {
+        "supported": {
+          "supported": 9,
+          "contradicted": 0,
+          "insufficient_evidence": 0,
+          "no_valid_answer": 1
+        },
+        "contradicted": {
+          "supported": 0,
+          "contradicted": 10,
+          "insufficient_evidence": 0,
+          "no_valid_answer": 0
+        },
+        "insufficient_evidence": {
+          "supported": 0,
+          "contradicted": 0,
+          "insufficient_evidence": 9,
+          "no_valid_answer": 1
+        }
+      },
+      "false_support": 0,
+      "negatives_attempted": 20,
+      "false_support_rate": 0.0,
+      "false_support_ci95": [
+        0.0,
+        0.16113012549493322
+      ],
+      "critical_false_support": 0,
+      "critical_false_support_cases": [],
+      "false_support_cases": [],
+      "traceable_correct": 28,
+      "unknown_id_answers": 0,
+      "answers": 28,
+      "expected_evidence_cited": 19,
+      "expected_evidence_denominator": 19,
+      "quote_found_in_cited": 20,
+      "quote_denominator": 20,
+      "both_values_named": 6,
+      "both_values_denominator": 6,
+      "answers_with_number_not_in_inputs": 0,
+      "answers_with_capitalized_not_in_inputs": 0
+    }
+  },
+  "regression_cases": [
+    {
+      "case_id": "EV-27",
+      "expected": "insufficient_evidence",
+      "critical": true,
+      "tags": [
+        "lexical_distractor"
+      ],
+      "state": "no_validado",
+      "reason": "Falta la evidencia: esta etiqueta exige un pasaje citado y una cita literal.",
+      "raw_label": "contradicted",
+      "shown_label": "no_valid_answer",
+      "explanation": null,
+      "evidence": []
+    },
+    {
+      "case_id": "EV-02",
+      "expected": "contradicted",
+      "critical": true,
+      "tags": [
+        "deadline_60_90",
+        "figure"
+      ],
+      "state": "validado",
+      "reason": null,
+      "raw_label": "contradicted",
+      "shown_label": "contradicted",
+      "explanation": "El pasaje P1 establece un plazo máximo de 60 días, lo cual contradice la afirmación del fragmento de 90 días.",
+      "evidence": [
+        {
+          "cita": "se resolverán en un plazo máximo de 60 días desde su presentación",
+          "id": "P1",
+          "pasaje": 1
+        }
+      ]
+    },
+    {
+      "case_id": "EV-06",
+      "expected": "insufficient_evidence",
+      "critical": true,
+      "tags": [
+        "lexical_distractor",
+        "wrong_entity"
+      ],
+      "state": "validado",
+      "reason": null,
+      "raw_label": "insufficient_evidence",
+      "shown_label": "insufficient_evidence",
+      "explanation": "Los pasajes mencionan la reforma de la Biblioteca Central (P1) y la ampliación de horario (P3), pero ninguno afirma explícitamente que prestará portátiles. El préstamo de portátiles se menciona en P2, pero se refiere a la Biblioteca del Campus Norte, gestionada por la Universidad, no a la Biblioteca Central de la Diputación.",
+      "evidence": []
+    },
+    {
+      "case_id": "EV-28",
+      "expected": "supported",
+      "critical": false,
+      "tags": [
+        "percentage"
+      ],
+      "state": "validado",
+      "reason": null,
+      "raw_label": "supported",
+      "shown_label": "supported",
+      "explanation": "El pasaje P1 confirma que el acuerdo salarial para los maquinistas de Ferrovías del Norte en 2026 es del 4,5 %, coincidiendo exactamente con el fragmento.",
+      "evidence": [
+        {
+          "cita": "El acuerdo de Ferrovías del Norte con sus maquinistas contempla una subida salarial del 4,5 % en 2026",
+          "id": "P1",
+          "pasaje": 1
+        }
+      ]
+    },
+    {
+      "case_id": "EV-12",
+      "expected": "insufficient_evidence",
+      "critical": true,
+      "tags": [
+        "lexical_distractor",
+        "figure"
+      ],
+      "state": "validado",
+      "reason": null,
+      "raw_label": "insufficient_evidence",
+      "shown_label": "insufficient_evidence",
+      "explanation": "Los pasajes mencionan el plazo de 90 días para resolver reclamaciones y el servicio arbitral, pero no especifican el tiempo medio de duración de la resolución del mismo.",
+      "evidence": []
+    },
+    {
+      "case_id": "EV-24",
+      "expected": "insufficient_evidence",
+      "critical": true,
+      "tags": [
+        "lexical_distractor"
+      ],
+      "state": "validado",
+      "reason": null,
+      "raw_label": "insufficient_evidence",
+      "shown_label": "insufficient_evidence",
+      "explanation": "El pasaje P2 confirma que Marta Ilundain presentó datos sobre el Puerto de Bahía Clara, pero no menciona ninguna ampliación del puerto, por lo que el fragmento no está respaldado.",
+      "evidence": [
+        {
+          "cita": "El Puerto de Bahía Clara movió 1,8 millones de contenedores en 2024, un récord histórico, según informó su presidenta, Marta Ilundain",
+          "id": "P2",
+          "pasaje": 2
+        }
+      ]
+    },
+    {
+      "case_id": "EV-30",
+      "expected": "insufficient_evidence",
+      "critical": true,
+      "tags": [
+        "prompt_injection",
+        "absent"
+      ],
+      "state": "validado",
+      "reason": null,
+      "raw_label": "insufficient_evidence",
+      "shown_label": "insufficient_evidence",
+      "explanation": "El fragmento afirma una reducción de jornada laboral, pero los pasajes mencionan únicamente una subida salarial y la creación de nuevas plazas, sin referirse a la jornada.",
+      "evidence": []
+    },
+    {
+      "case_id": "EV-16",
+      "expected": "supported",
+      "critical": false,
+      "tags": [
+        "paraphrase",
+        "negation"
+      ],
+      "state": "validado",
+      "reason": null,
+      "raw_label": "supported",
+      "shown_label": "supported",
+      "explanation": "El pasaje P2 confirma que la reducción del 18 % no incluye las emisiones de la cadena de suministro, lo cual coincide con la afirmación del fragmento.",
+      "evidence": [
+        {
+          "cita": "La compañía aclara que esa cifra no incluye las emisiones de su cadena de suministro",
+          "id": "P2",
+          "pasaje": 2
+        }
+      ]
+    },
+    {
+      "case_id": "EV-07",
+      "expected": "supported",
+      "critical": false,
+      "tags": [
+        "paraphrase",
+        "figure"
+      ],
+      "state": "no_validado",
+      "reason": "La cita no aparece literalmente en los pasajes citados.",
+      "raw_label": "supported",
+      "shown_label": "no_valid_answer",
+      "explanation": null,
+      "evidence": []
+    },
+    {
+      "case_id": "EV-14",
+      "expected": "contradicted",
+      "critical": true,
+      "tags": [
+        "scope",
+        "negation"
+      ],
+      "state": "validado",
+      "reason": null,
+      "raw_label": "contradicted",
+      "shown_label": "contradicted",
+      "explanation": "El pasaje P2 indica explícitamente que los datos del 6,2 % no incluyen a los menores de 25 años, lo cual contradice la afirmación del fragmento de que el dato corresponde a toda la población.",
+      "evidence": [
+        {
+          "cita": "La encuesta no incluye a los menores de 25 años",
+          "id": "P2",
+          "pasaje": 2
+        }
+      ]
+    },
+    {
+      "case_id": "EV-23",
+      "expected": "contradicted",
+      "critical": true,
+      "tags": [
+        "percentage",
+        "wrong_entity",
+        "cross_source"
+      ],
+      "state": "validado",
+      "reason": null,
+      "raw_label": "contradicted",
+      "shown_label": "contradicted",
+      "explanation": "El pasaje P1 menciona un descenso del 3% pero se refiere al puerto de Cala Serena, mientras que el pasaje P3 indica que el Puerto de Bahía Clara movió 1,8 millones de contenedores con un crecimiento del 7%. Por tanto, el fragmento afirma un dato falso para la entidad correcta.",
+      "evidence": [
+        {
+          "cita": "El puerto vecino de Cala Serena registró en 2024 un descenso del 3 % en su tráfico de contenedores",
+          "id": "P1",
+          "pasaje": 1
+        },
+        {
+          "cita": null,
+          "id": "P3",
+          "pasaje": 3
+        }
+      ]
+    },
+    {
+      "case_id": "EV-13",
+      "expected": "supported",
+      "critical": false,
+      "tags": [
+        "figure",
+        "paraphrase"
+      ],
+      "state": "validado",
+      "reason": null,
+      "raw_label": "supported",
+      "shown_label": "supported",
+      "explanation": "El pasaje P3 confirma tanto el número de hogares como el número de comarcas mencionados en el fragmento.",
+      "evidence": [
+        {
+          "cita": "La encuesta se realizó en 12 comarcas con una muestra de 18.500 hogares",
+          "id": "P3",
+          "pasaje": 3
+        }
+      ]
+    },
+    {
+      "case_id": "EV-10",
+      "expected": "supported",
+      "critical": false,
+      "tags": [
+        "percentage",
+        "paraphrase"
+      ],
+      "state": "validado",
+      "reason": null,
+      "raw_label": "supported",
+      "shown_label": "supported",
+      "explanation": "El pasaje P2 confirma que las reclamaciones crecieron un 12% en 2024 respecto al año anterior.",
+      "evidence": [
+        {
+          "cita": "El informe contabiliza 48.200 reclamaciones en 2024, un 12 % más que en 2023",
+          "id": "P2",
+          "pasaje": 2
+        }
+      ]
+    },
+    {
+      "case_id": "EV-03",
+      "expected": "insufficient_evidence",
+      "critical": true,
+      "tags": [
+        "lexical_distractor"
+      ],
+      "state": "validado",
+      "reason": null,
+      "raw_label": "insufficient_evidence",
+      "shown_label": "insufficient_evidence",
+      "explanation": "Los pasajes mencionan los días de recogida de residuos voluminosos (martes y jueves) y la fecha límite para instalar el contenedor de compostaje, pero no especifican cuándo se vacía este último.",
+      "evidence": []
+    },
+    {
+      "case_id": "EV-01",
+      "expected": "supported",
+      "critical": false,
+      "tags": [
+        "paraphrase",
+        "negation"
+      ],
+      "state": "validado",
+      "reason": null,
+      "raw_label": "supported",
+      "shown_label": "supported",
+      "explanation": "El pasaje P2 establece que las comunidades de 20 viviendas o menos están exentas de la obligación, lo cual coincide con el fragmento que afirma que las comunidades con un máximo de 20 viviendas no están obligadas.",
+      "evidence": [
+        {
+          "cita": "Las comunidades de 20 viviendas o menos quedan exentas de esta obligación",
+          "id": "P2",
+          "pasaje": 2
+        }
+      ]
+    },
+    {
+      "case_id": "EV-04",
+      "expected": "supported",
+      "critical": false,
+      "tags": [
+        "paraphrase",
+        "figure",
+        "simple_sum"
+      ],
+      "state": "validado",
+      "reason": null,
+      "raw_label": "supported",
+      "shown_label": "supported",
+      "explanation": "El pasaje indica que la obra añadirá 180 puestos a los 320 existentes, lo que resulta en un total de 500 puestos, coincidiendo con el fragmento.",
+      "evidence": [
+        {
+          "cita": "La obra añadirá 180 puestos de lectura a los 320 actuales",
+          "id": "P3",
+          "pasaje": 3
+        }
+      ]
+    },
+    {
+      "case_id": "EV-08",
+      "expected": "contradicted",
+      "critical": true,
+      "tags": [
+        "wrong_entity",
+        "lexical_distractor"
+      ],
+      "state": "validado",
+      "reason": null,
+      "raw_label": "contradicted",
+      "shown_label": "contradicted",
+      "explanation": "El pasaje P2 indica que la empresa Transportes Lumbre operará la línea L7, mientras que el fragmento afirma que la operará Autocares Brisa, lo que constituye una contradicción directa sobre la entidad responsable.",
+      "evidence": [
+        {
+          "cita": "La empresa Transportes Lumbre operará en exclusiva desde el 1 de febrero de 2026 la nueva línea L7",
+          "id": "P2",
+          "pasaje": 2
+        }
+      ]
+    },
+    {
+      "case_id": "EV-11",
+      "expected": "contradicted",
+      "critical": true,
+      "tags": [
+        "deadline_60_90",
+        "evidence_first",
+        "lexical_distractor"
+      ],
+      "state": "validado",
+      "reason": null,
+      "raw_label": "contradicted",
+      "shown_label": "contradicted",
+      "explanation": "El pasaje P1 establece 90 días, mientras que el fragmento afirma 60 días, lo que constituye una contradicción directa en el plazo.",
+      "evidence": [
+        {
+          "cita": "las comercializadoras dispondrán de 90 días naturales para resolver las reclamaciones de facturación",
+          "id": "P1",
+          "pasaje": 1
+        }
+      ]
+    },
+    {
+      "case_id": "EV-09",
+      "expected": "insufficient_evidence",
+      "critical": false,
+      "tags": [
+        "absent"
+      ],
+      "state": "validado",
+      "reason": null,
+      "raw_label": "insufficient_evidence",
+      "shown_label": "insufficient_evidence",
+      "explanation": "Los pasajes mencionan características técnicas como la recarga de los autobuses o la rampa de acceso, pero no contienen ninguna información sobre la disponibilidad de wifi a bordo.",
+      "evidence": []
+    },
+    {
+      "case_id": "EV-18",
+      "expected": "insufficient_evidence",
+      "critical": true,
+      "tags": [
+        "lexical_distractor"
+      ],
+      "state": "validado",
+      "reason": null,
+      "raw_label": "insufficient_evidence",
+      "shown_label": "insufficient_evidence",
+      "explanation": "El fragmento afirma que una auditoría externa verificó la reducción de emisiones, pero los pasajes mencionan una auditoría sobre el consumo de agua y no contienen información sobre la verificación de las emisiones.",
+      "evidence": []
+    },
+    {
+      "case_id": "EV-21",
+      "expected": "insufficient_evidence",
+      "critical": false,
+      "tags": [
+        "absent",
+        "date"
+      ],
+      "state": "validado",
+      "reason": null,
+      "raw_label": "insufficient_evidence",
+      "shown_label": "insufficient_evidence",
+      "explanation": "El fragmento afirma que Ventrol se venderá en farmacias a partir de julio de 2025, pero los pasajes proporcionados no mencionan la fecha de venta ni el canal de distribución del medicamento.",
+      "evidence": []
+    },
+    {
+      "case_id": "EV-25",
+      "expected": "supported",
+      "critical": false,
+      "tags": [
+        "paraphrase"
+      ],
+      "state": "validado",
+      "reason": null,
+      "raw_label": "supported",
+      "shown_label": "supported",
+      "explanation": "El pasaje P2 indica que la producción de 2025 (12.500 toneladas) fue menor que la de la campaña anterior (15.000 toneladas), lo cual confirma la afirmación del fragmento.",
+      "evidence": [
+        {
+          "cita": "La Cooperativa Olivar del Sur recogió 12.500 toneladas de aceituna en la campaña de 2025, frente a las 15.000 toneladas de la anterior",
+          "id": "P2",
+          "pasaje": 2
+        }
+      ]
+    },
+    {
+      "case_id": "EV-26",
+      "expected": "contradicted",
+      "critical": true,
+      "tags": [
+        "figure",
+        "wrong_entity",
+        "cross_source"
+      ],
+      "state": "validado",
+      "reason": null,
+      "raw_label": "contradicted",
+      "shown_label": "contradicted",
+      "explanation": "El pasaje P2 afirma que la cooperativa recogió 8.000 toneladas, lo cual contradice la cifra de 12.500 toneladas del fragmento.",
+      "evidence": [
+        {
+          "cita": "La Cooperativa San Isidro de Valtierra mantuvo su producción en 8.000 toneladas de aceituna en la campaña de 2025",
+          "id": "P2",
+          "pasaje": 2
+        }
+      ]
+    },
+    {
+      "case_id": "EV-17",
+      "expected": "contradicted",
+      "critical": true,
+      "tags": [
+        "unit",
+        "figure"
+      ],
+      "state": "validado",
+      "reason": null,
+      "raw_label": "contradicted",
+      "shown_label": "contradicted",
+      "explanation": "El pasaje P3 afirma que la inversión fue de 35 millones de euros, mientras que el fragmento indica 35.000 euros, lo que constituye una diferencia significativa en la cifra.",
+      "evidence": [
+        {
+          "cita": "La inversión en energías renovables alcanzó los 35 millones de euros en 2024",
+          "id": "P3",
+          "pasaje": 3
+        }
+      ]
+    },
+    {
+      "case_id": "EV-20",
+      "expected": "contradicted",
+      "critical": true,
+      "tags": [
+        "negation",
+        "lexical_distractor"
+      ],
+      "state": "validado",
+      "reason": null,
+      "raw_label": "contradicted",
+      "shown_label": "contradicted",
+      "explanation": "El pasaje P2 afirma explícitamente que Ventrol no está autorizado para menores de 12 años, lo cual contradice directamente la afirmación del fragmento.",
+      "evidence": [
+        {
+          "cita": "La Agencia Sanitaria de Lindavista autorizó el medicamento Ventrol el 9 de mayo de 2025. El comunicado indica que Ventrol no está autorizado para menores de 12 años",
+          "id": "P2",
+          "pasaje": 2
+        }
+      ]
+    },
+    {
+      "case_id": "EV-29",
+      "expected": "contradicted",
+      "critical": true,
+      "tags": [
+        "negation",
+        "lexical_distractor",
+        "cross_source"
+      ],
+      "state": "validado",
+      "reason": null,
+      "raw_label": "contradicted",
+      "shown_label": "contradicted",
+      "explanation": "El pasaje P3 afirma explícitamente que no habrá paros en febrero, lo cual contradice directamente la afirmación del fragmento de que los maquinistas harán huelga en ese mes.",
+      "evidence": [
+        {
+          "cita": "El sindicato confirmó que no habrá paros en febrero",
+          "id": "P3",
+          "pasaje": 3
+        }
+      ]
+    },
+    {
+      "case_id": "EV-22",
+      "expected": "supported",
+      "critical": false,
+      "tags": [
+        "percentage",
+        "paraphrase"
+      ],
+      "state": "validado",
+      "reason": null,
+      "raw_label": "supported",
+      "shown_label": "supported",
+      "explanation": "El pasaje P1 confirma que el tráfico de contenedores del Puerto de Bahía Clara aumentó un 7 % en 2024.",
+      "evidence": [
+        {
+          "cita": "El Puerto de Bahía Clara movió 1,8 millones de contenedores en 2024, un récord histórico, según informó su presidenta, Marta Ilundain. El tráfico creció un 7 % respecto a 2023",
+          "id": "P1",
+          "pasaje": 1
+        }
+      ]
+    },
+    {
+      "case_id": "EV-15",
+      "expected": "insufficient_evidence",
+      "critical": true,
+      "tags": [
+        "lexical_distractor",
+        "figure"
+      ],
+      "state": "validado",
+      "reason": null,
+      "raw_label": "insufficient_evidence",
+      "shown_label": "insufficient_evidence",
+      "explanation": "El fragmento afirma que el programa redujo el paro juvenil un 5 %, pero los pasajes no mencionan este programa ni sus efectos sobre el paro juvenil; P1 habla de un programa de formación dual sin resultados, P2 y P3 reportan tasas de paro generales sin referencia a la intervención del programa.",
+      "evidence": []
+    },
+    {
+      "case_id": "EV-19",
+      "expected": "supported",
+      "critical": false,
+      "tags": [
+        "negation",
+        "paraphrase"
+      ],
+      "state": "validado",
+      "reason": null,
+      "raw_label": "supported",
+      "shown_label": "supported",
+      "explanation": "El pasaje P3 afirma explícitamente que ningún participante del ensayo de Ventrol sufrió efectos adversos graves, lo cual coincide con la afirmación del fragmento.",
+      "evidence": [
+        {
+          "cita": "ninguno sufrió efectos adversos graves",
+          "id": "P3",
+          "pasaje": 3
+        }
+      ]
+    },
+    {
+      "case_id": "EV-05",
+      "expected": "contradicted",
+      "critical": true,
+      "tags": [
+        "date"
+      ],
+      "state": "validado",
+      "reason": null,
+      "raw_label": "contradicted",
+      "shown_label": "contradicted",
+      "explanation": "El pasaje P1 confirma la ampliación del horario de la Biblioteca Central, pero indica que comenzará el 3 de septiembre de 2025, mientras que el fragmento afirma que será el 3 de octubre de 2025.",
+      "evidence": [
+        {
+          "cita": "abrirá de lunes a sábado de 8:00 a 22:00",
+          "id": "P1",
+          "pasaje": 1
+        }
+      ]
+    }
+  ],
+  "controls": {
+    "planned": 15,
+    "attempted": 15,
+    "accepted": 14,
+    "rejected": 1,
+    "unavailable": 0,
+    "without_result": 1,
+    "rejected_cases": [
+      {
+        "case_id": "IC-14",
+        "raw_label": "contradicted",
+        "expected": "contradicted",
+        "reason": "La cita no aparece literalmente en los pasajes citados."
+      }
+    ],
+    "unavailable_cases": [],
+    "raw": {
+      "planned": 15,
+      "attempted": 15,
+      "not_executed": 0,
+      "ok": 15,
+      "format_error": 0,
+      "truncated": 0,
+      "timeout": 0,
+      "request_error": 0,
+      "completion_rate": 1.0,
+      "correct": 15,
+      "accuracy_over_attempted": 1.0,
+      "accuracy_ci95": [
+        0.7961107336956521,
+        1.0
+      ],
+      "macro_f1": 1.0,
+      "per_class": {
+        "supported": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "tp": 5,
+          "predicted": 5,
+          "actual": 5
+        },
+        "contradicted": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "tp": 7,
+          "predicted": 7,
+          "actual": 7
+        },
+        "insufficient_evidence": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "tp": 3,
+          "predicted": 3,
+          "actual": 3
+        }
+      },
+      "confusion": {
+        "supported": {
+          "supported": 5,
+          "contradicted": 0,
+          "insufficient_evidence": 0,
+          "no_valid_answer": 0
+        },
+        "contradicted": {
+          "supported": 0,
+          "contradicted": 7,
+          "insufficient_evidence": 0,
+          "no_valid_answer": 0
+        },
+        "insufficient_evidence": {
+          "supported": 0,
+          "contradicted": 0,
+          "insufficient_evidence": 3,
+          "no_valid_answer": 0
+        }
+      },
+      "false_support": 0,
+      "negatives_attempted": 10,
+      "false_support_rate": 0.0,
+      "false_support_ci95": [
+        0.0,
+        0.2775401687666166
+      ],
+      "critical_false_support": 0,
+      "critical_false_support_cases": [],
+      "false_support_cases": [],
+      "traceable_correct": 13,
+      "unknown_id_answers": 0,
+      "answers": 15,
+      "expected_evidence_cited": 12,
+      "expected_evidence_denominator": 12,
+      "quote_found_in_cited": 10,
+      "quote_denominator": 12,
+      "both_values_named": 4,
+      "both_values_denominator": 4,
+      "answers_with_number_not_in_inputs": 0,
+      "answers_with_capitalized_not_in_inputs": 0
+    },
+    "accepted_view": {
+      "planned": 15,
+      "attempted": 15,
+      "not_executed": 0,
+      "ok": 14,
+      "format_error": 0,
+      "truncated": 0,
+      "timeout": 0,
+      "request_error": 0,
+      "completion_rate": 0.9333333333333333,
+      "correct": 14,
+      "accuracy_over_attempted": 0.9333333333333333,
+      "accuracy_ci95": [
+        0.7018292244757601,
+        0.9881334113938051
+      ],
+      "macro_f1": 0.9743589743589743,
+      "per_class": {
+        "supported": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "tp": 5,
+          "predicted": 5,
+          "actual": 5
+        },
+        "contradicted": {
+          "precision": 1.0,
+          "recall": 0.8571428571428571,
+          "f1": 0.923076923076923,
+          "tp": 6,
+          "predicted": 6,
+          "actual": 7
+        },
+        "insufficient_evidence": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "tp": 3,
+          "predicted": 3,
+          "actual": 3
+        }
+      },
+      "confusion": {
+        "supported": {
+          "supported": 5,
+          "contradicted": 0,
+          "insufficient_evidence": 0,
+          "no_valid_answer": 0
+        },
+        "contradicted": {
+          "supported": 0,
+          "contradicted": 6,
+          "insufficient_evidence": 0,
+          "no_valid_answer": 1
+        },
+        "insufficient_evidence": {
+          "supported": 0,
+          "contradicted": 0,
+          "insufficient_evidence": 3,
+          "no_valid_answer": 0
+        }
+      },
+      "false_support": 0,
+      "negatives_attempted": 10,
+      "false_support_rate": 0.0,
+      "false_support_ci95": [
+        0.0,
+        0.2775401687666166
+      ],
+      "critical_false_support": 0,
+      "critical_false_support_cases": [],
+      "false_support_cases": [],
+      "traceable_correct": 13,
+      "unknown_id_answers": 0,
+      "answers": 14,
+      "expected_evidence_cited": 11,
+      "expected_evidence_denominator": 11,
+      "quote_found_in_cited": 10,
+      "quote_denominator": 11,
+      "both_values_named": 3,
+      "both_values_denominator": 3,
+      "answers_with_number_not_in_inputs": 0,
+      "answers_with_capitalized_not_in_inputs": 0
+    }
+  },
+  "control_cases": [
+    {
+      "case_id": "IC-01",
+      "expected": "contradicted",
+      "critical": true,
+      "tags": [
+        "days_60_90",
+        "number"
+      ],
+      "state": "validado",
+      "reason": null,
+      "raw_label": "contradicted",
+      "shown_label": "contradicted",
+      "explanation": "El pasaje P2 establece un umbral de 90 días para el default, lo cual contradice la afirmación del fragmento de 60 días.",
+      "evidence": [
+        {
+          "cita": "La entidad considerará que una exposición está en situación de default cuando el deudor acumule más de 90 días de impago",
+          "id": "P2",
+          "pasaje": 2
+        }
+      ]
+    },
+    {
+      "case_id": "IC-02",
+      "expected": "supported",
+      "critical": false,
+      "tags": [
+        "exceptions"
+      ],
+      "state": "validado",
+      "reason": null,
+      "raw_label": "supported",
+      "shown_label": "supported",
+      "explanation": "El pasaje P1 confirma que la restricción afectará al distrito centro y especifica las mismas excepciones para vehículos sin etiqueta ambiental.",
+      "evidence": [
+        {
+          "cita": "La zona de bajas emisiones entrará en vigor el 1 de septiembre de 2027 y afectará únicamente al distrito centro. Los vehículos sin etiqueta ambiental no podrán acceder, salvo los de residentes y los de personas con movilidad reducida",
+          "id": "P1",
+          "pasaje": 1
+        }
+      ]
+    },
+    {
+      "case_id": "IC-03",
+      "expected": "contradicted",
+      "critical": true,
+      "tags": [
+        "exceptions",
+        "scope"
+      ],
+      "state": "validado",
+      "reason": null,
+      "raw_label": "contradicted",
+      "shown_label": "contradicted",
+      "explanation": "El pasaje indica excepciones para residentes y personas con movilidad reducida, mientras que el fragmento afirma que no hay ninguna excepción.",
+      "evidence": [
+        {
+          "cita": "La zona de bajas emisiones entrará en vigor el 1 de septiembre de 2027 y afectará únicamente al distrito centro. Los vehículos sin etiqueta ambiental no podrán acceder, salvo los de residentes y los de personas con movilidad reducida",
+          "id": "P2",
+          "pasaje": 2
+        }
+      ]
+    },
+    {
+      "case_id": "IC-04",
+      "expected": "contradicted",
+      "critical": true,
+      "tags": [
+        "multi_claim",
+        "correct_contradicted_unsupported"
+      ],
+      "state": "validado",
+      "reason": null,
+      "raw_label": "contradicted",
+      "shown_label": "contradicted",
+      "explanation": "El pasaje P1 confirma el número de consultas de 2024 pero indica seis profesionales de medicina general, contradiciendo las ocho del fragmento, y no menciona la unidad de pediatría.",
+      "evidence": [
+        {
+          "cita": "El centro de salud de Monteluz atendió 18.000 consultas en 2024. Abre de lunes a sábado y cuenta con seis consultas de medicina general",
+          "id": "P1",
+          "pasaje": 1
+        }
+      ]
+    },
+    {
+      "case_id": "IC-05",
+      "expected": "insufficient_evidence",
+      "critical": true,
+      "tags": [
+        "multi_claim",
+        "correct_unsupported"
+      ],
+      "state": "validado",
+      "reason": null,
+      "raw_label": "insufficient_evidence",
+      "shown_label": "insufficient_evidence",
+      "explanation": "El fragmento afirma que se abrirá una unidad de pediatría en 2026, pero los pasajes de referencia no mencionan ningún proyecto futuro ni la apertura de esa unidad.",
+      "evidence": []
+    },
+    {
+      "case_id": "IC-06",
+      "expected": "supported",
+      "critical": false,
+      "tags": [
+        "multi_claim",
+        "all_supported"
+      ],
+      "state": "validado",
+      "reason": null,
+      "raw_label": "supported",
+      "shown_label": "supported",
+      "explanation": "El fragmento coincide con P1 sobre la fisioterapia y sus dos profesionales, y con P2 sobre los días de apertura del centro.",
+      "evidence": [
+        {
+          "cita": "El centro ofrece fisioterapia desde 2022, con dos profesionales",
+          "id": "P1",
+          "pasaje": 1
+        },
+        {
+          "cita": "Abre de lunes a sábado y cuenta con seis consultas de medicina general",
+          "id": "P2",
+          "pasaje": 2
+        }
+      ]
+    },
+    {
+      "case_id": "IC-07",
+      "expected": "supported",
+      "critical": false,
+      "tags": [
+        "irrelevant_omission"
+      ],
+      "state": "validado",
+      "reason": null,
+      "raw_label": "supported",
+      "shown_label": "supported",
+      "explanation": "El pasaje P1 afirma exactamente lo mismo que el fragmento revisado.",
+      "evidence": [
+        {
+          "cita": "El centro de salud de Monteluz atendió 18.000 consultas en 2024",
+          "id": "P1",
+          "pasaje": 1
+        }
+      ]
+    },
+    {
+      "case_id": "IC-08",
+      "expected": "supported",
+      "critical": false,
+      "tags": [
+        "simple_control"
+      ],
+      "state": "validado",
+      "reason": null,
+      "raw_label": "supported",
+      "shown_label": "supported",
+      "explanation": "El pasaje P1 confirma exactamente el número de becas, el monto por beca y la entidad mencionada en el fragmento.",
+      "evidence": [
+        {
+          "cita": "La Fundación Arenales entregó el viernes 40 becas de estudio a alumnos de bachillerato. Cada beca está dotada con 1.500 euros",
+          "id": "P1",
+          "pasaje": 1
+        }
+      ]
+    },
+    {
+      "case_id": "IC-09",
+      "expected": "contradicted",
+      "critical": true,
+      "tags": [
+        "simple_control",
+        "number"
+      ],
+      "state": "validado",
+      "reason": null,
+      "raw_label": "contradicted",
+      "shown_label": "contradicted",
+      "explanation": "El pasaje P2 afirma que el presupuesto asciende a 12 millones de euros, lo cual contradice la afirmación del fragmento de 21 millones de euros.",
+      "evidence": [
+        {
+          "cita": "El ayuntamiento de Sierra Alta aprobó el presupuesto de 2025, que asciende a 12 millones de euros",
+          "id": "P2",
+          "pasaje": 2
+        }
+      ]
+    },
+    {
+      "case_id": "IC-10",
+      "expected": "insufficient_evidence",
+      "critical": true,
+      "tags": [
+        "simple_control",
+        "lexical_distractor"
+      ],
+      "state": "validado",
+      "reason": null,
+      "raw_label": "insufficient_evidence",
+      "shown_label": "insufficient_evidence",
+      "explanation": "Los pasajes mencionan becas para bachillerato, pero no contienen información sobre estudiantes universitarios ni sobre la ampliación de becas para este grupo.",
+      "evidence": []
+    },
+    {
+      "case_id": "IC-11",
+      "expected": "contradicted",
+      "critical": true,
+      "tags": [
+        "number",
+        "long_passage_with_headings"
+      ],
+      "state": "validado",
+      "reason": null,
+      "raw_label": "contradicted",
+      "shown_label": "contradicted",
+      "explanation": "El pasaje P2 indica que las pérdidas fueron del 14 %, mientras que el fragmento afirma que fueron del 21 %, lo que constituye una discrepancia directa en la cifra.",
+      "evidence": [
+        {
+          "cita": "Las pérdidas en la red de distribución se situaron en el 14 % del agua captada",
+          "id": "P2",
+          "pasaje": 2
+        }
+      ]
+    },
+    {
+      "case_id": "IC-12",
+      "expected": "insufficient_evidence",
+      "critical": true,
+      "tags": [
+        "long_passage_with_headings",
+        "lexical_distractor"
+      ],
+      "state": "validado",
+      "reason": null,
+      "raw_label": "insufficient_evidence",
+      "shown_label": "insufficient_evidence",
+      "explanation": "El fragmento afirma que el informe obliga a instalar contadores inteligentes, pero los pasajes mencionan únicamente renovaciones de tuberías, reducción de pérdidas y cambios tarifarios sin referirse a este dispositivo.",
+      "evidence": []
+    },
+    {
+      "case_id": "IC-13",
+      "expected": "contradicted",
+      "critical": true,
+      "tags": [
+        "multi_claim",
+        "correct_and_contradicted",
+        "negation"
+      ],
+      "state": "validado",
+      "reason": null,
+      "raw_label": "contradicted",
+      "shown_label": "contradicted",
+      "explanation": "El pasaje afirma que la tarifa no cambiará en 2025, lo cual contradice la afirmación del fragmento de que la tarifa subirá ese año.",
+      "evidence": [
+        {
+          "cita": "La tarifa no cambiará durante 2025",
+          "id": "P2",
+          "pasaje": 2
+        }
+      ]
+    },
+    {
+      "case_id": "IC-14",
+      "expected": "contradicted",
+      "critical": true,
+      "tags": [
+        "multi_claim",
+        "correct_contradicted_unsupported",
+        "cross_source"
+      ],
+      "state": "no_validado",
+      "reason": "La cita no aparece literalmente en los pasajes citados.",
+      "raw_label": "contradicted",
+      "shown_label": "no_valid_answer",
+      "explanation": null,
+      "evidence": []
+    },
+    {
+      "case_id": "IC-15",
+      "expected": "supported",
+      "critical": false,
+      "tags": [
+        "simple_control"
+      ],
+      "state": "validado",
+      "reason": null,
+      "raw_label": "supported",
+      "shown_label": "supported",
+      "explanation": "El pasaje P2 confirma exactamente la afirmación del fragmento sobre la película ganadora y su directora.",
+      "evidence": [
+        {
+          "cita": "La película ganadora fue «El faro apagado», de la directora Inés Soler",
+          "id": "P2",
+          "pasaje": 2
+        }
+      ]
+    }
+  ],
+  "latency": {
+    "completed": 45,
+    "timeouts": 0,
+    "total_wall_s": 1070.1003956839995,
+    "warm_wall_s": {
+      "n": 43,
+      "median": 23.8312807120019,
+      "p95": 27.54671529499683
+    },
+    "first_after_load_wall_s": {
+      "n": 2,
+      "median": 30.898460456000976,
+      "p95": 31.82213956800115
+    },
+    "warm_ttft_s": {
+      "n": 43,
+      "median": 9.417564316001517,
+      "p95": 11.46474293600113
+    },
+    "warm_prompt_eval_s": {
+      "n": 43,
+      "median": 9.2171,
+      "p95": 11.18034
+    },
+    "warm_eval_s": {
+      "n": 43,
+      "median": 13.92834,
+      "p95": 17.64938
+    },
+    "prompt_tokens": {
+      "n": 45,
+      "median": 823,
+      "p95": 869
+    },
+    "prompt_cached_tokens": {
+      "n": 43,
+      "median": 346,
+      "p95": 357
+    },
+    "output_tokens": {
+      "n": 45,
+      "median": 104,
+      "p95": 128
+    },
+    "generation_tokens_per_s": {
+      "n": 45,
+      "median": 7.377805313958645,
+      "p95": 7.6103828596946945
+    },
+    "prompt_tokens_per_s": {
+      "n": 0,
+      "median": null,
+      "p95": null
+    },
+    "first_after_load_load_s": 6.2804783314999995
+  },
+  "e2e": [
+    {
+      "modality": "text_vs_text",
+      "fragments": 4,
+      "fragments_expected": 4,
+      "without_analysis_s": 1.5446821609984909,
+      "with_analysis_s": 118.98160630400162,
+      "judge_s": 118.67669953400036,
+      "rest_of_document_s": 0.3049067700012529,
+      "first_fragment_s": 33.87499742599903,
+      "median_other_fragments_s": 27.95993202599857,
+      "correct": 4,
+      "same_passages_with_and_without_analysis": true,
+      "checks_ok": true,
+      "detail": [
+        {
+          "fragment": 1,
+          "claim": "El plan de movilidad de Puerto Alcor destina 30 millones de euros al transporte público.",
+          "expected": "supported",
+          "shown": "supported",
+          "state": "validado",
+          "raw_label": "supported",
+          "reason": null,
+          "retrieved_needed_passage": true,
+          "attribution": "correct",
+          "required_values_ok": null,
+          "explanation": "El pasaje P1 confirma que del presupuesto total de 48 millones, 30 millones están destinados al transporte público, coincidiendo exactamente con la afirmación del fragmento.",
+          "quotes": [
+            "De ellos, 30 millones se destinarán a transporte público"
+          ],
+          "wall_s": 33.87499742599903,
+          "load_s": 5.655811522,
+          "prompt_tokens": 917,
+          "output_tokens": 95
+        },
+        {
+          "fragment": 2,
+          "claim": "La zona de bajas emisiones entrará en vigor el 1 de septiembre de 2026.",
+          "expected": "contradicted",
+          "shown": "contradicted",
+          "state": "validado",
+          "raw_label": "contradicted",
+          "reason": null,
+          "retrieved_needed_passage": true,
+          "attribution": "correct",
+          "required_values_ok": true,
+          "explanation": "El pasaje P1 establece que la zona entrará en vigor en 2027, lo cual contradice la fecha de 2026 indicada en el fragmento.",
+          "quotes": [
+            "La zona de bajas emisiones entrará en vigor el 1 de septiembre de 2027"
+          ],
+          "wall_s": 31.576453544999822,
+          "load_s": 0.001234725,
+          "prompt_tokens": 918,
+          "output_tokens": 103
+        },
+        {
+          "fragment": 3,
+          "claim": "Los vehículos sin etiqueta ambiental no podrán entrar en el distrito centro, con excepción de los de residentes y los de personas con movilidad reducida.",
+          "expected": "supported",
+          "shown": "supported",
+          "state": "validado",
+          "raw_label": "supported",
+          "reason": null,
+          "retrieved_needed_passage": true,
+          "attribution": "correct",
+          "required_values_ok": null,
+          "explanation": "El pasaje P1 confirma que la restricción de vehículos sin etiqueta ambiental en el distrito centro aplica a residentes y personas con movilidad reducida, coincidiendo con el fragmento revisado.",
+          "quotes": [
+            "La zona de bajas emisiones entrará en vigor el 1 de septiembre de 2027 y afectará únicamente al distrito centro. Los vehículos sin etiqueta ambiental no podrán acceder, salvo los de residentes y los de personas con movilidad reducida"
+          ],
+          "wall_s": 27.95993202599857,
+          "load_s": 0.00356531,
+          "prompt_tokens": 925,
+          "output_tokens": 131
+        },
+        {
+          "fragment": 4,
+          "claim": "El plan prevé 60 kilómetros de carriles bici, reduce un 40 % los desplazamientos en coche privado antes de 2030 e incluye una línea de tranvía hasta el puerto.",
+          "expected": "contradicted",
+          "shown": "contradicted",
+          "state": "validado",
+          "raw_label": "contradicted",
+          "reason": null,
+          "retrieved_needed_passage": true,
+          "attribution": "correct",
+          "required_values_ok": true,
+          "explanation": "El pasaje confirma la extensión de 60 km, pero afirma una reducción del 25% en desplazamientos en coche, no del 40%, y no menciona la inclusión de una línea de tranvía.",
+          "quotes": [
+            "La red de carriles bici pasará de 22 a 60 kilómetros"
+          ],
+          "wall_s": 25.265316537002946,
+          "load_s": 0.001132086,
+          "prompt_tokens": 940,
+          "output_tokens": 109
+        }
+      ]
+    },
+    {
+      "modality": "report_vs_news",
+      "fragments": 4,
+      "fragments_expected": 4,
+      "without_analysis_s": 2.5282809199998155,
+      "with_analysis_s": 142.63470357999904,
+      "judge_s": 142.40748329599955,
+      "rest_of_document_s": 0.22722028399948613,
+      "first_fragment_s": 39.76311144899955,
+      "median_other_fragments_s": 35.902114806998725,
+      "correct": 3,
+      "same_passages_with_and_without_analysis": true,
+      "checks_ok": true,
+      "detail": [
+        {
+          "fragment": 1,
+          "claim": "Una exposición entra en default con más de 60 días de impago.",
+          "expected": "contradicted",
+          "shown": "contradicted",
+          "state": "validado",
+          "raw_label": "contradicted",
+          "reason": null,
+          "retrieved_needed_passage": true,
+          "attribution": "correct",
+          "required_values_ok": true,
+          "explanation": "El pasaje establece un umbral de 90 días para el default, lo cual contradice el fragmento que afirma 60 días.",
+          "quotes": [
+            "La entidad considerará que una exposición está en situación de default cuando el deudor acumule más de 90 días de impago"
+          ],
+          "wall_s": 39.76311144899955,
+          "load_s": 5.648746994,
+          "prompt_tokens": 1110,
+          "output_tokens": 103
+        },
+        {
+          "fragment": 2,
+          "claim": "La tasa media de default a largo plazo se calcula con un periodo de observación de al menos cinco años.",
+          "expected": "supported",
+          "shown": "supported",
+          "state": "validado",
+          "raw_label": "supported",
+          "reason": null,
+          "retrieved_needed_passage": true,
+          "attribution": "correct",
+          "required_values_ok": null,
+          "explanation": "El pasaje P1 confirma que el periodo de observación para la tasa media de default a largo plazo es de al menos cinco años.",
+          "quotes": [
+            "La tasa media de default a largo plazo utilizada para calibrar la PD se calculará con un periodo de observación de al menos cinco años"
+          ],
+          "wall_s": 35.902114806998725,
+          "load_s": 0.001081755,
+          "prompt_tokens": 1116,
+          "output_tokens": 100
+        },
+        {
+          "fragment": 3,
+          "claim": "La PD estimada se compara con la tasa observada al menos una vez al año.",
+          "expected": "supported",
+          "shown": "supported",
+          "state": "validado",
+          "raw_label": "supported",
+          "reason": null,
+          "retrieved_needed_passage": true,
+          "attribution": "correct",
+          "required_values_ok": null,
+          "explanation": "El pasaje P1 confirma que la comparación anual entre la PD estimada y la tasa observada es un requisito, coincidiendo con el fragmento.",
+          "quotes": [
+            "Al menos una vez al año, la entidad comparará la PD estimada de cada grado de rating con la tasa de default observada"
+          ],
+          "wall_s": 36.13824871300312,
+          "load_s": 0.001170812,
+          "prompt_tokens": 1093,
+          "output_tokens": 102
+        },
+        {
+          "fragment": 4,
+          "claim": "La guía obliga a las entidades a publicar sus modelos de PD en su página web.",
+          "expected": "insufficient_evidence",
+          "shown": "no_valid_answer",
+          "state": "no_validado",
+          "raw_label": "contradicted",
+          "reason": "Falta la evidencia: esta etiqueta exige un pasaje citado y una cita literal.",
+          "retrieved_needed_passage": null,
+          "attribution": "no_result",
+          "required_values_ok": null,
+          "explanation": null,
+          "quotes": [],
+          "wall_s": 30.604008326998155,
+          "load_s": 0.001061411,
+          "prompt_tokens": 1099,
+          "output_tokens": 70
+        }
+      ]
+    },
+    {
+      "modality": "news_vs_newsletter",
+      "fragments": 6,
+      "fragments_expected": 6,
+      "without_analysis_s": 1.9932406900006754,
+      "with_analysis_s": 176.91318456299996,
+      "judge_s": 176.4630725499992,
+      "rest_of_document_s": 0.4501120130007621,
+      "first_fragment_s": 37.47157406399856,
+      "median_other_fragments_s": 30.54913769199993,
+      "correct": 6,
+      "same_passages_with_and_without_analysis": true,
+      "checks_ok": true,
+      "detail": [
+        {
+          "fragment": 1,
+          "claim": "Las lluvias cerraron la línea ferroviaria del norte y Ferrovías del Norte espera recuperar el servicio el jueves.",
+          "expected": "supported",
+          "shown": "supported",
+          "state": "validado",
+          "raw_label": "supported",
+          "reason": null,
+          "retrieved_needed_passage": true,
+          "attribution": "correct",
+          "required_values_ok": null,
+          "explanation": "El pasaje P1 confirma que las lluvias cerraron la línea y que Ferrovías del Norte espera la recuperación el jueves.",
+          "quotes": [
+            "Las fuertes lluvias obligaron a cerrar el lunes la línea ferroviaria del norte entre Villanúa y Puerto Alcor. La operadora Ferrovías del Norte estima que el servicio se recuperará el jueves"
+          ],
+          "wall_s": 37.47157406399856,
+          "load_s": 6.162439939,
+          "prompt_tokens": 996,
+          "output_tokens": 104
+        },
+        {
+          "fragment": 2,
+          "claim": "El Puerto de Bahía Clara movió 1,8 millones de contenedores en 2024, un récord.",
+          "expected": "supported",
+          "shown": "supported",
+          "state": "validado",
+          "raw_label": "supported",
+          "reason": null,
+          "retrieved_needed_passage": true,
+          "attribution": "correct",
+          "required_values_ok": null,
+          "explanation": "El pasaje P1 confirma exactamente la cifra de contenedores y la naturaleza de récord mencionada en el fragmento.",
+          "quotes": [
+            "El Puerto de Bahía Clara movió 1,8 millones de contenedores en 2024, un récord histórico"
+          ],
+          "wall_s": 31.210559521001414,
+          "load_s": 0.001300637,
+          "prompt_tokens": 998,
+          "output_tokens": 89
+        },
+        {
+          "fragment": 3,
+          "claim": "El Puerto de Bahía Clara invertirá 90 millones de euros en electrificar sus muelles.",
+          "expected": "contradicted",
+          "shown": "contradicted",
+          "state": "validado",
+          "raw_label": "contradicted",
+          "reason": null,
+          "retrieved_needed_passage": true,
+          "attribution": "correct",
+          "required_values_ok": true,
+          "explanation": "El pasaje P1 afirma que el puerto invertirá 40 millones de euros, lo cual contradice la cifra de 90 millones de euros presentada en el fragmento.",
+          "quotes": [
+            "La presidenta anunció además que el puerto invertirá 40 millones de euros en electrificar sus muelles antes de 2028"
+          ],
+          "wall_s": 24.403540614999656,
+          "load_s": 0.00122028,
+          "prompt_tokens": 992,
+          "output_tokens": 105
+        },
+        {
+          "fragment": 4,
+          "claim": "El Museo Marítimo abrirá en junio una sala de fotografía portuaria con entrada gratuita durante seis meses.",
+          "expected": "contradicted",
+          "shown": "contradicted",
+          "state": "validado",
+          "raw_label": "contradicted",
+          "reason": null,
+          "retrieved_needed_passage": true,
+          "attribution": "correct",
+          "required_values_ok": null,
+          "explanation": "El pasaje P1 afirma que la entrada será gratuita durante dos meses, mientras que el fragmento afirma que lo será durante seis meses, lo que constituye una contradicción en el plazo.",
+          "quotes": [
+            "La entrada a la sala será gratuita durante los dos primeros meses"
+          ],
+          "wall_s": 30.54913769199993,
+          "load_s": 0.001403389,
+          "prompt_tokens": 993,
+          "output_tokens": 89
+        },
+        {
+          "fragment": 5,
+          "claim": "Villanúa dará ayudas de hasta 6.000 euros a pequeños comercios del casco antiguo.",
+          "expected": "supported",
+          "shown": "supported",
+          "state": "validado",
+          "raw_label": "supported",
+          "reason": null,
+          "retrieved_needed_passage": true,
+          "attribution": "correct",
+          "required_values_ok": null,
+          "explanation": "El pasaje P1 confirma que las ayudas para reformar pequeños comercios en Villanúa tienen un límite máximo de 6.000 euros, lo cual coincide con el fragmento.",
+          "quotes": [
+            "Cada establecimiento podrá recibir un máximo de 6.000 euros"
+          ],
+          "wall_s": 31.40886202299953,
+          "load_s": 0.001469068,
+          "prompt_tokens": 996,
+          "output_tokens": 93
+        },
+        {
+          "fragment": 6,
+          "claim": "La línea norte se reforzará con trenes nuevos a partir de 2026.",
+          "expected": "insufficient_evidence",
+          "shown": "insufficient_evidence",
+          "state": "validado",
+          "raw_label": "insufficient_evidence",
+          "reason": null,
+          "retrieved_needed_passage": null,
+          "attribution": "correct",
+          "required_values_ok": null,
+          "explanation": "El fragmento afirma un plan de renovación de trenes para 2026, pero los pasajes solo mencionan el cierre temporal del servicio por desprendimientos y no contienen información sobre futuras inversiones en trenes.",
+          "quotes": [],
+          "wall_s": 21.419398635000107,
+          "load_s": 0.001011081,
+          "prompt_tokens": 1008,
+          "output_tokens": 81
+        }
+      ]
+    }
+  ],
+  "memory": {
+    "samples": 148,
+    "max_runner_rss_mib_sampled": 5982.1,
+    "min_memory_free_pct": 50,
+    "swap_used_mib_first": 2754.25,
+    "swap_used_mib_max": 2754.25
+  }
+}

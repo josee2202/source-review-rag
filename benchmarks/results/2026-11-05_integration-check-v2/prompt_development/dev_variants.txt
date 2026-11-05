@@ -1,0 +1,14 @@
+B MIXTO esperada contradicted | no_validado None 21.6s
+    Falta la evidencia: esta etiqueta exige un pasaje citado y una cita literal. []
+B MIXTO esperada contradicted | validado contradicted 18.7s
+    El pasaje afirma que el polideportivo abrirá en mayo, lo cual contradice la afirmación del fragmento de que abrirá en marzo. ['El polideportivo abrirá en mayo']
+B MIXTO esperada insufficient_evidence | validado insufficient_evidence 20.5s
+    El pasaje confirma la primera y segunda afirmación del fragmento, pero no menciona el precio del billete, por lo que no se puede confirmar ni desmentir esa parte. ['El tren une las dos ciudades en dos horas. Hay seis salidas diarias']
+B MIXTO esperada supported | validado supported 20.2s
+    El pasaje confirma que la feria reúne a 200 expositores y se celebra en octubre, coincidiendo exactamente con las afirmaciones del fragmento. ['La feria del libro de Valdemar reúne a 200 expositores en octubre']
+B DV-01 esperada supported | validado supported 22.2s
+B DV-02 esperada contradicted | validado contradicted 19.3s
+B DV-03 esperada contradicted | validado contradicted 23.0s
+B DV-04 esperada insufficient_evidence | validado insufficient_evidence 17.7s
+B DV-05 esperada insufficient_evidence | validado insufficient_evidence 20.9s
+B DV-06 esperada supported | validado supported 22.6s
