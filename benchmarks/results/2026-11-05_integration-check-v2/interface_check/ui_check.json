@@ -1,0 +1,78 @@
+{
+  "default_off": true,
+  "switched_on_by_click": true,
+  "generations_equal_fragments": true,
+  "browser_errors": [],
+  "think_false": true,
+  "num_thread": [
+    8
+  ],
+  "model": [
+    "qwen3.5:4b-q4_K_M"
+  ],
+  "fragments_compared": 4,
+  "ui_wait_s": 118.815,
+  "fragments": [
+    {
+      "fragment": 1,
+      "state": "validado",
+      "label": "supported",
+      "label_text": "Respaldado por los pasajes",
+      "ui_label": true,
+      "ui_explanation": true,
+      "ui_quotes": true,
+      "ui_passages": true,
+      "ui_no_internal_label": true,
+      "excel_label": true,
+      "excel_explanation": true,
+      "excel_quotes": true,
+      "excel_reason": true
+    },
+    {
+      "fragment": 2,
+      "state": "validado",
+      "label": "contradicted",
+      "label_text": "Contradicción con los pasajes",
+      "ui_label": true,
+      "ui_explanation": true,
+      "ui_quotes": true,
+      "ui_passages": true,
+      "ui_no_internal_label": true,
+      "excel_label": true,
+      "excel_explanation": true,
+      "excel_quotes": true,
+      "excel_reason": true
+    },
+    {
+      "fragment": 3,
+      "state": "validado",
+      "label": "supported",
+      "label_text": "Respaldado por los pasajes",
+      "ui_label": true,
+      "ui_explanation": true,
+      "ui_quotes": true,
+      "ui_passages": true,
+      "ui_no_internal_label": true,
+      "excel_label": true,
+      "excel_explanation": true,
+      "excel_quotes": true,
+      "excel_reason": true
+    },
+    {
+      "fragment": 4,
+      "state": "validado",
+      "label": "contradicted",
+      "label_text": "Contradicción con los pasajes",
+      "ui_label": true,
+      "ui_explanation": true,
+      "ui_quotes": true,
+      "ui_passages": true,
+      "ui_no_internal_label": true,
+      "excel_label": true,
+      "excel_explanation": true,
+      "excel_quotes": true,
+      "excel_reason": true
+    }
+  ],
+  "all_ok": true
+}
