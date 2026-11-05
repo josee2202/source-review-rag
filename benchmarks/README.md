@@ -16,6 +16,9 @@ The `tests/test_benchmark.py` tests of the harness do run in CI, with no models.
 | `run_benchmark.py` | Resumable runner |
 | `build_report.py` | Metrics, CSV, chart and the tables of the document, from saved results only |
 | `check_app_comments.py` | Follow-up outside the frozen protocol: the app's own comment path after turning thinking off |
+| `dataset/integration_cases.yaml` | Control cases of the integration check, written and labelled by the assistant before running them |
+| `run_integration_check.py` | Integration check of the production judge, using `IA-modulable/juez.py` and the real API |
+| `build_integration_report.py` | Summary and tables of an integration check, from saved results only |
 | `results/<run_id>/` | One run: see below |
 
 ## Reproduce or resume
@@ -49,6 +52,33 @@ The document in `docs/` was generated with:
 
 The first command is resumable by model and mode. It runs nothing from the frozen protocol and changes none of its results. A test
 checks that the tables in the document are exactly what `build_report.py` generates from the saved results.
+
+## Reproducing the frozen run after the integration
+
+The app later replaced its free-text comment with the judge evaluated here ([integration check](../docs/integration-check.md)), so
+`IA-modulable/X_AGENT.py` no longer exists. The frozen harness is unchanged, and its fixed-evidence stages still run from this commit,
+but its end-to-end stage and `check_app_comments.py` exercised that earlier comment path. Run those from the commits they were
+written for, in a separate worktree:
+
+```bash
+git worktree add ../srr-frozen 1af7098     # frozen run; b52eb98 for the comments follow-up
+```
+
+The saved results and the commits in their manifests are the record of what ran.
+
+## The integration check
+
+Separate from the comparison: one model, the production code, and no change to the frozen files or results.
+
+```bash
+ollama pull qwen3.5:4b-q4_K_M && ollama pull nomic-embed-text
+.venv/bin/python benchmarks/run_integration_check.py --run-id my-check     # --num-thread 8 by default, recorded in the manifest
+.venv/bin/python benchmarks/build_integration_report.py --run-id my-check
+```
+
+It refuses to start with uncommitted code, resumes with the same `--run-id`, keeps failed answers, stops after three consecutive
+timeouts or two hours of inference, and uses a temporary index. It writes `manifest.json`, `responses.jsonl`, `e2e.jsonl`,
+`resources.jsonl`, `run_status.json`, `summary.json` and `tables.md`. Results are in [`docs/integration-check.md`](../docs/integration-check.md).
 
 ## Files in a run
 
