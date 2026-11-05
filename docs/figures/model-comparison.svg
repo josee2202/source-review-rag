@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 420" role="img" aria-labelledby="title desc">
+<title id="title">Macro-F1 against median warm time per request</title>
+<desc id="desc">1B pass 1: macro-F1 0.24, 8.1 s, 14 of 20 false supports; 1B pass 2: macro-F1 0.27, 8.3 s, 13 of 20 false supports; 4B pass 1: macro-F1 0.97, 21.8 s, 1 of 20 false supports; 4B pass 2: macro-F1 1.00, 20.6 s, 0 of 20 false supports; 9B pass 1: macro-F1 0.90, 38.8 s, 0 of 20 false supports; 9B pass 2: macro-F1 0.95, 39.1 s, 0 of 20 false supports</desc>
+<style>:root{--bg:#fcfcfb;--ink:#0b0b0b;--muted:#52514e;--grid:#e4e3df;--s1B:#2a78d6;--s4B:#eb6834;--s9B:#1baf7a;}@media (prefers-color-scheme:dark){:root{--bg:#1a1a19;--ink:#f0efec;--muted:#c3c2b7;--grid:#3a3a38;--s1B:#3987e5;--s4B:#d95926;--s9B:#199e70;}}text{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;fill:var(--ink);font-size:13px}.m{fill:var(--muted);font-size:12px}.t{font-size:15px;font-weight:600}</style>
+<rect width="760" height="420" fill="var(--bg)"/>
+<text x="64" y="24" class="t">Label quality and waiting time, 30 synthetic cases</text>
+<circle cx="69" cy="44" r="5" fill="var(--s1B)"/><text x="79" y="48" class="m">1B</text>
+<circle cx="125" cy="44" r="5" fill="var(--s4B)"/><text x="135" y="48" class="m">4B</text>
+<circle cx="181" cy="44" r="5" fill="var(--s9B)"/><text x="191" y="48" class="m">9B</text>
+<circle cx="237" cy="44" r="4" fill="none" stroke="var(--muted)" stroke-width="2"/><text x="247" y="48" class="m">hollow: pass 2; labels describe pass 1</text>
+<line x1="64" x2="736" y1="364.0" y2="364.0" stroke="var(--grid)" stroke-width="1"/>
+<text x="56" y="368.0" text-anchor="end" class="m">0</text>
+<line x1="64" x2="736" y1="289.0" y2="289.0" stroke="var(--grid)" stroke-width="1"/>
+<text x="56" y="293.0" text-anchor="end" class="m">0.25</text>
+<line x1="64" x2="736" y1="214.0" y2="214.0" stroke="var(--grid)" stroke-width="1"/>
+<text x="56" y="218.0" text-anchor="end" class="m">0.5</text>
+<line x1="64" x2="736" y1="139.0" y2="139.0" stroke="var(--grid)" stroke-width="1"/>
+<text x="56" y="143.0" text-anchor="end" class="m">0.75</text>
+<line x1="64" x2="736" y1="64.0" y2="64.0" stroke="var(--grid)" stroke-width="1"/>
+<text x="56" y="68.0" text-anchor="end" class="m">1</text>
+<text x="64.0" y="384" text-anchor="middle" class="m">0</text>
+<text x="178.6" y="384" text-anchor="middle" class="m">10</text>
+<text x="293.2" y="384" text-anchor="middle" class="m">20</text>
+<text x="407.7" y="384" text-anchor="middle" class="m">30</text>
+<text x="522.3" y="384" text-anchor="middle" class="m">40</text>
+<text x="636.9" y="384" text-anchor="middle" class="m">50</text>
+<line x1="407.7" x2="407.7" y1="64" y2="364" stroke="var(--muted)" stroke-width="1" stroke-dasharray="4 4"/>
+<text x="413.7" y="356" class="m">30 s preference</text>
+<text x="400.0" y="406" text-anchor="middle" class="m">Median wall time per warm request, seconds (lower is better)</text>
+<text transform="translate(16 214.0) rotate(-90)" text-anchor="middle" class="m">Macro-F1 over attempted cases (higher is better)</text>
+<circle cx="159.2" cy="281.6" r="5" fill="var(--bg)" stroke="var(--s1B)" stroke-width="2"/>
+<circle cx="300.3" cy="64.0" r="5" fill="var(--bg)" stroke="var(--s4B)" stroke-width="2"/>
+<circle cx="512.0" cy="79.3" r="5" fill="var(--bg)" stroke="var(--s9B)" stroke-width="2"/>
+<circle cx="156.6" cy="291.3" r="6" fill="var(--s1B)" stroke="var(--bg)" stroke-width="2"/>
+<circle cx="313.4" cy="74.0" r="6" fill="var(--s4B)" stroke="var(--bg)" stroke-width="2"/>
+<circle cx="509.0" cy="94.1" r="6" fill="var(--s9B)" stroke="var(--bg)" stroke-width="2"/>
+<text x="171.2" y="296.3" text-anchor="start">1B: 14/20 false supports</text>
+<text x="288.3" y="79.0" text-anchor="end">4B: 1/20 false supports</text>
+<text x="524.0" y="99.1" text-anchor="start">9B: 0/20 false supports</text>
+</svg>

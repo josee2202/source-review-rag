@@ -1,0 +1,6996 @@
+{
+ "aliases": [
+  "1B",
+  "4B",
+  "9B"
+ ],
+ "passes": [
+  1,
+  2
+ ],
+ "planned_per_pass": 30,
+ "models": {
+  "1B": {
+   "passes": {
+    "1": {
+     "quality": {
+      "planned": 30,
+      "attempted": 30,
+      "not_executed": 0,
+      "ok": 30,
+      "format_error": 0,
+      "truncated": 0,
+      "timeout": 0,
+      "request_error": 0,
+      "completion_rate": 1.0,
+      "correct": 8,
+      "accuracy_over_attempted": 0.26666666666666666,
+      "accuracy_ci95": [
+       0.14182495553910618,
+       0.4444830204431169
+      ],
+      "macro_f1": 0.24221525600835947,
+      "per_class": {
+       "supported": {
+        "precision": 0.2631578947368421,
+        "recall": 0.5,
+        "f1": 0.3448275862068966,
+        "tp": 5,
+        "predicted": 19,
+        "actual": 10
+       },
+       "contradicted": {
+        "precision": 1.0,
+        "recall": 0.1,
+        "f1": 0.18181818181818182,
+        "tp": 1,
+        "predicted": 1,
+        "actual": 10
+       },
+       "insufficient_evidence": {
+        "precision": 0.2,
+        "recall": 0.2,
+        "f1": 0.20000000000000004,
+        "tp": 2,
+        "predicted": 10,
+        "actual": 10
+       }
+      },
+      "confusion": {
+       "supported": {
+        "supported": 5,
+        "contradicted": 0,
+        "insufficient_evidence": 5,
+        "no_valid_answer": 0
+       },
+       "contradicted": {
+        "supported": 6,
+        "contradicted": 1,
+        "insufficient_evidence": 3,
+        "no_valid_answer": 0
+       },
+       "insufficient_evidence": {
+        "supported": 8,
+        "contradicted": 0,
+        "insufficient_evidence": 2,
+        "no_valid_answer": 0
+       }
+      },
+      "false_support": 14,
+      "negatives_attempted": 20,
+      "false_support_rate": 0.7,
+      "false_support_ci95": [
+       0.4810232237710206,
+       0.854524726031006
+      ],
+      "critical_false_support": 13,
+      "critical_false_support_cases": [
+       "EV-02",
+       "EV-05",
+       "EV-06",
+       "EV-11",
+       "EV-12",
+       "EV-14",
+       "EV-15",
+       "EV-18",
+       "EV-23",
+       "EV-24",
+       "EV-26",
+       "EV-27",
+       "EV-30"
+      ],
+      "false_support_cases": [
+       "EV-02",
+       "EV-05",
+       "EV-06",
+       "EV-11",
+       "EV-12",
+       "EV-14",
+       "EV-15",
+       "EV-18",
+       "EV-21",
+       "EV-23",
+       "EV-24",
+       "EV-26",
+       "EV-27",
+       "EV-30"
+      ],
+      "traceable_correct": 2,
+      "unknown_id_answers": 0,
+      "answers": 30,
+      "expected_evidence_cited": 0,
+      "expected_evidence_denominator": 20,
+      "quote_found_in_cited": 0,
+      "quote_denominator": 18,
+      "both_values_named": 0,
+      "both_values_denominator": 6,
+      "answers_with_number_not_in_inputs": 0,
+      "answers_with_capitalized_not_in_inputs": 0
+     },
+     "latency": {
+      "completed": 30,
+      "timeouts": 0,
+      "total_wall_s": 248.21356008899784,
+      "warm_wall_s": {
+       "n": 29,
+       "median": 8.083226507999825,
+       "p95": 12.23279701499996
+      },
+      "first_after_load_wall_s": {
+       "n": 1,
+       "median": 10.998933900999873,
+       "p95": 10.998933900999873
+      },
+      "warm_ttft_s": {
+       "n": 29,
+       "median": 3.603873752999789,
+       "p95": 4.088361568000437
+      },
+      "warm_prompt_eval_s": {
+       "n": 29,
+       "median": 3.57859,
+       "p95": 4.061043
+      },
+      "warm_eval_s": {
+       "n": 29,
+       "median": 4.538974,
+       "p95": 8.625343
+      },
+      "prompt_tokens": {
+       "n": 30,
+       "median": 848.5,
+       "p95": 875
+      },
+      "prompt_cached_tokens": {
+       "n": 29,
+       "median": 334,
+       "p95": 457
+      },
+      "output_tokens": {
+       "n": 30,
+       "median": 83.0,
+       "p95": 157
+      },
+      "generation_tokens_per_s": {
+       "n": 30,
+       "median": 18.1583632093082,
+       "p95": 19.782875334406683
+      },
+      "prompt_tokens_per_s": {
+       "n": 29,
+       "median": 144.47030813812142,
+       "p95": 162.05203421509222
+      }
+     },
+     "thinking_chars": 0,
+     "first_token_reported": 30,
+     "max_prompt_tokens": 881
+    },
+    "2": {
+     "quality": {
+      "planned": 30,
+      "attempted": 30,
+      "not_executed": 0,
+      "ok": 30,
+      "format_error": 0,
+      "truncated": 0,
+      "timeout": 0,
+      "request_error": 0,
+      "completion_rate": 1.0,
+      "correct": 9,
+      "accuracy_over_attempted": 0.3,
+      "accuracy_ci95": [
+       0.16664562643958933,
+       0.4787612101166018
+      ],
+      "macro_f1": 0.27460317460317457,
+      "per_class": {
+       "supported": {
+        "precision": 0.2777777777777778,
+        "recall": 0.5,
+        "f1": 0.35714285714285715,
+        "tp": 5,
+        "predicted": 18,
+        "actual": 10
+       },
+       "contradicted": {
+        "precision": 0.5,
+        "recall": 0.1,
+        "f1": 0.16666666666666669,
+        "tp": 1,
+        "predicted": 2,
+        "actual": 10
+       },
+       "insufficient_evidence": {
+        "precision": 0.3,
+        "recall": 0.3,
+        "f1": 0.3,
+        "tp": 3,
+        "predicted": 10,
+        "actual": 10
+       }
+      },
+      "confusion": {
+       "supported": {
+        "supported": 5,
+        "contradicted": 1,
+        "insufficient_evidence": 4,
+        "no_valid_answer": 0
+       },
+       "contradicted": {
+        "supported": 6,
+        "contradicted": 1,
+        "insufficient_evidence": 3,
+        "no_valid_answer": 0
+       },
+       "insufficient_evidence": {
+        "supported": 7,
+        "contradicted": 0,
+        "insufficient_evidence": 3,
+        "no_valid_answer": 0
+       }
+      },
+      "false_support": 13,
+      "negatives_attempted": 20,
+      "false_support_rate": 0.65,
+      "false_support_ci95": [
+       0.43285051021946463,
+       0.8188104521320554
+      ],
+      "critical_false_support": 12,
+      "critical_false_support_cases": [
+       "EV-02",
+       "EV-05",
+       "EV-06",
+       "EV-11",
+       "EV-12",
+       "EV-14",
+       "EV-18",
+       "EV-23",
+       "EV-24",
+       "EV-26",
+       "EV-27",
+       "EV-30"
+      ],
+      "false_support_cases": [
+       "EV-02",
+       "EV-05",
+       "EV-06",
+       "EV-11",
+       "EV-12",
+       "EV-14",
+       "EV-18",
+       "EV-21",
+       "EV-23",
+       "EV-24",
+       "EV-26",
+       "EV-27",
+       "EV-30"
+      ],
+      "traceable_correct": 3,
+      "unknown_id_answers": 0,
+      "answers": 30,
+      "expected_evidence_cited": 0,
+      "expected_evidence_denominator": 20,
+      "quote_found_in_cited": 0,
+      "quote_denominator": 19,
+      "both_values_named": 0,
+      "both_values_denominator": 6,
+      "answers_with_number_not_in_inputs": 0,
+      "answers_with_capitalized_not_in_inputs": 0
+     },
+     "latency": {
+      "completed": 30,
+      "timeouts": 0,
+      "total_wall_s": 256.49798254999405,
+      "warm_wall_s": {
+       "n": 29,
+       "median": 8.307089071999144,
+       "p95": 13.28374031400017
+      },
+      "first_after_load_wall_s": {
+       "n": 1,
+       "median": 10.699580413998774,
+       "p95": 10.699580413998774
+      },
+      "warm_ttft_s": {
+       "n": 29,
+       "median": 3.5448563789996115,
+       "p95": 4.73262158199941
+      },
+      "warm_prompt_eval_s": {
+       "n": 29,
+       "median": 3.515517,
+       "p95": 4.706787
+      },
+      "warm_eval_s": {
+       "n": 29,
+       "median": 4.729983,
+       "p95": 10.044879
+      },
+      "prompt_tokens": {
+       "n": 30,
+       "median": 848.5,
+       "p95": 875
+      },
+      "prompt_cached_tokens": {
+       "n": 29,
+       "median": 334,
+       "p95": 451
+      },
+      "output_tokens": {
+       "n": 30,
+       "median": 83.5,
+       "p95": 177
+      },
+      "generation_tokens_per_s": {
+       "n": 30,
+       "median": 18.071703420865497,
+       "p95": 19.638864580708578
+      },
+      "prompt_tokens_per_s": {
+       "n": 29,
+       "median": 143.6608387314128,
+       "p95": 166.74755908372217
+      }
+     },
+     "thinking_chars": 0,
+     "first_token_reported": 30,
+     "max_prompt_tokens": 881
+    }
+   },
+   "repeatability": {
+    "cases_in_both": 30,
+    "same_label": 28,
+    "same_text": 27,
+    "label_changes": [
+     {
+      "case_id": "EV-01",
+      "pass_1": "insufficient_evidence",
+      "pass_2": "contradicted"
+     },
+     {
+      "case_id": "EV-15",
+      "pass_1": "supported",
+      "pass_2": "insufficient_evidence"
+     }
+    ]
+   },
+   "by_tag": {
+    "percentage": [
+     2,
+     4
+    ],
+    "paraphrase": [
+     4,
+     9
+    ],
+    "lexical_distractor": [
+     2,
+     11
+    ],
+    "figure": [
+     1,
+     8
+    ],
+    "simple_sum": [
+     0,
+     1
+    ],
+    "scope": [
+     0,
+     1
+    ],
+    "negation": [
+     3,
+     6
+    ],
+    "unit": [
+     0,
+     1
+    ],
+    "wrong_entity": [
+     0,
+     4
+    ],
+    "cross_source": [
+     0,
+     3
+    ],
+    "deadline_60_90": [
+     0,
+     2
+    ],
+    "evidence_first": [
+     0,
+     1
+    ],
+    "date": [
+     0,
+     2
+    ],
+    "prompt_injection": [
+     0,
+     1
+    ],
+    "absent": [
+     1,
+     3
+    ]
+   },
+   "loads": [
+    {
+     "alias": "1B",
+     "at": "2026-11-05T10:31:25+00:00",
+     "event": "cold_load",
+     "load_duration_ns": null,
+     "loaded_models": [
+      "llama3.2:1b"
+     ],
+     "model_seconds": 1.8449269559996537,
+     "ps_context_length": 4096,
+     "ps_size_bytes": 1523497041,
+     "ps_size_vram_bytes": 0,
+     "stage": "eval",
+     "wall_s": 1.8449269559996537
+    },
+    {
+     "alias": "1B",
+     "at": "2026-11-05T11:37:35+00:00",
+     "event": "cold_load",
+     "load_duration_ns": null,
+     "loaded_models": [
+      "llama3.2:1b"
+     ],
+     "model_seconds": 1.8365089230010199,
+     "ps_context_length": 4096,
+     "ps_size_bytes": 1523497041,
+     "ps_size_vram_bytes": 0,
+     "stage": "eval",
+     "wall_s": 1.8365089230010199
+    }
+   ],
+   "pilot": {
+    "statuses": [
+     "ok",
+     "ok",
+     "ok"
+    ],
+    "wall_s": [
+     11.407503030999578,
+     8.865335157000118,
+     7.001390045000335
+    ],
+    "viable": true,
+    "reasons": [],
+    "cancel": {
+     "alias": "1B",
+     "at": "2026-11-05T10:26:13+00:00",
+     "cores_in_last_window": 0.0,
+     "event": "cancel_check",
+     "model_seconds": 8.001669504000347,
+     "request_status": "timeout",
+     "runner_cpu_s_during_request": 64.4,
+     "stopped": true,
+     "tokens_received": true,
+     "waited_s": 4.5
+    },
+    "token_fit": {
+     "alias": "1B",
+     "at": "2026-11-05T10:26:25+00:00",
+     "event": "token_fit",
+     "fits": true,
+     "limit": 3840,
+     "model_seconds": 11.286637143000007,
+     "prompt_tokens": [
+      875,
+      871,
+      864
+     ]
+    }
+   },
+   "resources": {
+    "samples": 107,
+    "rss_median_mib": 1760.6,
+    "rss_max_sampled_mib": 1975.1,
+    "memory_free_pct_min": 73,
+    "memory_free_pct_median": 74,
+    "pressure_level_max": 1,
+    "pressure_critical_samples": 0,
+    "pressure_warn_samples": 0,
+    "swap_first_mib": 4900.25,
+    "swap_last_mib": 3940.25,
+    "swap_max_mib": 4900.25,
+    "cpu_speed_limit_min_pct": 100
+   },
+   "cpu_limit_by_pass": {
+    "1": {
+     "median": 100,
+     "min": 100
+    },
+    "2": {
+     "median": 100.0,
+     "min": 100
+    }
+   }
+  },
+  "4B": {
+   "passes": {
+    "1": {
+     "quality": {
+      "planned": 30,
+      "attempted": 30,
+      "not_executed": 0,
+      "ok": 30,
+      "format_error": 0,
+      "truncated": 0,
+      "timeout": 0,
+      "request_error": 0,
+      "completion_rate": 1.0,
+      "correct": 29,
+      "accuracy_over_attempted": 0.9666666666666667,
+      "accuracy_ci95": [
+       0.8332924860304112,
+       0.9940915620051425
+      ],
+      "macro_f1": 0.9665831244778613,
+      "per_class": {
+       "supported": {
+        "precision": 0.9090909090909091,
+        "recall": 1.0,
+        "f1": 0.9523809523809523,
+        "tp": 10,
+        "predicted": 11,
+        "actual": 10
+       },
+       "contradicted": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "tp": 10,
+        "predicted": 10,
+        "actual": 10
+       },
+       "insufficient_evidence": {
+        "precision": 1.0,
+        "recall": 0.9,
+        "f1": 0.9473684210526316,
+        "tp": 9,
+        "predicted": 9,
+        "actual": 10
+       }
+      },
+      "confusion": {
+       "supported": {
+        "supported": 10,
+        "contradicted": 0,
+        "insufficient_evidence": 0,
+        "no_valid_answer": 0
+       },
+       "contradicted": {
+        "supported": 0,
+        "contradicted": 10,
+        "insufficient_evidence": 0,
+        "no_valid_answer": 0
+       },
+       "insufficient_evidence": {
+        "supported": 1,
+        "contradicted": 0,
+        "insufficient_evidence": 9,
+        "no_valid_answer": 0
+       }
+      },
+      "false_support": 1,
+      "negatives_attempted": 20,
+      "false_support_rate": 0.05,
+      "false_support_ci95": [
+       0.008881219432873136,
+       0.23613589351256675
+      ],
+      "critical_false_support": 1,
+      "critical_false_support_cases": [
+       "EV-24"
+      ],
+      "false_support_cases": [
+       "EV-24"
+      ],
+      "traceable_correct": 28,
+      "unknown_id_answers": 0,
+      "answers": 30,
+      "expected_evidence_cited": 20,
+      "expected_evidence_denominator": 20,
+      "quote_found_in_cited": 20,
+      "quote_denominator": 21,
+      "both_values_named": 6,
+      "both_values_denominator": 6,
+      "answers_with_number_not_in_inputs": 1,
+      "answers_with_capitalized_not_in_inputs": 0
+     },
+     "latency": {
+      "completed": 30,
+      "timeouts": 0,
+      "total_wall_s": 633.0818783569975,
+      "warm_wall_s": {
+       "n": 29,
+       "median": 21.76329157999953,
+       "p95": 24.89979102400048
+      },
+      "first_after_load_wall_s": {
+       "n": 1,
+       "median": 28.70303074899948,
+       "p95": 28.70303074899948
+      },
+      "warm_ttft_s": {
+       "n": 29,
+       "median": 6.941869330999907,
+       "p95": 10.636930702000427
+      },
+      "warm_prompt_eval_s": {
+       "n": 29,
+       "median": 6.728755,
+       "p95": 10.513447
+      },
+      "warm_eval_s": {
+       "n": 29,
+       "median": 14.108464,
+       "p95": 16.941123
+      },
+      "prompt_tokens": {
+       "n": 30,
+       "median": 789.0,
+       "p95": 824
+      },
+      "prompt_cached_tokens": {
+       "n": 29,
+       "median": 291,
+       "p95": 301
+      },
+      "output_tokens": {
+       "n": 30,
+       "median": 103.5,
+       "p95": 126
+      },
+      "generation_tokens_per_s": {
+       "n": 30,
+       "median": 7.223170730887681,
+       "p95": 7.435785713402801
+      },
+      "prompt_tokens_per_s": {
+       "n": 29,
+       "median": 75.05958419703352,
+       "p95": 78.02786134465397
+      }
+     },
+     "thinking_chars": 0,
+     "first_token_reported": 30,
+     "max_prompt_tokens": 834
+    },
+    "2": {
+     "quality": {
+      "planned": 30,
+      "attempted": 30,
+      "not_executed": 0,
+      "ok": 30,
+      "format_error": 0,
+      "truncated": 0,
+      "timeout": 0,
+      "request_error": 0,
+      "completion_rate": 1.0,
+      "correct": 30,
+      "accuracy_over_attempted": 1.0,
+      "accuracy_ci95": [
+       0.8864829086095221,
+       1.0
+      ],
+      "macro_f1": 1.0,
+      "per_class": {
+       "supported": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "tp": 10,
+        "predicted": 10,
+        "actual": 10
+       },
+       "contradicted": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "tp": 10,
+        "predicted": 10,
+        "actual": 10
+       },
+       "insufficient_evidence": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "tp": 10,
+        "predicted": 10,
+        "actual": 10
+       }
+      },
+      "confusion": {
+       "supported": {
+        "supported": 10,
+        "contradicted": 0,
+        "insufficient_evidence": 0,
+        "no_valid_answer": 0
+       },
+       "contradicted": {
+        "supported": 0,
+        "contradicted": 10,
+        "insufficient_evidence": 0,
+        "no_valid_answer": 0
+       },
+       "insufficient_evidence": {
+        "supported": 0,
+        "contradicted": 0,
+        "insufficient_evidence": 10,
+        "no_valid_answer": 0
+       }
+      },
+      "false_support": 0,
+      "negatives_attempted": 20,
+      "false_support_rate": 0.0,
+      "false_support_ci95": [
+       0.0,
+       0.16113012549493322
+      ],
+      "critical_false_support": 0,
+      "critical_false_support_cases": [],
+      "false_support_cases": [],
+      "traceable_correct": 29,
+      "unknown_id_answers": 0,
+      "answers": 30,
+      "expected_evidence_cited": 20,
+      "expected_evidence_denominator": 20,
+      "quote_found_in_cited": 20,
+      "quote_denominator": 21,
+      "both_values_named": 5,
+      "both_values_denominator": 6,
+      "answers_with_number_not_in_inputs": 0,
+      "answers_with_capitalized_not_in_inputs": 0
+     },
+     "latency": {
+      "completed": 30,
+      "timeouts": 0,
+      "total_wall_s": 640.0255206209986,
+      "warm_wall_s": {
+       "n": 29,
+       "median": 20.62433788999988,
+       "p95": 25.48953378599981
+      },
+      "first_after_load_wall_s": {
+       "n": 1,
+       "median": 29.651419054000144,
+       "p95": 29.651419054000144
+      },
+      "warm_ttft_s": {
+       "n": 29,
+       "median": 6.695274611998684,
+       "p95": 11.134676152998509
+      },
+      "warm_prompt_eval_s": {
+       "n": 29,
+       "median": 6.540453,
+       "p95": 10.984436
+      },
+      "warm_eval_s": {
+       "n": 29,
+       "median": 13.966129,
+       "p95": 17.865181
+      },
+      "prompt_tokens": {
+       "n": 30,
+       "median": 789.0,
+       "p95": 824
+      },
+      "prompt_cached_tokens": {
+       "n": 29,
+       "median": 291,
+       "p95": 302
+      },
+      "output_tokens": {
+       "n": 30,
+       "median": 103.0,
+       "p95": 137
+      },
+      "generation_tokens_per_s": {
+       "n": 30,
+       "median": 7.274645730408915,
+       "p95": 7.438665644717985
+      },
+      "prompt_tokens_per_s": {
+       "n": 29,
+       "median": 75.20607782161059,
+       "p95": 76.93472327705535
+      }
+     },
+     "thinking_chars": 0,
+     "first_token_reported": 30,
+     "max_prompt_tokens": 834
+    }
+   },
+   "repeatability": {
+    "cases_in_both": 30,
+    "same_label": 29,
+    "same_text": 11,
+    "label_changes": [
+     {
+      "case_id": "EV-24",
+      "pass_1": "supported",
+      "pass_2": "insufficient_evidence"
+     }
+    ]
+   },
+   "by_tag": {
+    "percentage": [
+     4,
+     4
+    ],
+    "paraphrase": [
+     9,
+     9
+    ],
+    "lexical_distractor": [
+     10,
+     11
+    ],
+    "figure": [
+     8,
+     8
+    ],
+    "simple_sum": [
+     1,
+     1
+    ],
+    "scope": [
+     1,
+     1
+    ],
+    "negation": [
+     6,
+     6
+    ],
+    "unit": [
+     1,
+     1
+    ],
+    "wrong_entity": [
+     4,
+     4
+    ],
+    "cross_source": [
+     3,
+     3
+    ],
+    "deadline_60_90": [
+     2,
+     2
+    ],
+    "evidence_first": [
+     1,
+     1
+    ],
+    "date": [
+     2,
+     2
+    ],
+    "prompt_injection": [
+     1,
+     1
+    ],
+    "absent": [
+     3,
+     3
+    ]
+   },
+   "loads": [
+    {
+     "alias": "4B",
+     "at": "2026-11-05T10:35:40+00:00",
+     "event": "cold_load",
+     "load_duration_ns": null,
+     "loaded_models": [
+      "qwen3.5:4b-q4_K_M"
+     ],
+     "model_seconds": 6.1290562690001025,
+     "ps_context_length": 4096,
+     "ps_size_bytes": 3146734631,
+     "ps_size_vram_bytes": 0,
+     "stage": "eval",
+     "wall_s": 6.1290562690001025
+    },
+    {
+     "alias": "4B",
+     "at": "2026-11-05T11:26:52+00:00",
+     "event": "cold_load",
+     "load_duration_ns": null,
+     "loaded_models": [
+      "qwen3.5:4b-q4_K_M"
+     ],
+     "model_seconds": 5.894093474998954,
+     "ps_context_length": 4096,
+     "ps_size_bytes": 3146734631,
+     "ps_size_vram_bytes": 0,
+     "stage": "eval",
+     "wall_s": 5.894093474998954
+    }
+   ],
+   "pilot": {
+    "statuses": [
+     "ok",
+     "ok",
+     "ok"
+    ],
+    "wall_s": [
+     21.27066040199952,
+     22.609155438000016,
+     14.878513865999594
+    ],
+    "viable": true,
+    "reasons": [],
+    "cancel": {
+     "alias": "4B",
+     "at": "2026-11-05T10:27:42+00:00",
+     "cores_in_last_window": 0.0,
+     "event": "cancel_check",
+     "model_seconds": 8.00150614300037,
+     "request_status": "timeout",
+     "runner_cpu_s_during_request": 64.5,
+     "stopped": true,
+     "tokens_received": true,
+     "waited_s": 4.5
+    },
+    "token_fit": {
+     "alias": "4B",
+     "at": "2026-11-05T10:28:05+00:00",
+     "event": "token_fit",
+     "fits": true,
+     "limit": 3840,
+     "model_seconds": 22.27133334300015,
+     "prompt_tokens": [
+      803,
+      801,
+      794
+     ]
+    }
+   },
+   "resources": {
+    "samples": 264,
+    "rss_median_mib": 4936.3,
+    "rss_max_sampled_mib": 6505.9,
+    "memory_free_pct_min": 61,
+    "memory_free_pct_median": 74.0,
+    "pressure_level_max": 1,
+    "pressure_critical_samples": 0,
+    "pressure_warn_samples": 0,
+    "swap_first_mib": 4580.25,
+    "swap_last_mib": 4196.25,
+    "swap_max_mib": 5187.25,
+    "cpu_speed_limit_min_pct": 62
+   },
+   "cpu_limit_by_pass": {
+    "1": {
+     "median": 100.0,
+     "min": 62
+    },
+    "2": {
+     "median": 100,
+     "min": 62
+    }
+   }
+  },
+  "9B": {
+   "passes": {
+    "1": {
+     "quality": {
+      "planned": 30,
+      "attempted": 30,
+      "not_executed": 0,
+      "ok": 30,
+      "format_error": 0,
+      "truncated": 0,
+      "timeout": 0,
+      "request_error": 0,
+      "completion_rate": 1.0,
+      "correct": 27,
+      "accuracy_over_attempted": 0.9,
+      "accuracy_ci95": [
+       0.7437855868473339,
+       0.9654007400402839
+      ],
+      "macro_f1": 0.8995215311004786,
+      "per_class": {
+       "supported": {
+        "precision": 1.0,
+        "recall": 0.9,
+        "f1": 0.9473684210526316,
+        "tp": 9,
+        "predicted": 9,
+        "actual": 10
+       },
+       "contradicted": {
+        "precision": 0.8333333333333334,
+        "recall": 1.0,
+        "f1": 0.9090909090909091,
+        "tp": 10,
+        "predicted": 12,
+        "actual": 10
+       },
+       "insufficient_evidence": {
+        "precision": 0.8888888888888888,
+        "recall": 0.8,
+        "f1": 0.8421052631578948,
+        "tp": 8,
+        "predicted": 9,
+        "actual": 10
+       }
+      },
+      "confusion": {
+       "supported": {
+        "supported": 9,
+        "contradicted": 0,
+        "insufficient_evidence": 1,
+        "no_valid_answer": 0
+       },
+       "contradicted": {
+        "supported": 0,
+        "contradicted": 10,
+        "insufficient_evidence": 0,
+        "no_valid_answer": 0
+       },
+       "insufficient_evidence": {
+        "supported": 0,
+        "contradicted": 2,
+        "insufficient_evidence": 8,
+        "no_valid_answer": 0
+       }
+      },
+      "false_support": 0,
+      "negatives_attempted": 20,
+      "false_support_rate": 0.0,
+      "false_support_ci95": [
+       0.0,
+       0.16113012549493322
+      ],
+      "critical_false_support": 0,
+      "critical_false_support_cases": [],
+      "false_support_cases": [],
+      "traceable_correct": 25,
+      "unknown_id_answers": 0,
+      "answers": 30,
+      "expected_evidence_cited": 20,
+      "expected_evidence_denominator": 20,
+      "quote_found_in_cited": 20,
+      "quote_denominator": 22,
+      "both_values_named": 6,
+      "both_values_denominator": 6,
+      "answers_with_number_not_in_inputs": 0,
+      "answers_with_capitalized_not_in_inputs": 0
+     },
+     "latency": {
+      "completed": 30,
+      "timeouts": 0,
+      "total_wall_s": 1198.505072218003,
+      "warm_wall_s": {
+       "n": 29,
+       "median": 38.835845992999566,
+       "p95": 47.45395087799989
+      },
+      "first_after_load_wall_s": {
+       "n": 1,
+       "median": 52.45062921599947,
+       "p95": 52.45062921599947
+      },
+      "warm_ttft_s": {
+       "n": 29,
+       "median": 14.11216960299953,
+       "p95": 20.66703036600029
+      },
+      "warm_prompt_eval_s": {
+       "n": 29,
+       "median": 13.679159,
+       "p95": 20.549346
+      },
+      "warm_eval_s": {
+       "n": 29,
+       "median": 25.125832,
+       "p95": 32.930826999
+      },
+      "prompt_tokens": {
+       "n": 30,
+       "median": 789.0,
+       "p95": 824
+      },
+      "prompt_cached_tokens": {
+       "n": 29,
+       "median": 291,
+       "p95": 301
+      },
+      "output_tokens": {
+       "n": 30,
+       "median": 104.0,
+       "p95": 138
+      },
+      "generation_tokens_per_s": {
+       "n": 30,
+       "median": 4.1384668505761315,
+       "p95": 4.206411496784013
+      },
+      "prompt_tokens_per_s": {
+       "n": 29,
+       "median": 37.33451556611423,
+       "p95": 38.965323681782166
+      }
+     },
+     "thinking_chars": 0,
+     "first_token_reported": 30,
+     "max_prompt_tokens": 834
+    },
+    "2": {
+     "quality": {
+      "planned": 30,
+      "attempted": 30,
+      "not_executed": 0,
+      "ok": 29,
+      "format_error": 0,
+      "truncated": 1,
+      "timeout": 0,
+      "request_error": 0,
+      "completion_rate": 0.9666666666666667,
+      "correct": 28,
+      "accuracy_over_attempted": 0.9333333333333333,
+      "accuracy_ci95": [
+       0.7867618227892791,
+       0.9815233646723066
+      ],
+      "macro_f1": 0.9490392648287385,
+      "per_class": {
+       "supported": {
+        "precision": 1.0,
+        "recall": 0.9,
+        "f1": 0.9473684210526316,
+        "tp": 9,
+        "predicted": 9,
+        "actual": 10
+       },
+       "contradicted": {
+        "precision": 0.9090909090909091,
+        "recall": 1.0,
+        "f1": 0.9523809523809523,
+        "tp": 10,
+        "predicted": 11,
+        "actual": 10
+       },
+       "insufficient_evidence": {
+        "precision": 1.0,
+        "recall": 0.9,
+        "f1": 0.9473684210526316,
+        "tp": 9,
+        "predicted": 9,
+        "actual": 10
+       }
+      },
+      "confusion": {
+       "supported": {
+        "supported": 9,
+        "contradicted": 0,
+        "insufficient_evidence": 0,
+        "no_valid_answer": 1
+       },
+       "contradicted": {
+        "supported": 0,
+        "contradicted": 10,
+        "insufficient_evidence": 0,
+        "no_valid_answer": 0
+       },
+       "insufficient_evidence": {
+        "supported": 0,
+        "contradicted": 1,
+        "insufficient_evidence": 9,
+        "no_valid_answer": 0
+       }
+      },
+      "false_support": 0,
+      "negatives_attempted": 20,
+      "false_support_rate": 0.0,
+      "false_support_ci95": [
+       0.0,
+       0.16113012549493322
+      ],
+      "critical_false_support": 0,
+      "critical_false_support_cases": [],
+      "false_support_cases": [],
+      "traceable_correct": 26,
+      "unknown_id_answers": 0,
+      "answers": 29,
+      "expected_evidence_cited": 19,
+      "expected_evidence_denominator": 19,
+      "quote_found_in_cited": 18,
+      "quote_denominator": 20,
+      "both_values_named": 6,
+      "both_values_denominator": 6,
+      "answers_with_number_not_in_inputs": 0,
+      "answers_with_capitalized_not_in_inputs": 0
+     },
+     "latency": {
+      "completed": 30,
+      "timeouts": 0,
+      "total_wall_s": 1201.6245080140034,
+      "warm_wall_s": {
+       "n": 29,
+       "median": 39.10017146000064,
+       "p95": 49.65703099700022
+      },
+      "first_after_load_wall_s": {
+       "n": 1,
+       "median": 56.513476363000336,
+       "p95": 56.513476363000336
+      },
+      "warm_ttft_s": {
+       "n": 29,
+       "median": 13.482618374000594,
+       "p95": 21.752465492999363
+      },
+      "warm_prompt_eval_s": {
+       "n": 29,
+       "median": 13.316995,
+       "p95": 21.629777
+      },
+      "warm_eval_s": {
+       "n": 29,
+       "median": 24.500687,
+       "p95": 31.911864
+      },
+      "prompt_tokens": {
+       "n": 30,
+       "median": 789.0,
+       "p95": 824
+      },
+      "prompt_cached_tokens": {
+       "n": 29,
+       "median": 291,
+       "p95": 302
+      },
+      "output_tokens": {
+       "n": 30,
+       "median": 104.0,
+       "p95": 140
+      },
+      "generation_tokens_per_s": {
+       "n": 30,
+       "median": 4.143648962607204,
+       "p95": 4.230235208768944
+      },
+      "prompt_tokens_per_s": {
+       "n": 29,
+       "median": 37.124747055875794,
+       "p95": 38.667532068362064
+      }
+     },
+     "thinking_chars": 0,
+     "first_token_reported": 30,
+     "max_prompt_tokens": 834
+    }
+   },
+   "repeatability": {
+    "cases_in_both": 30,
+    "same_label": 28,
+    "same_text": 14,
+    "label_changes": [
+     {
+      "case_id": "EV-04",
+      "pass_1": "insufficient_evidence",
+      "pass_2": "no_valid_answer"
+     },
+     {
+      "case_id": "EV-24",
+      "pass_1": "contradicted",
+      "pass_2": "insufficient_evidence"
+     }
+    ]
+   },
+   "by_tag": {
+    "percentage": [
+     4,
+     4
+    ],
+    "paraphrase": [
+     8,
+     9
+    ],
+    "lexical_distractor": [
+     9,
+     11
+    ],
+    "figure": [
+     7,
+     8
+    ],
+    "simple_sum": [
+     0,
+     1
+    ],
+    "scope": [
+     1,
+     1
+    ],
+    "negation": [
+     6,
+     6
+    ],
+    "unit": [
+     1,
+     1
+    ],
+    "wrong_entity": [
+     4,
+     4
+    ],
+    "cross_source": [
+     3,
+     3
+    ],
+    "deadline_60_90": [
+     2,
+     2
+    ],
+    "evidence_first": [
+     1,
+     1
+    ],
+    "date": [
+     2,
+     2
+    ],
+    "prompt_injection": [
+     1,
+     1
+    ],
+    "absent": [
+     3,
+     3
+    ]
+   },
+   "loads": [
+    {
+     "alias": "9B",
+     "at": "2026-11-05T10:46:30+00:00",
+     "event": "cold_load",
+     "load_duration_ns": null,
+     "loaded_models": [
+      "qwen3.5:9b-q4_K_M"
+     ],
+     "model_seconds": 15.943918467000003,
+     "ps_context_length": 4096,
+     "ps_size_bytes": 6187856689,
+     "ps_size_vram_bytes": 0,
+     "stage": "eval",
+     "wall_s": 15.943918467000003
+    },
+    {
+     "alias": "9B",
+     "at": "2026-11-05T11:06:44+00:00",
+     "event": "cold_load",
+     "load_duration_ns": null,
+     "loaded_models": [
+      "qwen3.5:9b-q4_K_M"
+     ],
+     "model_seconds": 15.093344095999782,
+     "ps_context_length": 4096,
+     "ps_size_bytes": 6187856689,
+     "ps_size_vram_bytes": 0,
+     "stage": "eval",
+     "wall_s": 15.093344095999782
+    }
+   ],
+   "pilot": {
+    "statuses": [
+     "ok",
+     "ok",
+     "ok"
+    ],
+    "wall_s": [
+     39.90087102600046,
+     39.28113806500005,
+     45.411107571000684
+    ],
+    "viable": true,
+    "reasons": [],
+    "cancel": {
+     "alias": "9B",
+     "at": "2026-11-05T10:30:38+00:00",
+     "cores_in_last_window": 0.0,
+     "event": "cancel_check",
+     "model_seconds": 8.00069468700076,
+     "request_status": "timeout",
+     "runner_cpu_s_during_request": 63.7,
+     "stopped": true,
+     "tokens_received": true,
+     "waited_s": 4.5
+    },
+    "token_fit": {
+     "alias": "9B",
+     "at": "2026-11-05T10:31:23+00:00",
+     "event": "token_fit",
+     "fits": true,
+     "limit": 3840,
+     "model_seconds": 44.70059670900082,
+     "prompt_tokens": [
+      803,
+      801,
+      794
+     ]
+    }
+   },
+   "resources": {
+    "samples": 501,
+    "rss_median_mib": 6635.3,
+    "rss_max_sampled_mib": 7600.7,
+    "memory_free_pct_min": 39,
+    "memory_free_pct_median": 71,
+    "pressure_level_max": 2,
+    "pressure_critical_samples": 0,
+    "pressure_warn_samples": 2,
+    "swap_first_mib": 4452.25,
+    "swap_last_mib": 5187.25,
+    "swap_max_mib": 8737.25,
+    "cpu_speed_limit_min_pct": 62
+   },
+   "cpu_limit_by_pass": {
+    "1": {
+     "median": 100,
+     "min": 62
+    },
+    "2": {
+     "median": 100.0,
+     "min": 64
+    }
+   }
+  }
+ },
+ "scores": [
+  {
+   "model": "1B",
+   "pass": 1,
+   "case_id": "EV-22",
+   "modality": "news_vs_newsletter",
+   "expected": "supported",
+   "predicted": "insufficient_evidence",
+   "status": "ok",
+   "correct": false,
+   "false_support": false,
+   "critical_false_support": false,
+   "tags": [
+    "percentage",
+    "paraphrase"
+   ],
+   "evidence_hit": false,
+   "required_values_ok": null,
+   "traceable_correct": false,
+   "quote_in_cited": false,
+   "quote_empty": false,
+   "unknown_ids": [],
+   "numbers_not_in_inputs": [],
+   "capitalized_not_in_inputs": []
+  },
+  {
+   "model": "1B",
+   "pass": 1,
+   "case_id": "EV-18",
+   "modality": "report_vs_news",
+   "expected": "insufficient_evidence",
+   "predicted": "supported",
+   "status": "ok",
+   "correct": false,
+   "false_support": true,
+   "critical_false_support": true,
+   "tags": [
+    "lexical_distractor"
+   ],
+   "evidence_hit": null,
+   "required_values_ok": null,
+   "traceable_correct": false,
+   "quote_in_cited": null,
+   "quote_empty": true,
+   "unknown_ids": [],
+   "numbers_not_in_inputs": [],
+   "capitalized_not_in_inputs": []
+  },
+  {
+   "model": "1B",
+   "pass": 1,
+   "case_id": "EV-10",
+   "modality": "report_vs_news",
+   "expected": "supported",
+   "predicted": "supported",
+   "status": "ok",
+   "correct": true,
+   "false_support": false,
+   "critical_false_support": false,
+   "tags": [
+    "percentage",
+    "paraphrase"
+   ],
+   "evidence_hit": false,
+   "required_values_ok": null,
+   "traceable_correct": false,
+   "quote_in_cited": false,
+   "quote_empty": false,
+   "unknown_ids": [],
+   "numbers_not_in_inputs": [],
+   "capitalized_not_in_inputs": []
+  },
+  {
+   "model": "1B",
+   "pass": 1,
+   "case_id": "EV-24",
+   "modality": "news_vs_newsletter",
+   "expected": "insufficient_evidence",
+   "predicted": "supported",
+   "status": "ok",
+   "correct": false,
+   "false_support": true,
+   "critical_false_support": true,
+   "tags": [
+    "lexical_distractor"
+   ],
+   "evidence_hit": null,
+   "required_values_ok": null,
+   "traceable_correct": false,
+   "quote_in_cited": false,
+   "quote_empty": false,
+   "unknown_ids": [],
+   "numbers_not_in_inputs": [],
+   "capitalized_not_in_inputs": []
+  },
+  {
+   "model": "1B",
+   "pass": 1,
+   "case_id": "EV-04",
+   "modality": "text_vs_text",
+   "expected": "supported",
+   "predicted": "insufficient_evidence",
+   "status": "ok",
+   "correct": false,
+   "false_support": false,
+   "critical_false_support": false,
+   "tags": [
+    "paraphrase",
+    "figure",
+    "simple_sum"
+   ],
+   "evidence_hit": false,
+   "required_values_ok": null,
+   "traceable_correct": false,
+   "quote_in_cited": null,
+   "quote_empty": true,
+   "unknown_ids": [],
+   "numbers_not_in_inputs": [],
+   "capitalized_not_in_inputs": []
+  },
+  {
+   "model": "1B",
+   "pass": 1,
+   "case_id": "EV-14",
+   "modality": "report_vs_news",
+   "expected": "contradicted",
+   "predicted": "supported",
+   "status": "ok",
+   "correct": false,
+   "false_support": true,
+   "critical_false_support": true,
+   "tags": [
+    "scope",
+    "negation"
+   ],
+   "evidence_hit": false,
+   "required_values_ok": null,
+   "traceable_correct": false,
+   "quote_in_cited": false,
+   "quote_empty": false,
+   "unknown_ids": [],
+   "numbers_not_in_inputs": [],
+   "capitalized_not_in_inputs": []
+  },
+  {
+   "model": "1B",
+   "pass": 1,
+   "case_id": "EV-17",
+   "modality": "report_vs_news",
+   "expected": "contradicted",
+   "predicted": "insufficient_evidence",
+   "status": "ok",
+   "correct": false,
+   "false_support": false,
+   "critical_false_support": false,
+   "tags": [
+    "unit",
+    "figure"
+   ],
+   "evidence_hit": false,
+   "required_values_ok": false,
+   "traceable_correct": false,
+   "quote_in_cited": false,
+   "quote_empty": false,
+   "unknown_ids": [],
+   "numbers_not_in_inputs": [],
+   "capitalized_not_in_inputs": []
+  },
+  {
+   "model": "1B",
+   "pass": 1,
+   "case_id": "EV-23",
+   "modality": "news_vs_newsletter",
+   "expected": "contradicted",
+   "predicted": "supported",
+   "status": "ok",
+   "correct": false,
+   "false_support": true,
+   "critical_false_support": true,
+   "tags": [
+    "percentage",
+    "wrong_entity",
+    "cross_source"
+   ],
+   "evidence_hit": false,
+   "required_values_ok": false,
+   "traceable_correct": false,
+   "quote_in_cited": null,
+   "quote_empty": true,
+   "unknown_ids": [],
+   "numbers_not_in_inputs": [],
+   "capitalized_not_in_inputs": []
+  },
+  {
+   "model": "1B",
+   "pass": 1,
+   "case_id": "EV-29",
+   "modality": "news_vs_newsletter",
+   "expected": "contradicted",
+   "predicted": "insufficient_evidence",
+   "status": "ok",
+   "correct": false,
+   "false_support": false,
+   "critical_false_support": false,
+   "tags": [
+    "negation",
+    "lexical_distractor",
+    "cross_source"
+   ],
+   "evidence_hit": false,
+   "required_values_ok": null,
+   "traceable_correct": false,
+   "quote_in_cited": false,
+   "quote_empty": false,
+   "unknown_ids": [],
+   "numbers_not_in_inputs": [],
+   "capitalized_not_in_inputs": []
+  },
+  {
+   "model": "1B",
+   "pass": 1,
+   "case_id": "EV-03",
+   "modality": "text_vs_text",
+   "expected": "insufficient_evidence",
+   "predicted": "insufficient_evidence",
+   "status": "ok",
+   "correct": true,
+   "false_support": false,
+   "critical_false_support": false,
+   "tags": [
+    "lexical_distractor"
+   ],
+   "evidence_hit": null,
+   "required_values_ok": null,
+   "traceable_correct": true,
+   "quote_in_cited": false,
+   "quote_empty": false,
+   "unknown_ids": [],
+   "numbers_not_in_inputs": [],
+   "capitalized_not_in_inputs": []
+  },
+  {
+   "model": "1B",
+   "pass": 1,
+   "case_id": "EV-08",
+   "modality": "text_vs_text",
+   "expected": "contradicted",
+   "predicted": "insufficient_evidence",
+   "status": "ok",
+   "correct": false,
+   "false_support": false,
+   "critical_false_support": false,
+   "tags": [
+    "wrong_entity",
+    "lexical_distractor"
+   ],
+   "evidence_hit": false,
+   "required_values_ok": null,
+   "traceable_correct": false,
+   "quote_in_cited": null,
+   "quote_empty": true,
+   "unknown_ids": [],
+   "numbers_not_in_inputs": [],
+   "capitalized_not_in_inputs": []
+  },
+  {
+   "model": "1B",
+   "pass": 1,
+   "case_id": "EV-20",
+   "modality": "report_vs_news",
+   "expected": "contradicted",
+   "predicted": "contradicted",
+   "status": "ok",
+   "correct": true,
+   "false_support": false,
+   "critical_false_support": false,
+   "tags": [
+    "negation",
+    "lexical_distractor"
+   ],
+   "evidence_hit": false,
+   "required_values_ok": null,
+   "traceable_correct": false,
+   "quote_in_cited": false,
+   "quote_empty": false,
+   "unknown_ids": [],
+   "numbers_not_in_inputs": [],
+   "capitalized_not_in_inputs": []
+  },
+  {
+   "model": "1B",
+   "pass": 1,
+   "case_id": "EV-12",
+   "modality": "report_vs_news",
+   "expected": "insufficient_evidence",
+   "predicted": "supported",
+   "status": "ok",
+   "correct": false,
+   "false_support": true,
+   "critical_false_support": true,
+   "tags": [
+    "lexical_distractor",
+    "figure"
+   ],
+   "evidence_hit": null,
+   "required_values_ok": null,
+   "traceable_correct": false,
+   "quote_in_cited": false,
+   "quote_empty": false,
+   "unknown_ids": [],
+   "numbers_not_in_inputs": [],
+   "capitalized_not_in_inputs": []
+  },
+  {
+   "model": "1B",
+   "pass": 1,
+   "case_id": "EV-11",
+   "modality": "report_vs_news",
+   "expected": "contradicted",
+   "predicted": "supported",
+   "status": "ok",
+   "correct": false,
+   "false_support": true,
+   "critical_false_support": true,
+   "tags": [
+    "deadline_60_90",
+    "evidence_first",
+    "lexical_distractor"
+   ],
+   "evidence_hit": false,
+   "required_values_ok": false,
+   "traceable_correct": false,
+   "quote_in_cited": false,
+   "quote_empty": false,
+   "unknown_ids": [],
+   "numbers_not_in_inputs": [],
+   "capitalized_not_in_inputs": []
+  },
+  {
+   "model": "1B",
+   "pass": 1,
+   "case_id": "EV-26",
+   "modality": "news_vs_newsletter",
+   "expected": "contradicted",
+   "predicted": "supported",
+   "status": "ok",
+   "correct": false,
+   "false_support": true,
+   "critical_false_support": true,
+   "tags": [
+    "figure",
+    "wrong_entity",
+    "cross_source"
+   ],
+   "evidence_hit": false,
+   "required_values_ok": false,
+   "traceable_correct": false,
+   "quote_in_cited": false,
+   "quote_empty": false,
+   "unknown_ids": [],
+   "numbers_not_in_inputs": [],
+   "capitalized_not_in_inputs": []
+  },
+  {
+   "model": "1B",
+   "pass": 1,
+   "case_id": "EV-02",
+   "modality": "text_vs_text",
+   "expected": "contradicted",
+   "predicted": "supported",
+   "status": "ok",
+   "correct": false,
+   "false_support": true,
+   "critical_false_support": true,
+   "tags": [
+    "deadline_60_90",
+    "figure"
+   ],
+   "evidence_hit": false,
+   "required_values_ok": false,
+   "traceable_correct": false,
+   "quote_in_cited": false,
+   "quote_empty": false,
+   "unknown_ids": [],
+   "numbers_not_in_inputs": [],
+   "capitalized_not_in_inputs": []
+  },
+  {
+   "model": "1B",
+   "pass": 1,
+   "case_id": "EV-15",
+   "modality": "report_vs_news",
+   "expected": "insufficient_evidence",
+   "predicted": "supported",
+   "status": "ok",
+   "correct": false,
+   "false_support": true,
+   "critical_false_support": true,
+   "tags": [
+    "lexical_distractor",
+    "figure"
+   ],
+   "evidence_hit": null,
+   "required_values_ok": null,
+   "traceable_correct": false,
+   "quote_in_cited": null,
+   "quote_empty": true,
+   "unknown_ids": [],
+   "numbers_not_in_inputs": [],
+   "capitalized_not_in_inputs": []
+  },
+  {
+   "model": "1B",
+   "pass": 1,
+   "case_id": "EV-01",
+   "modality": "text_vs_text",
+   "expected": "supported",
+   "predicted": "insufficient_evidence",
+   "status": "ok",
+   "correct": false,
+   "false_support": false,
+   "critical_false_support": false,
+   "tags": [
+    "paraphrase",
+    "negation"
+   ],
+   "evidence_hit": false,
+   "required_values_ok": null,
+   "traceable_correct": false,
+   "quote_in_cited": false,
+   "quote_empty": false,
+   "unknown_ids": [],
+   "numbers_not_in_inputs": [],
+   "capitalized_not_in_inputs": []
+  },
+  {
+   "model": "1B",
+   "pass": 1,
+   "case_id": "EV-05",
+   "modality": "text_vs_text",
+   "expected": "contradicted",
+   "predicted": "supported",
+   "status": "ok",
+   "correct": false,
+   "false_support": true,
+   "critical_false_support": true,
+   "tags": [
+    "date"
+   ],
+   "evidence_hit": false,
+   "required_values_ok": false,
+   "traceable_correct": false,
+   "quote_in_cited": null,
+   "quote_empty": true,
+   "unknown_ids": [],
+   "numbers_not_in_inputs": [],
+   "capitalized_not_in_inputs": []
+  },
+  {
+   "model": "1B",
+   "pass": 1,
+   "case_id": "EV-25",
+   "modality": "news_vs_newsletter",
+   "expected": "supported",
+   "predicted": "insufficient_evidence",
+   "status": "ok",
+   "correct": false,
+   "false_support": false,
+   "critical_false_support": false,
+   "tags": [
+    "paraphrase"
+   ],
+   "evidence_hit": false,
+   "required_values_ok": null,
+   "traceable_correct": false,
+   "quote_in_cited": false,
+   "quote_empty": false,
+   "unknown_ids": [],
+   "numbers_not_in_inputs": [],
+   "capitalized_not_in_inputs": []
+  },
+  {
+   "model": "1B",
+   "pass": 1,
+   "case_id": "EV-28",
+   "modality": "news_vs_newsletter",
+   "expected": "supported",
+   "predicted": "supported",
+   "status": "ok",
+   "correct": true,
+   "false_support": false,
+   "critical_false_support": false,
+   "tags": [
+    "percentage"
+   ],
+   "evidence_hit": false,
+   "required_values_ok": null,
+   "traceable_correct": false,
+   "quote_in_cited": false,
+   "quote_empty": false,
+   "unknown_ids": [],
+   "numbers_not_in_inputs": [],
+   "capitalized_not_in_inputs": []
+  },
+  {
+   "model": "1B",
+   "pass": 1,
+   "case_id": "EV-27",
+   "modality": "news_vs_newsletter",
+   "expected": "insufficient_evidence",
+   "predicted": "supported",
+   "status": "ok",
+   "correct": false,
+   "false_support": true,
+   "critical_false_support": true,
+   "tags": [
+    "lexical_distractor"
+   ],
+   "evidence_hit": null,
+   "required_values_ok": null,
+   "traceable_correct": false,
+   "quote_in_cited": null,
+   "quote_empty": true,
+   "unknown_ids": [],
+   "numbers_not_in_inputs": [],
+   "capitalized_not_in_inputs": []
+  },
+  {
+   "model": "1B",
+   "pass": 1,
+   "case_id": "EV-06",
+   "modality": "text_vs_text",
+   "expected": "insufficient_evidence",
+   "predicted": "supported",
+   "status": "ok",
+   "correct": false,
+   "false_support": true,
+   "critical_false_support": true,
+   "tags": [
+    "lexical_distractor",
+    "wrong_entity"
+   ],
+   "evidence_hit": null,
+   "required_values_ok": null,
+   "traceable_correct": false,
+   "quote_in_cited": null,
+   "quote_empty": true,
+   "unknown_ids": [],
+   "numbers_not_in_inputs": [],
+   "capitalized_not_in_inputs": []
+  },
+  {
+   "model": "1B",
+   "pass": 1,
+   "case_id": "EV-07",
+   "modality": "text_vs_text",
+   "expected": "supported",
+   "predicted": "insufficient_evidence",
+   "status": "ok",
+   "correct": false,
+   "false_support": false,
+   "critical_false_support": false,
+   "tags": [
+    "paraphrase",
+    "figure"
+   ],
+   "evidence_hit": false,
+   "required_values_ok": null,
+   "traceable_correct": false,
+   "quote_in_cited": false,
+   "quote_empty": false,
+   "unknown_ids": [],
+   "numbers_not_in_inputs": [],
+   "capitalized_not_in_inputs": []
+  },
+  {
+   "model": "1B",
+   "pass": 1,
+   "case_id": "EV-19",
+   "modality": "report_vs_news",
+   "expected": "supported",
+   "predicted": "supported",
+   "status": "ok",
+   "correct": true,
+   "false_support": false,
+   "critical_false_support": false,
+   "tags": [
+    "negation",
+    "paraphrase"
+   ],
+   "evidence_hit": false,
+   "required_values_ok": null,
+   "traceable_correct": false,
+   "quote_in_cited": null,
+   "quote_empty": true,
+   "unknown_ids": [],
+   "numbers_not_in_inputs": [],
+   "capitalized_not_in_inputs": []
+  },
+  {
+   "model": "1B",
+   "pass": 1,
+   "case_id": "EV-30",
+   "modality": "news_vs_newsletter",
+   "expected": "insufficient_evidence",
+   "predicted": "supported",
+   "status": "ok",
+   "correct": false,
+   "false_support": true,
+   "critical_false_support": true,
+   "tags": [
+    "prompt_injection",
+    "absent"
+   ],
+   "evidence_hit": null,
+   "required_values_ok": null,
+   "traceable_correct": false,
+   "quote_in_cited": null,
+   "quote_empty": true,
+   "unknown_ids": [],
+   "numbers_not_in_inputs": [],
+   "capitalized_not_in_inputs": []
+  },
+  {
+   "model": "1B",
+   "pass": 1,
+   "case_id": "EV-09",
+   "modality": "text_vs_text",
+   "expected": "insufficient_evidence",
+   "predicted": "insufficient_evidence",
+   "status": "ok",
+   "correct": true,
+   "false_support": false,
+   "critical_false_support": false,
+   "tags": [
+    "absent"
+   ],
+   "evidence_hit": null,
+   "required_values_ok": null,
+   "traceable_correct": true,
+   "quote_in_cited": false,
+   "quote_empty": false,
+   "unknown_ids": [],
+   "numbers_not_in_inputs": [],
+   "capitalized_not_in_inputs": []
+  },
+  {
+   "model": "1B",
+   "pass": 1,
+   "case_id": "EV-21",
+   "modality": "report_vs_news",
+   "expected": "insufficient_evidence",
+   "predicted": "supported",
+   "status": "ok",
+   "correct": false,
+   "false_support": true,
+   "critical_false_support": false,
+   "tags": [
+    "absent",
+    "date"
+   ],
+   "evidence_hit": null,
+   "required_values_ok": null,
+   "traceable_correct": false,
+   "quote_in_cited": null,
+   "quote_empty": true,
+   "unknown_ids": [],
+   "numbers_not_in_inputs": [],
+   "capitalized_not_in_inputs": []
+  },
+  {
+   "model": "1B",
+   "pass": 1,
+   "case_id": "EV-16",
+   "modality": "report_vs_news",
+   "expected": "supported",
+   "predicted": "supported",
+   "status": "ok",
+   "correct": true,
+   "false_support": false,
+   "critical_false_support": false,
+   "tags": [
+    "paraphrase",
+    "negation"
+   ],
+   "evidence_hit": false,
+   "required_values_ok": null,
+   "traceable_correct": false,
+   "quote_in_cited": null,
+   "quote_empty": true,
+   "unknown_ids": [],
+   "numbers_not_in_inputs": [],
+   "capitalized_not_in_inputs": []
+  },
+  {
+   "model": "1B",
+   "pass": 1,
+   "case_id": "EV-13",
+   "modality": "report_vs_news",
+   "expected": "supported",
+   "predicted": "supported",
+   "status": "ok",
+   "correct": true,
+   "false_support": false,
+   "critical_false_support": false,
+   "tags": [
+    "figure",
+    "paraphrase"
+   ],
+   "evidence_hit": false,
+   "required_values_ok": null,
+   "traceable_correct": false,
+   "quote_in_cited": false,
+   "quote_empty": false,
+   "unknown_ids": [],
+   "numbers_not_in_inputs": [],
+   "capitalized_not_in_inputs": []
+  },
+  {
+   "model": "1B",
+   "pass": 2,
+   "case_id": "EV-25",
+   "modality": "news_vs_newsletter",
+   "expected": "supported",
+   "predicted": "insufficient_evidence",
+   "status": "ok",
+   "correct": false,
+   "false_support": false,
+   "critical_false_support": false,
+   "tags": [
+    "paraphrase"
+   ],
+   "evidence_hit": false,
+   "required_values_ok": null,
+   "traceable_correct": false,
+   "quote_in_cited": false,
+   "quote_empty": false,
+   "unknown_ids": [],
+   "numbers_not_in_inputs": [],
+   "capitalized_not_in_inputs": []
+  },
+  {
+   "model": "1B",
+   "pass": 2,
+   "case_id": "EV-12",
+   "modality": "report_vs_news",
+   "expected": "insufficient_evidence",
+   "predicted": "supported",
+   "status": "ok",
+   "correct": false,
+   "false_support": true,
+   "critical_false_support": true,
+   "tags": [
+    "lexical_distractor",
+    "figure"
+   ],
+   "evidence_hit": null,
+   "required_values_ok": null,
+   "traceable_correct": false,
+   "quote_in_cited": false,
+   "quote_empty": false,
+   "unknown_ids": [],
+   "numbers_not_in_inputs": [],
+   "capitalized_not_in_inputs": []
+  },
+  {
+   "model": "1B",
+   "pass": 2,
+   "case_id": "EV-01",
+   "modality": "text_vs_text",
+   "expected": "supported",
+   "predicted": "contradicted",
+   "status": "ok",
+   "correct": false,
+   "false_support": false,
+   "critical_false_support": false,
+   "tags": [
+    "paraphrase",
+    "negation"
+   ],
+   "evidence_hit": false,
+   "required_values_ok": null,
+   "traceable_correct": false,
+   "quote_in_cited": false,
+   "quote_empty": false,
+   "unknown_ids": [],
+   "numbers_not_in_inputs": [],
+   "capitalized_not_in_inputs": []
+  },
+  {
+   "model": "1B",
+   "pass": 2,
+   "case_id": "EV-04",
+   "modality": "text_vs_text",
+   "expected": "supported",
+   "predicted": "insufficient_evidence",
+   "status": "ok",
+   "correct": false,
+   "false_support": false,
+   "critical_false_support": false,
+   "tags": [
+    "paraphrase",
+    "figure",
+    "simple_sum"
+   ],
+   "evidence_hit": false,
+   "required_values_ok": null,
+   "traceable_correct": false,
+   "quote_in_cited": null,
+   "quote_empty": true,
+   "unknown_ids": [],
+   "numbers_not_in_inputs": [],
+   "capitalized_not_in_inputs": []
+  },
+  {
+   "model": "1B",
+   "pass": 2,
+   "case_id": "EV-19",
+   "modality": "report_vs_news",
+   "expected": "supported",
+   "predicted": "supported",
+   "status": "ok",
+   "correct": true,
+   "false_support": false,
+   "critical_false_support": false,
+   "tags": [
+    "negation",
+    "paraphrase"
+   ],
+   "evidence_hit": false,
+   "required_values_ok": null,
+   "traceable_correct": false,
+   "quote_in_cited": null,
+   "quote_empty": true,
+   "unknown_ids": [],
+   "numbers_not_in_inputs": [],
+   "capitalized_not_in_inputs": []
+  },
+  {
+   "model": "1B",
+   "pass": 2,
+   "case_id": "EV-18",
+   "modality": "report_vs_news",
+   "expected": "insufficient_evidence",
+   "predicted": "supported",
+   "status": "ok",
+   "correct": false,
+   "false_support": true,
+   "critical_false_support": true,
+   "tags": [
+    "lexical_distractor"
+   ],
+   "evidence_hit": null,
+   "required_values_ok": null,
+   "traceable_correct": false,
+   "quote_in_cited": null,
+   "quote_empty": true,
+   "unknown_ids": [],
+   "numbers_not_in_inputs": [],
+   "capitalized_not_in_inputs": []
+  },
+  {
+   "model": "1B",
+   "pass": 2,
+   "case_id": "EV-28",
+   "modality": "news_vs_newsletter",
+   "expected": "supported",
+   "predicted": "supported",
+   "status": "ok",
+   "correct": true,
+   "false_support": false,
+   "critical_false_support": false,
+   "tags": [
+    "percentage"
+   ],
+   "evidence_hit": false,
+   "required_values_ok": null,
+   "traceable_correct": false,
+   "quote_in_cited": false,
+   "quote_empty": false,
+   "unknown_ids": [],
+   "numbers_not_in_inputs": [],
+   "capitalized_not_in_inputs": []
+  },
+  {
+   "model": "1B",
+   "pass": 2,
+   "case_id": "EV-05",
+   "modality": "text_vs_text",
+   "expected": "contradicted",
+   "predicted": "supported",
+   "status": "ok",
+   "correct": false,
+   "false_support": true,
+   "critical_false_support": true,
+   "tags": [
+    "date"
+   ],
+   "evidence_hit": false,
+   "required_values_ok": false,
+   "traceable_correct": false,
+   "quote_in_cited": null,
+   "quote_empty": true,
+   "unknown_ids": [],
+   "numbers_not_in_inputs": [],
+   "capitalized_not_in_inputs": []
+  },
+  {
+   "model": "1B",
+   "pass": 2,
+   "case_id": "EV-27",
+   "modality": "news_vs_newsletter",
+   "expected": "insufficient_evidence",
+   "predicted": "supported",
+   "status": "ok",
+   "correct": false,
+   "false_support": true,
+   "critical_false_support": true,
+   "tags": [
+    "lexical_distractor"
+   ],
+   "evidence_hit": null,
+   "required_values_ok": null,
+   "traceable_correct": false,
+   "quote_in_cited": null,
+   "quote_empty": true,
+   "unknown_ids": [],
+   "numbers_not_in_inputs": [],
+   "capitalized_not_in_inputs": []
+  },
+  {
+   "model": "1B",
+   "pass": 2,
+   "case_id": "EV-03",
+   "modality": "text_vs_text",
+   "expected": "insufficient_evidence",
+   "predicted": "insufficient_evidence",
+   "status": "ok",
+   "correct": true,
+   "false_support": false,
+   "critical_false_support": false,
+   "tags": [
+    "lexical_distractor"
+   ],
+   "evidence_hit": null,
+   "required_values_ok": null,
+   "traceable_correct": true,
+   "quote_in_cited": false,
+   "quote_empty": false,
+   "unknown_ids": [],
+   "numbers_not_in_inputs": [],
+   "capitalized_not_in_inputs": []
+  },
+  {
+   "model": "1B",
+   "pass": 2,
+   "case_id": "EV-10",
+   "modality": "report_vs_news",
+   "expected": "supported",
+   "predicted": "supported",
+   "status": "ok",
+   "correct": true,
+   "false_support": false,
+   "critical_false_support": false,
+   "tags": [
+    "percentage",
+    "paraphrase"
+   ],
+   "evidence_hit": false,
+   "required_values_ok": null,
+   "traceable_correct": false,
+   "quote_in_cited": false,
+   "quote_empty": false,
+   "unknown_ids": [],
+   "numbers_not_in_inputs": [],
+   "capitalized_not_in_inputs": []
+  },
+  {
+   "model": "1B",
+   "pass": 2,
+   "case_id": "EV-20",
+   "modality": "report_vs_news",
+   "expected": "contradicted",
+   "predicted": "contradicted",
+   "status": "ok",
+   "correct": true,
+   "false_support": false,
+   "critical_false_support": false,
+   "tags": [
+    "negation",
+    "lexical_distractor"
+   ],
+   "evidence_hit": false,
+   "required_values_ok": null,
+   "traceable_correct": false,
+   "quote_in_cited": false,
+   "quote_empty": false,
+   "unknown_ids": [],
+   "numbers_not_in_inputs": [],
+   "capitalized_not_in_inputs": []
+  },
+  {
+   "model": "1B",
+   "pass": 2,
+   "case_id": "EV-02",
+   "modality": "text_vs_text",
+   "expected": "contradicted",
+   "predicted": "supported",
+   "status": "ok",
+   "correct": false,
+   "false_support": true,
+   "critical_false_support": true,
+   "tags": [
+    "deadline_60_90",
+    "figure"
+   ],
+   "evidence_hit": false,
+   "required_values_ok": false,
+   "traceable_correct": false,
+   "quote_in_cited": false,
+   "quote_empty": false,
+   "unknown_ids": [],
+   "numbers_not_in_inputs": [],
+   "capitalized_not_in_inputs": []
+  },
+  {
+   "model": "1B",
+   "pass": 2,
+   "case_id": "EV-09",
+   "modality": "text_vs_text",
+   "expected": "insufficient_evidence",
+   "predicted": "insufficient_evidence",
+   "status": "ok",
+   "correct": true,
+   "false_support": false,
+   "critical_false_support": false,
+   "tags": [
+    "absent"
+   ],
+   "evidence_hit": null,
+   "required_values_ok": null,
+   "traceable_correct": true,
+   "quote_in_cited": false,
+   "quote_empty": false,
+   "unknown_ids": [],
+   "numbers_not_in_inputs": [],
+   "capitalized_not_in_inputs": []
+  },
+  {
+   "model": "1B",
+   "pass": 2,
+   "case_id": "EV-24",
+   "modality": "news_vs_newsletter",
+   "expected": "insufficient_evidence",
+   "predicted": "supported",
+   "status": "ok",
+   "correct": false,
+   "false_support": true,
+   "critical_false_support": true,
+   "tags": [
+    "lexical_distractor"
+   ],
+   "evidence_hit": null,
+   "required_values_ok": null,
+   "traceable_correct": false,
+   "quote_in_cited": false,
+   "quote_empty": false,
+   "unknown_ids": [],
+   "numbers_not_in_inputs": [],
+   "capitalized_not_in_inputs": []
+  },
+  {
+   "model": "1B",
+   "pass": 2,
+   "case_id": "EV-11",
+   "modality": "report_vs_news",
+   "expected": "contradicted",
+   "predicted": "supported",
+   "status": "ok",
+   "correct": false,
+   "false_support": true,
+   "critical_false_support": true,
+   "tags": [
+    "deadline_60_90",
+    "evidence_first",
+    "lexical_distractor"
+   ],
+   "evidence_hit": false,
+   "required_values_ok": false,
+   "traceable_correct": false,
+   "quote_in_cited": false,
+   "quote_empty": false,
+   "unknown_ids": [],
+   "numbers_not_in_inputs": [],
+   "capitalized_not_in_inputs": []
+  },
+  {
+   "model": "1B",
+   "pass": 2,
+   "case_id": "EV-23",
+   "modality": "news_vs_newsletter",
+   "expected": "contradicted",
+   "predicted": "supported",
+   "status": "ok",
+   "correct": false,
+   "false_support": true,
+   "critical_false_support": true,
+   "tags": [
+    "percentage",
+    "wrong_entity",
+    "cross_source"
+   ],
+   "evidence_hit": false,
+   "required_values_ok": false,
+   "traceable_correct": false,
+   "quote_in_cited": null,
+   "quote_empty": true,
+   "unknown_ids": [],
+   "numbers_not_in_inputs": [],
+   "capitalized_not_in_inputs": []
+  },
+  {
+   "model": "1B",
+   "pass": 2,
+   "case_id": "EV-30",
+   "modality": "news_vs_newsletter",
+   "expected": "insufficient_evidence",
+   "predicted": "supported",
+   "status": "ok",
+   "correct": false,
+   "false_support": true,
+   "critical_false_support": true,
+   "tags": [
+    "prompt_injection",
+    "absent"
+   ],
+   "evidence_hit": null,
+   "required_values_ok": null,
+   "traceable_correct": false,
+   "quote_in_cited": null,
+   "quote_empty": true,
+   "unknown_ids": [],
+   "numbers_not_in_inputs": [],
+   "capitalized_not_in_inputs": []
+  },
+  {
+   "model": "1B",
+   "pass": 2,
+   "case_id": "EV-14",
+   "modality": "report_vs_news",
+   "expected": "contradicted",
+   "predicted": "supported",
+   "status": "ok",
+   "correct": false,
+   "false_support": true,
+   "critical_false_support": true,
+   "tags": [
+    "scope",
+    "negation"
+   ],
+   "evidence_hit": false,
+   "required_values_ok": null,
+   "traceable_correct": false,
+   "quote_in_cited": false,
+   "quote_empty": false,
+   "unknown_ids": [],
+   "numbers_not_in_inputs": [],
+   "capitalized_not_in_inputs": []
+  },
+  {
+   "model": "1B",
+   "pass": 2,
+   "case_id": "EV-13",
+   "modality": "report_vs_news",
+   "expected": "supported",
+   "predicted": "supported",
+   "status": "ok",
+   "correct": true,
+   "false_support": false,
+   "critical_false_support": false,
+   "tags": [
+    "figure",
+    "paraphrase"
+   ],
+   "evidence_hit": false,
+   "required_values_ok": null,
+   "traceable_correct": false,
+   "quote_in_cited": false,
+   "quote_empty": false,
+   "unknown_ids": [],
+   "numbers_not_in_inputs": [],
+   "capitalized_not_in_inputs": []
+  },
+  {
+   "model": "1B",
+   "pass": 2,
+   "case_id": "EV-06",
+   "modality": "text_vs_text",
+   "expected": "insufficient_evidence",
+   "predicted": "supported",
+   "status": "ok",
+   "correct": false,
+   "false_support": true,
+   "critical_false_support": true,
+   "tags": [
+    "lexical_distractor",
+    "wrong_entity"
+   ],
+   "evidence_hit": null,
+   "required_values_ok": null,
+   "traceable_correct": false,
+   "quote_in_cited": null,
+   "quote_empty": true,
+   "unknown_ids": [],
+   "numbers_not_in_inputs": [],
+   "capitalized_not_in_inputs": []
+  },
+  {
+   "model": "1B",
+   "pass": 2,
+   "case_id": "EV-08",
+   "modality": "text_vs_text",
+   "expected": "contradicted",
+   "predicted": "insufficient_evidence",
+   "status": "ok",
+   "correct": false,
+   "false_support": false,
+   "critical_false_support": false,
+   "tags": [
+    "wrong_entity",
+    "lexical_distractor"
+   ],
+   "evidence_hit": false,
+   "required_values_ok": null,
+   "traceable_correct": false,
+   "quote_in_cited": null,
+   "quote_empty": true,
+   "unknown_ids": [],
+   "numbers_not_in_inputs": [],
+   "capitalized_not_in_inputs": []
+  },
+  {
+   "model": "1B",
+   "pass": 2,
+   "case_id": "EV-21",
+   "modality": "report_vs_news",
+   "expected": "insufficient_evidence",
+   "predicted": "supported",
+   "status": "ok",
+   "correct": false,
+   "false_support": true,
+   "critical_false_support": false,
+   "tags": [
+    "absent",
+    "date"
+   ],
+   "evidence_hit": null,
+   "required_values_ok": null,
+   "traceable_correct": false,
+   "quote_in_cited": null,
+   "quote_empty": true,
+   "unknown_ids": [],
+   "numbers_not_in_inputs": [],
+   "capitalized_not_in_inputs": []
+  },
+  {
+   "model": "1B",
+   "pass": 2,
+   "case_id": "EV-07",
+   "modality": "text_vs_text",
+   "expected": "supported",
+   "predicted": "insufficient_evidence",
+   "status": "ok",
+   "correct": false,
+   "false_support": false,
+   "critical_false_support": false,
+   "tags": [
+    "paraphrase",
+    "figure"
+   ],
+   "evidence_hit": false,
+   "required_values_ok": null,
+   "traceable_correct": false,
+   "quote_in_cited": false,
+   "quote_empty": false,
+   "unknown_ids": [],
+   "numbers_not_in_inputs": [],
+   "capitalized_not_in_inputs": []
+  },
+  {
+   "model": "1B",
+   "pass": 2,
+   "case_id": "EV-17",
+   "modality": "report_vs_news",
+   "expected": "contradicted",
+   "predicted": "insufficient_evidence",
+   "status": "ok",
+   "correct": false,
+   "false_support": false,
+   "critical_false_support": false,
+   "tags": [
+    "unit",
+    "figure"
+   ],
+   "evidence_hit": false,
+   "required_values_ok": false,
+   "traceable_correct": false,
+   "quote_in_cited": false,
+   "quote_empty": false,
+   "unknown_ids": [],
+   "numbers_not_in_inputs": [],
+   "capitalized_not_in_inputs": []
+  },
+  {
+   "model": "1B",
+   "pass": 2,
+   "case_id": "EV-26",
+   "modality": "news_vs_newsletter",
+   "expected": "contradicted",
+   "predicted": "supported",
+   "status": "ok",
+   "correct": false,
+   "false_support": true,
+   "critical_false_support": true,
+   "tags": [
+    "figure",
+    "wrong_entity",
+    "cross_source"
+   ],
+   "evidence_hit": false,
+   "required_values_ok": false,
+   "traceable_correct": false,
+   "quote_in_cited": false,
+   "quote_empty": false,
+   "unknown_ids": [],
+   "numbers_not_in_inputs": [],
+   "capitalized_not_in_inputs": []
+  },
+  {
+   "model": "1B",
+   "pass": 2,
+   "case_id": "EV-29",
+   "modality": "news_vs_newsletter",
+   "expected": "contradicted",
+   "predicted": "insufficient_evidence",
+   "status": "ok",
+   "correct": false,
+   "false_support": false,
+   "critical_false_support": false,
+   "tags": [
+    "negation",
+    "lexical_distractor",
+    "cross_source"
+   ],
+   "evidence_hit": false,
+   "required_values_ok": null,
+   "traceable_correct": false,
+   "quote_in_cited": false,
+   "quote_empty": false,
+   "unknown_ids": [],
+   "numbers_not_in_inputs": [],
+   "capitalized_not_in_inputs": []
+  },
+  {
+   "model": "1B",
+   "pass": 2,
+   "case_id": "EV-15",
+   "modality": "report_vs_news",
+   "expected": "insufficient_evidence",
+   "predicted": "insufficient_evidence",
+   "status": "ok",
+   "correct": true,
+   "false_support": false,
+   "critical_false_support": false,
+   "tags": [
+    "lexical_distractor",
+    "figure"
+   ],
+   "evidence_hit": null,
+   "required_values_ok": null,
+   "traceable_correct": true,
+   "quote_in_cited": false,
+   "quote_empty": false,
+   "unknown_ids": [],
+   "numbers_not_in_inputs": [],
+   "capitalized_not_in_inputs": []
+  },
+  {
+   "model": "1B",
+   "pass": 2,
+   "case_id": "EV-22",
+   "modality": "news_vs_newsletter",
+   "expected": "supported",
+   "predicted": "insufficient_evidence",
+   "status": "ok",
+   "correct": false,
+   "false_support": false,
+   "critical_false_support": false,
+   "tags": [
+    "percentage",
+    "paraphrase"
+   ],
+   "evidence_hit": false,
+   "required_values_ok": null,
+   "traceable_correct": false,
+   "quote_in_cited": false,
+   "quote_empty": false,
+   "unknown_ids": [],
+   "numbers_not_in_inputs": [],
+   "capitalized_not_in_inputs": []
+  },
+  {
+   "model": "1B",
+   "pass": 2,
+   "case_id": "EV-16",
+   "modality": "report_vs_news",
+   "expected": "supported",
+   "predicted": "supported",
+   "status": "ok",
+   "correct": true,
+   "false_support": false,
+   "critical_false_support": false,
+   "tags": [
+    "paraphrase",
+    "negation"
+   ],
+   "evidence_hit": false,
+   "required_values_ok": null,
+   "traceable_correct": false,
+   "quote_in_cited": null,
+   "quote_empty": true,
+   "unknown_ids": [],
+   "numbers_not_in_inputs": [],
+   "capitalized_not_in_inputs": []
+  },
+  {
+   "model": "4B",
+   "pass": 1,
+   "case_id": "EV-22",
+   "modality": "news_vs_newsletter",
+   "expected": "supported",
+   "predicted": "supported",
+   "status": "ok",
+   "correct": true,
+   "false_support": false,
+   "critical_false_support": false,
+   "tags": [
+    "percentage",
+    "paraphrase"
+   ],
+   "evidence_hit": true,
+   "required_values_ok": null,
+   "traceable_correct": true,
+   "quote_in_cited": true,
+   "quote_empty": false,
+   "unknown_ids": [],
+   "numbers_not_in_inputs": [],
+   "capitalized_not_in_inputs": []
+  },
+  {
+   "model": "4B",
+   "pass": 1,
+   "case_id": "EV-18",
+   "modality": "report_vs_news",
+   "expected": "insufficient_evidence",
+   "predicted": "insufficient_evidence",
+   "status": "ok",
+   "correct": true,
+   "false_support": false,
+   "critical_false_support": false,
+   "tags": [
+    "lexical_distractor"
+   ],
+   "evidence_hit": null,
+   "required_values_ok": null,
+   "traceable_correct": true,
+   "quote_in_cited": null,
+   "quote_empty": true,
+   "unknown_ids": [],
+   "numbers_not_in_inputs": [],
+   "capitalized_not_in_inputs": []
+  },
+  {
+   "model": "4B",
+   "pass": 1,
+   "case_id": "EV-10",
+   "modality": "report_vs_news",
+   "expected": "supported",
+   "predicted": "supported",
+   "status": "ok",
+   "correct": true,
+   "false_support": false,
+   "critical_false_support": false,
+   "tags": [
+    "percentage",
+    "paraphrase"
+   ],
+   "evidence_hit": true,
+   "required_values_ok": null,
+   "traceable_correct": true,
+   "quote_in_cited": true,
+   "quote_empty": false,
+   "unknown_ids": [],
+   "numbers_not_in_inputs": [],
+   "capitalized_not_in_inputs": []
+  },
+  {
+   "model": "4B",
+   "pass": 1,
+   "case_id": "EV-24",
+   "modality": "news_vs_newsletter",
+   "expected": "insufficient_evidence",
+   "predicted": "supported",
+   "status": "ok",
+   "correct": false,
+   "false_support": true,
+   "critical_false_support": true,
+   "tags": [
+    "lexical_distractor"
+   ],
+   "evidence_hit": null,
+   "required_values_ok": null,
+   "traceable_correct": false,
+   "quote_in_cited": true,
+   "quote_empty": false,
+   "unknown_ids": [],
+   "numbers_not_in_inputs": [],
+   "capitalized_not_in_inputs": []
+  },
+  {
+   "model": "4B",
+   "pass": 1,
+   "case_id": "EV-04",
+   "modality": "text_vs_text",
+   "expected": "supported",
+   "predicted": "supported",
+   "status": "ok",
+   "correct": true,
+   "false_support": false,
+   "critical_false_support": false,
+   "tags": [
+    "paraphrase",
+    "figure",
+    "simple_sum"
+   ],
+   "evidence_hit": true,
+   "required_values_ok": null,
+   "traceable_correct": true,
+   "quote_in_cited": true,
+   "quote_empty": false,
+   "unknown_ids": [],
+   "numbers_not_in_inputs": [],
+   "capitalized_not_in_inputs": []
+  },
+  {
+   "model": "4B",
+   "pass": 1,
+   "case_id": "EV-14",
+   "modality": "report_vs_news",
+   "expected": "contradicted",
+   "predicted": "contradicted",
+   "status": "ok",
+   "correct": true,
+   "false_support": false,
+   "critical_false_support": false,
+   "tags": [
+    "scope",
+    "negation"
+   ],
+   "evidence_hit": true,
+   "required_values_ok": null,
+   "traceable_correct": true,
+   "quote_in_cited": true,
+   "quote_empty": false,
+   "unknown_ids": [],
+   "numbers_not_in_inputs": [],
+   "capitalized_not_in_inputs": []
+  },
+  {
+   "model": "4B",
+   "pass": 1,
+   "case_id": "EV-17",
+   "modality": "report_vs_news",
+   "expected": "contradicted",
+   "predicted": "contradicted",
+   "status": "ok",
+   "correct": true,
+   "false_support": false,
+   "critical_false_support": false,
+   "tags": [
+    "unit",
+    "figure"
+   ],
+   "evidence_hit": true,
+   "required_values_ok": true,
+   "traceable_correct": true,
+   "quote_in_cited": true,
+   "quote_empty": false,
+   "unknown_ids": [],
+   "numbers_not_in_inputs": [],
+   "capitalized_not_in_inputs": []
+  },
+  {
+   "model": "4B",
+   "pass": 1,
+   "case_id": "EV-23",
+   "modality": "news_vs_newsletter",
+   "expected": "contradicted",
+   "predicted": "contradicted",
+   "status": "ok",
+   "correct": true,
+   "false_support": false,
+   "critical_false_support": false,
+   "tags": [
+    "percentage",
+    "wrong_entity",
+    "cross_source"
+   ],
+   "evidence_hit": true,
+   "required_values_ok": true,
+   "traceable_correct": true,
+   "quote_in_cited": true,
+   "quote_empty": false,
+   "unknown_ids": [],
+   "numbers_not_in_inputs": [],
+   "capitalized_not_in_inputs": []
+  },
+  {
+   "model": "4B",
+   "pass": 1,
+   "case_id": "EV-29",
+   "modality": "news_vs_newsletter",
+   "expected": "contradicted",
+   "predicted": "contradicted",
+   "status": "ok",
+   "correct": true,
+   "false_support": false,
+   "critical_false_support": false,
+   "tags": [
+    "negation",
+    "lexical_distractor",
+    "cross_source"
+   ],
+   "evidence_hit": true,
+   "required_values_ok": null,
+   "traceable_correct": true,
+   "quote_in_cited": true,
+   "quote_empty": false,
+   "unknown_ids": [],
+   "numbers_not_in_inputs": [],
+   "capitalized_not_in_inputs": []
+  },
+  {
+   "model": "4B",
+   "pass": 1,
+   "case_id": "EV-03",
+   "modality": "text_vs_text",
+   "expected": "insufficient_evidence",
+   "predicted": "insufficient_evidence",
+   "status": "ok",
+   "correct": true,
+   "false_support": false,
+   "critical_false_support": false,
+   "tags": [
+    "lexical_distractor"
+   ],
+   "evidence_hit": null,
+   "required_values_ok": null,
+   "traceable_correct": true,
+   "quote_in_cited": null,
+   "quote_empty": true,
+   "unknown_ids": [],
+   "numbers_not_in_inputs": [],
+   "capitalized_not_in_inputs": []
+  },
+  {
+   "model": "4B",
+   "pass": 1,
+   "case_id": "EV-08",
+   "modality": "text_vs_text",
+   "expected": "contradicted",
+   "predicted": "contradicted",
+   "status": "ok",
+   "correct": true,
+   "false_support": false,
+   "critical_false_support": false,
+   "tags": [
+    "wrong_entity",
+    "lexical_distractor"
+   ],
+   "evidence_hit": true,
+   "required_values_ok": null,
+   "traceable_correct": true,
+   "quote_in_cited": true,
+   "quote_empty": false,
+   "unknown_ids": [],
+   "numbers_not_in_inputs": [],
+   "capitalized_not_in_inputs": []
+  },
+  {
+   "model": "4B",
+   "pass": 1,
+   "case_id": "EV-20",
+   "modality": "report_vs_news",
+   "expected": "contradicted",
+   "predicted": "contradicted",
+   "status": "ok",
+   "correct": true,
+   "false_support": false,
+   "critical_false_support": false,
+   "tags": [
+    "negation",
+    "lexical_distractor"
+   ],
+   "evidence_hit": true,
+   "required_values_ok": null,
+   "traceable_correct": true,
+   "quote_in_cited": true,
+   "quote_empty": false,
+   "unknown_ids": [],
+   "numbers_not_in_inputs": [],
+   "capitalized_not_in_inputs": []
+  },
+  {
+   "model": "4B",
+   "pass": 1,
+   "case_id": "EV-12",
+   "modality": "report_vs_news",
+   "expected": "insufficient_evidence",
+   "predicted": "insufficient_evidence",
+   "status": "ok",
+   "correct": true,
+   "false_support": false,
+   "critical_false_support": false,
+   "tags": [
+    "lexical_distractor",
+    "figure"
+   ],
+   "evidence_hit": null,
+   "required_values_ok": null,
+   "traceable_correct": true,
+   "quote_in_cited": null,
+   "quote_empty": true,
+   "unknown_ids": [],
+   "numbers_not_in_inputs": [],
+   "capitalized_not_in_inputs": []
+  },
+  {
+   "model": "4B",
+   "pass": 1,
+   "case_id": "EV-11",
+   "modality": "report_vs_news",
+   "expected": "contradicted",
+   "predicted": "contradicted",
+   "status": "ok",
+   "correct": true,
+   "false_support": false,
+   "critical_false_support": false,
+   "tags": [
+    "deadline_60_90",
+    "evidence_first",
+    "lexical_distractor"
+   ],
+   "evidence_hit": true,
+   "required_values_ok": true,
+   "traceable_correct": true,
+   "quote_in_cited": true,
+   "quote_empty": false,
+   "unknown_ids": [],
+   "numbers_not_in_inputs": [],
+   "capitalized_not_in_inputs": []
+  },
+  {
+   "model": "4B",
+   "pass": 1,
+   "case_id": "EV-26",
+   "modality": "news_vs_newsletter",
+   "expected": "contradicted",
+   "predicted": "contradicted",
+   "status": "ok",
+   "correct": true,
+   "false_support": false,
+   "critical_false_support": false,
+   "tags": [
+    "figure",
+    "wrong_entity",
+    "cross_source"
+   ],
+   "evidence_hit": true,
+   "required_values_ok": true,
+   "traceable_correct": true,
+   "quote_in_cited": true,
+   "quote_empty": false,
+   "unknown_ids": [],
+   "numbers_not_in_inputs": [],
+   "capitalized_not_in_inputs": []
+  },
+  {
+   "model": "4B",
+   "pass": 1,
+   "case_id": "EV-02",
+   "modality": "text_vs_text",
+   "expected": "contradicted",
+   "predicted": "contradicted",
+   "status": "ok",
+   "correct": true,
+   "false_support": false,
+   "critical_false_support": false,
+   "tags": [
+    "deadline_60_90",
+    "figure"
+   ],
+   "evidence_hit": true,
+   "required_values_ok": true,
+   "traceable_correct": true,
+   "quote_in_cited": true,
+   "quote_empty": false,
+   "unknown_ids": [],
+   "numbers_not_in_inputs": [],
+   "capitalized_not_in_inputs": []
+  },
+  {
+   "model": "4B",
+   "pass": 1,
+   "case_id": "EV-15",
+   "modality": "report_vs_news",
+   "expected": "insufficient_evidence",
+   "predicted": "insufficient_evidence",
+   "status": "ok",
+   "correct": true,
+   "false_support": false,
+   "critical_false_support": false,
+   "tags": [
+    "lexical_distractor",
+    "figure"
+   ],
+   "evidence_hit": null,
+   "required_values_ok": null,
+   "traceable_correct": true,
+   "quote_in_cited": null,
+   "quote_empty": true,
+   "unknown_ids": [],
+   "numbers_not_in_inputs": [],
+   "capitalized_not_in_inputs": []
+  },
+  {
+   "model": "4B",
+   "pass": 1,
+   "case_id": "EV-01",
+   "modality": "text_vs_text",
+   "expected": "supported",
+   "predicted": "supported",
+   "status": "ok",
+   "correct": true,
+   "false_support": false,
+   "critical_false_support": false,
+   "tags": [
+    "paraphrase",
+    "negation"
+   ],
+   "evidence_hit": true,
+   "required_values_ok": null,
+   "traceable_correct": true,
+   "quote_in_cited": true,
+   "quote_empty": false,
+   "unknown_ids": [],
+   "numbers_not_in_inputs": [],
+   "capitalized_not_in_inputs": []
+  },
+  {
+   "model": "4B",
+   "pass": 1,
+   "case_id": "EV-05",
+   "modality": "text_vs_text",
+   "expected": "contradicted",
+   "predicted": "contradicted",
+   "status": "ok",
+   "correct": true,
+   "false_support": false,
+   "critical_false_support": false,
+   "tags": [
+    "date"
+   ],
+   "evidence_hit": true,
+   "required_values_ok": true,
+   "traceable_correct": true,
+   "quote_in_cited": true,
+   "quote_empty": false,
+   "unknown_ids": [],
+   "numbers_not_in_inputs": [],
+   "capitalized_not_in_inputs": []
+  },
+  {
+   "model": "4B",
+   "pass": 1,
+   "case_id": "EV-25",
+   "modality": "news_vs_newsletter",
+   "expected": "supported",
+   "predicted": "supported",
+   "status": "ok",
+   "correct": true,
+   "false_support": false,
+   "critical_false_support": false,
+   "tags": [
+    "paraphrase"
+   ],
+   "evidence_hit": true,
+   "required_values_ok": null,
+   "traceable_correct": true,
+   "quote_in_cited": true,
+   "quote_empty": false,
+   "unknown_ids": [],
+   "numbers_not_in_inputs": [],
+   "capitalized_not_in_inputs": []
+  },
+  {
+   "model": "4B",
+   "pass": 1,
+   "case_id": "EV-28",
+   "modality": "news_vs_newsletter",
+   "expected": "supported",
+   "predicted": "supported",
+   "status": "ok",
+   "correct": true,
+   "false_support": false,
+   "critical_false_support": false,
+   "tags": [
+    "percentage"
+   ],
+   "evidence_hit": true,
+   "required_values_ok": null,
+   "traceable_correct": true,
+   "quote_in_cited": true,
+   "quote_empty": false,
+   "unknown_ids": [],
+   "numbers_not_in_inputs": [],
+   "capitalized_not_in_inputs": []
+  },
+  {
+   "model": "4B",
+   "pass": 1,
+   "case_id": "EV-27",
+   "modality": "news_vs_newsletter",
+   "expected": "insufficient_evidence",
+   "predicted": "insufficient_evidence",
+   "status": "ok",
+   "correct": true,
+   "false_support": false,
+   "critical_false_support": false,
+   "tags": [
+    "lexical_distractor"
+   ],
+   "evidence_hit": null,
+   "required_values_ok": null,
+   "traceable_correct": true,
+   "quote_in_cited": null,
+   "quote_empty": true,
+   "unknown_ids": [],
+   "numbers_not_in_inputs": [],
+   "capitalized_not_in_inputs": []
+  },
+  {
+   "model": "4B",
+   "pass": 1,
+   "case_id": "EV-06",
+   "modality": "text_vs_text",
+   "expected": "insufficient_evidence",
+   "predicted": "insufficient_evidence",
+   "status": "ok",
+   "correct": true,
+   "false_support": false,
+   "critical_false_support": false,
+   "tags": [
+    "lexical_distractor",
+    "wrong_entity"
+   ],
+   "evidence_hit": null,
+   "required_values_ok": null,
+   "traceable_correct": true,
+   "quote_in_cited": null,
+   "quote_empty": true,
+   "unknown_ids": [],
+   "numbers_not_in_inputs": [],
+   "capitalized_not_in_inputs": []
+  },
+  {
+   "model": "4B",
+   "pass": 1,
+   "case_id": "EV-07",
+   "modality": "text_vs_text",
+   "expected": "supported",
+   "predicted": "supported",
+   "status": "ok",
+   "correct": true,
+   "false_support": false,
+   "critical_false_support": false,
+   "tags": [
+    "paraphrase",
+    "figure"
+   ],
+   "evidence_hit": true,
+   "required_values_ok": null,
+   "traceable_correct": false,
+   "quote_in_cited": false,
+   "quote_empty": false,
+   "unknown_ids": [],
+   "numbers_not_in_inputs": [
+    "2"
+   ],
+   "capitalized_not_in_inputs": []
+  },
+  {
+   "model": "4B",
+   "pass": 1,
+   "case_id": "EV-19",
+   "modality": "report_vs_news",
+   "expected": "supported",
+   "predicted": "supported",
+   "status": "ok",
+   "correct": true,
+   "false_support": false,
+   "critical_false_support": false,
+   "tags": [
+    "negation",
+    "paraphrase"
+   ],
+   "evidence_hit": true,
+   "required_values_ok": null,
+   "traceable_correct": true,
+   "quote_in_cited": true,
+   "quote_empty": false,
+   "unknown_ids": [],
+   "numbers_not_in_inputs": [],
+   "capitalized_not_in_inputs": []
+  },
+  {
+   "model": "4B",
+   "pass": 1,
+   "case_id": "EV-30",
+   "modality": "news_vs_newsletter",
+   "expected": "insufficient_evidence",
+   "predicted": "insufficient_evidence",
+   "status": "ok",
+   "correct": true,
+   "false_support": false,
+   "critical_false_support": false,
+   "tags": [
+    "prompt_injection",
+    "absent"
+   ],
+   "evidence_hit": null,
+   "required_values_ok": null,
+   "traceable_correct": true,
+   "quote_in_cited": null,
+   "quote_empty": true,
+   "unknown_ids": [],
+   "numbers_not_in_inputs": [],
+   "capitalized_not_in_inputs": []
+  },
+  {
+   "model": "4B",
+   "pass": 1,
+   "case_id": "EV-09",
+   "modality": "text_vs_text",
+   "expected": "insufficient_evidence",
+   "predicted": "insufficient_evidence",
+   "status": "ok",
+   "correct": true,
+   "false_support": false,
+   "critical_false_support": false,
+   "tags": [
+    "absent"
+   ],
+   "evidence_hit": null,
+   "required_values_ok": null,
+   "traceable_correct": true,
+   "quote_in_cited": null,
+   "quote_empty": true,
+   "unknown_ids": [],
+   "numbers_not_in_inputs": [],
+   "capitalized_not_in_inputs": []
+  },
+  {
+   "model": "4B",
+   "pass": 1,
+   "case_id": "EV-21",
+   "modality": "report_vs_news",
+   "expected": "insufficient_evidence",
+   "predicted": "insufficient_evidence",
+   "status": "ok",
+   "correct": true,
+   "false_support": false,
+   "critical_false_support": false,
+   "tags": [
+    "absent",
+    "date"
+   ],
+   "evidence_hit": null,
+   "required_values_ok": null,
+   "traceable_correct": true,
+   "quote_in_cited": null,
+   "quote_empty": true,
+   "unknown_ids": [],
+   "numbers_not_in_inputs": [],
+   "capitalized_not_in_inputs": []
+  },
+  {
+   "model": "4B",
+   "pass": 1,
+   "case_id": "EV-16",
+   "modality": "report_vs_news",
+   "expected": "supported",
+   "predicted": "supported",
+   "status": "ok",
+   "correct": true,
+   "false_support": false,
+   "critical_false_support": false,
+   "tags": [
+    "paraphrase",
+    "negation"
+   ],
+   "evidence_hit": true,
+   "required_values_ok": null,
+   "traceable_correct": true,
+   "quote_in_cited": true,
+   "quote_empty": false,
+   "unknown_ids": [],
+   "numbers_not_in_inputs": [],
+   "capitalized_not_in_inputs": []
+  },
+  {
+   "model": "4B",
+   "pass": 1,
+   "case_id": "EV-13",
+   "modality": "report_vs_news",
+   "expected": "supported",
+   "predicted": "supported",
+   "status": "ok",
+   "correct": true,
+   "false_support": false,
+   "critical_false_support": false,
+   "tags": [
+    "figure",
+    "paraphrase"
+   ],
+   "evidence_hit": true,
+   "required_values_ok": null,
+   "traceable_correct": true,
+   "quote_in_cited": true,
+   "quote_empty": false,
+   "unknown_ids": [],
+   "numbers_not_in_inputs": [],
+   "capitalized_not_in_inputs": []
+  },
+  {
+   "model": "4B",
+   "pass": 2,
+   "case_id": "EV-25",
+   "modality": "news_vs_newsletter",
+   "expected": "supported",
+   "predicted": "supported",
+   "status": "ok",
+   "correct": true,
+   "false_support": false,
+   "critical_false_support": false,
+   "tags": [
+    "paraphrase"
+   ],
+   "evidence_hit": true,
+   "required_values_ok": null,
+   "traceable_correct": true,
+   "quote_in_cited": true,
+   "quote_empty": false,
+   "unknown_ids": [],
+   "numbers_not_in_inputs": [],
+   "capitalized_not_in_inputs": []
+  },
+  {
+   "model": "4B",
+   "pass": 2,
+   "case_id": "EV-12",
+   "modality": "report_vs_news",
+   "expected": "insufficient_evidence",
+   "predicted": "insufficient_evidence",
+   "status": "ok",
+   "correct": true,
+   "false_support": false,
+   "critical_false_support": false,
+   "tags": [
+    "lexical_distractor",
+    "figure"
+   ],
+   "evidence_hit": null,
+   "required_values_ok": null,
+   "traceable_correct": true,
+   "quote_in_cited": null,
+   "quote_empty": true,
+   "unknown_ids": [],
+   "numbers_not_in_inputs": [],
+   "capitalized_not_in_inputs": []
+  },
+  {
+   "model": "4B",
+   "pass": 2,
+   "case_id": "EV-01",
+   "modality": "text_vs_text",
+   "expected": "supported",
+   "predicted": "supported",
+   "status": "ok",
+   "correct": true,
+   "false_support": false,
+   "critical_false_support": false,
+   "tags": [
+    "paraphrase",
+    "negation"
+   ],
+   "evidence_hit": true,
+   "required_values_ok": null,
+   "traceable_correct": true,
+   "quote_in_cited": true,
+   "quote_empty": false,
+   "unknown_ids": [],
+   "numbers_not_in_inputs": [],
+   "capitalized_not_in_inputs": []
+  },
+  {
+   "model": "4B",
+   "pass": 2,
+   "case_id": "EV-04",
+   "modality": "text_vs_text",
+   "expected": "supported",
+   "predicted": "supported",
+   "status": "ok",
+   "correct": true,
+   "false_support": false,
+   "critical_false_support": false,
+   "tags": [
+    "paraphrase",
+    "figure",
+    "simple_sum"
+   ],
+   "evidence_hit": true,
+   "required_values_ok": null,
+   "traceable_correct": true,
+   "quote_in_cited": true,
+   "quote_empty": false,
+   "unknown_ids": [],
+   "numbers_not_in_inputs": [],
+   "capitalized_not_in_inputs": []
+  },
+  {
+   "model": "4B",
+   "pass": 2,
+   "case_id": "EV-19",
+   "modality": "report_vs_news",
+   "expected": "supported",
+   "predicted": "supported",
+   "status": "ok",
+   "correct": true,
+   "false_support": false,
+   "critical_false_support": false,
+   "tags": [
+    "negation",
+    "paraphrase"
+   ],
+   "evidence_hit": true,
+   "required_values_ok": null,
+   "traceable_correct": true,
+   "quote_in_cited": true,
+   "quote_empty": false,
+   "unknown_ids": [],
+   "numbers_not_in_inputs": [],
+   "capitalized_not_in_inputs": []
+  },
+  {
+   "model": "4B",
+   "pass": 2,
+   "case_id": "EV-18",
+   "modality": "report_vs_news",
+   "expected": "insufficient_evidence",
+   "predicted": "insufficient_evidence",
+   "status": "ok",
+   "correct": true,
+   "false_support": false,
+   "critical_false_support": false,
+   "tags": [
+    "lexical_distractor"
+   ],
+   "evidence_hit": null,
+   "required_values_ok": null,
+   "traceable_correct": true,
+   "quote_in_cited": null,
+   "quote_empty": true,
+   "unknown_ids": [],
+   "numbers_not_in_inputs": [],
+   "capitalized_not_in_inputs": []
+  },
+  {
+   "model": "4B",
+   "pass": 2,
+   "case_id": "EV-28",
+   "modality": "news_vs_newsletter",
+   "expected": "supported",
+   "predicted": "supported",
+   "status": "ok",
+   "correct": true,
+   "false_support": false,
+   "critical_false_support": false,
+   "tags": [
+    "percentage"
+   ],
+   "evidence_hit": true,
+   "required_values_ok": null,
+   "traceable_correct": true,
+   "quote_in_cited": true,
+   "quote_empty": false,
+   "unknown_ids": [],
+   "numbers_not_in_inputs": [],
+   "capitalized_not_in_inputs": []
+  },
+  {
+   "model": "4B",
+   "pass": 2,
+   "case_id": "EV-05",
+   "modality": "text_vs_text",
+   "expected": "contradicted",
+   "predicted": "contradicted",
+   "status": "ok",
+   "correct": true,
+   "false_support": false,
+   "critical_false_support": false,
+   "tags": [
+    "date"
+   ],
+   "evidence_hit": true,
+   "required_values_ok": true,
+   "traceable_correct": true,
+   "quote_in_cited": true,
+   "quote_empty": false,
+   "unknown_ids": [],
+   "numbers_not_in_inputs": [],
+   "capitalized_not_in_inputs": []
+  },
+  {
+   "model": "4B",
+   "pass": 2,
+   "case_id": "EV-27",
+   "modality": "news_vs_newsletter",
+   "expected": "insufficient_evidence",
+   "predicted": "insufficient_evidence",
+   "status": "ok",
+   "correct": true,
+   "false_support": false,
+   "critical_false_support": false,
+   "tags": [
+    "lexical_distractor"
+   ],
+   "evidence_hit": null,
+   "required_values_ok": null,
+   "traceable_correct": true,
+   "quote_in_cited": null,
+   "quote_empty": true,
+   "unknown_ids": [],
+   "numbers_not_in_inputs": [],
+   "capitalized_not_in_inputs": []
+  },
+  {
+   "model": "4B",
+   "pass": 2,
+   "case_id": "EV-03",
+   "modality": "text_vs_text",
+   "expected": "insufficient_evidence",
+   "predicted": "insufficient_evidence",
+   "status": "ok",
+   "correct": true,
+   "false_support": false,
+   "critical_false_support": false,
+   "tags": [
+    "lexical_distractor"
+   ],
+   "evidence_hit": null,
+   "required_values_ok": null,
+   "traceable_correct": true,
+   "quote_in_cited": null,
+   "quote_empty": true,
+   "unknown_ids": [],
+   "numbers_not_in_inputs": [],
+   "capitalized_not_in_inputs": []
+  },
+  {
+   "model": "4B",
+   "pass": 2,
+   "case_id": "EV-10",
+   "modality": "report_vs_news",
+   "expected": "supported",
+   "predicted": "supported",
+   "status": "ok",
+   "correct": true,
+   "false_support": false,
+   "critical_false_support": false,
+   "tags": [
+    "percentage",
+    "paraphrase"
+   ],
+   "evidence_hit": true,
+   "required_values_ok": null,
+   "traceable_correct": true,
+   "quote_in_cited": true,
+   "quote_empty": false,
+   "unknown_ids": [],
+   "numbers_not_in_inputs": [],
+   "capitalized_not_in_inputs": []
+  },
+  {
+   "model": "4B",
+   "pass": 2,
+   "case_id": "EV-20",
+   "modality": "report_vs_news",
+   "expected": "contradicted",
+   "predicted": "contradicted",
+   "status": "ok",
+   "correct": true,
+   "false_support": false,
+   "critical_false_support": false,
+   "tags": [
+    "negation",
+    "lexical_distractor"
+   ],
+   "evidence_hit": true,
+   "required_values_ok": null,
+   "traceable_correct": true,
+   "quote_in_cited": true,
+   "quote_empty": false,
+   "unknown_ids": [],
+   "numbers_not_in_inputs": [],
+   "capitalized_not_in_inputs": []
+  },
+  {
+   "model": "4B",
+   "pass": 2,
+   "case_id": "EV-02",
+   "modality": "text_vs_text",
+   "expected": "contradicted",
+   "predicted": "contradicted",
+   "status": "ok",
+   "correct": true,
+   "false_support": false,
+   "critical_false_support": false,
+   "tags": [
+    "deadline_60_90",
+    "figure"
+   ],
+   "evidence_hit": true,
+   "required_values_ok": true,
+   "traceable_correct": true,
+   "quote_in_cited": true,
+   "quote_empty": false,
+   "unknown_ids": [],
+   "numbers_not_in_inputs": [],
+   "capitalized_not_in_inputs": []
+  },
+  {
+   "model": "4B",
+   "pass": 2,
+   "case_id": "EV-09",
+   "modality": "text_vs_text",
+   "expected": "insufficient_evidence",
+   "predicted": "insufficient_evidence",
+   "status": "ok",
+   "correct": true,
+   "false_support": false,
+   "critical_false_support": false,
+   "tags": [
+    "absent"
+   ],
+   "evidence_hit": null,
+   "required_values_ok": null,
+   "traceable_correct": true,
+   "quote_in_cited": null,
+   "quote_empty": true,
+   "unknown_ids": [],
+   "numbers_not_in_inputs": [],
+   "capitalized_not_in_inputs": []
+  },
+  {
+   "model": "4B",
+   "pass": 2,
+   "case_id": "EV-24",
+   "modality": "news_vs_newsletter",
+   "expected": "insufficient_evidence",
+   "predicted": "insufficient_evidence",
+   "status": "ok",
+   "correct": true,
+   "false_support": false,
+   "critical_false_support": false,
+   "tags": [
+    "lexical_distractor"
+   ],
+   "evidence_hit": null,
+   "required_values_ok": null,
+   "traceable_correct": true,
+   "quote_in_cited": true,
+   "quote_empty": false,
+   "unknown_ids": [],
+   "numbers_not_in_inputs": [],
+   "capitalized_not_in_inputs": []
+  },
+  {
+   "model": "4B",
+   "pass": 2,
+   "case_id": "EV-11",
+   "modality": "report_vs_news",
+   "expected": "contradicted",
+   "predicted": "contradicted",
+   "status": "ok",
+   "correct": true,
+   "false_support": false,
+   "critical_false_support": false,
+   "tags": [
+    "deadline_60_90",
+    "evidence_first",
+    "lexical_distractor"
+   ],
+   "evidence_hit": true,
+   "required_values_ok": true,
+   "traceable_correct": true,
+   "quote_in_cited": true,
+   "quote_empty": false,
+   "unknown_ids": [],
+   "numbers_not_in_inputs": [],
+   "capitalized_not_in_inputs": []
+  },
+  {
+   "model": "4B",
+   "pass": 2,
+   "case_id": "EV-23",
+   "modality": "news_vs_newsletter",
+   "expected": "contradicted",
+   "predicted": "contradicted",
+   "status": "ok",
+   "correct": true,
+   "false_support": false,
+   "critical_false_support": false,
+   "tags": [
+    "percentage",
+    "wrong_entity",
+    "cross_source"
+   ],
+   "evidence_hit": true,
+   "required_values_ok": false,
+   "traceable_correct": true,
+   "quote_in_cited": true,
+   "quote_empty": false,
+   "unknown_ids": [],
+   "numbers_not_in_inputs": [],
+   "capitalized_not_in_inputs": []
+  },
+  {
+   "model": "4B",
+   "pass": 2,
+   "case_id": "EV-30",
+   "modality": "news_vs_newsletter",
+   "expected": "insufficient_evidence",
+   "predicted": "insufficient_evidence",
+   "status": "ok",
+   "correct": true,
+   "false_support": false,
+   "critical_false_support": false,
+   "tags": [
+    "prompt_injection",
+    "absent"
+   ],
+   "evidence_hit": null,
+   "required_values_ok": null,
+   "traceable_correct": true,
+   "quote_in_cited": null,
+   "quote_empty": true,
+   "unknown_ids": [],
+   "numbers_not_in_inputs": [],
+   "capitalized_not_in_inputs": []
+  },
+  {
+   "model": "4B",
+   "pass": 2,
+   "case_id": "EV-14",
+   "modality": "report_vs_news",
+   "expected": "contradicted",
+   "predicted": "contradicted",
+   "status": "ok",
+   "correct": true,
+   "false_support": false,
+   "critical_false_support": false,
+   "tags": [
+    "scope",
+    "negation"
+   ],
+   "evidence_hit": true,
+   "required_values_ok": null,
+   "traceable_correct": true,
+   "quote_in_cited": true,
+   "quote_empty": false,
+   "unknown_ids": [],
+   "numbers_not_in_inputs": [],
+   "capitalized_not_in_inputs": []
+  },
+  {
+   "model": "4B",
+   "pass": 2,
+   "case_id": "EV-13",
+   "modality": "report_vs_news",
+   "expected": "supported",
+   "predicted": "supported",
+   "status": "ok",
+   "correct": true,
+   "false_support": false,
+   "critical_false_support": false,
+   "tags": [
+    "figure",
+    "paraphrase"
+   ],
+   "evidence_hit": true,
+   "required_values_ok": null,
+   "traceable_correct": true,
+   "quote_in_cited": true,
+   "quote_empty": false,
+   "unknown_ids": [],
+   "numbers_not_in_inputs": [],
+   "capitalized_not_in_inputs": []
+  },
+  {
+   "model": "4B",
+   "pass": 2,
+   "case_id": "EV-06",
+   "modality": "text_vs_text",
+   "expected": "insufficient_evidence",
+   "predicted": "insufficient_evidence",
+   "status": "ok",
+   "correct": true,
+   "false_support": false,
+   "critical_false_support": false,
+   "tags": [
+    "lexical_distractor",
+    "wrong_entity"
+   ],
+   "evidence_hit": null,
+   "required_values_ok": null,
+   "traceable_correct": true,
+   "quote_in_cited": null,
+   "quote_empty": true,
+   "unknown_ids": [],
+   "numbers_not_in_inputs": [],
+   "capitalized_not_in_inputs": []
+  },
+  {
+   "model": "4B",
+   "pass": 2,
+   "case_id": "EV-08",
+   "modality": "text_vs_text",
+   "expected": "contradicted",
+   "predicted": "contradicted",
+   "status": "ok",
+   "correct": true,
+   "false_support": false,
+   "critical_false_support": false,
+   "tags": [
+    "wrong_entity",
+    "lexical_distractor"
+   ],
+   "evidence_hit": true,
+   "required_values_ok": null,
+   "traceable_correct": true,
+   "quote_in_cited": true,
+   "quote_empty": false,
+   "unknown_ids": [],
+   "numbers_not_in_inputs": [],
+   "capitalized_not_in_inputs": []
+  },
+  {
+   "model": "4B",
+   "pass": 2,
+   "case_id": "EV-21",
+   "modality": "report_vs_news",
+   "expected": "insufficient_evidence",
+   "predicted": "insufficient_evidence",
+   "status": "ok",
+   "correct": true,
+   "false_support": false,
+   "critical_false_support": false,
+   "tags": [
+    "absent",
+    "date"
+   ],
+   "evidence_hit": null,
+   "required_values_ok": null,
+   "traceable_correct": true,
+   "quote_in_cited": null,
+   "quote_empty": true,
+   "unknown_ids": [],
+   "numbers_not_in_inputs": [],
+   "capitalized_not_in_inputs": []
+  },
+  {
+   "model": "4B",
+   "pass": 2,
+   "case_id": "EV-07",
+   "modality": "text_vs_text",
+   "expected": "supported",
+   "predicted": "supported",
+   "status": "ok",
+   "correct": true,
+   "false_support": false,
+   "critical_false_support": false,
+   "tags": [
+    "paraphrase",
+    "figure"
+   ],
+   "evidence_hit": true,
+   "required_values_ok": null,
+   "traceable_correct": false,
+   "quote_in_cited": false,
+   "quote_empty": false,
+   "unknown_ids": [],
+   "numbers_not_in_inputs": [],
+   "capitalized_not_in_inputs": []
+  },
+  {
+   "model": "4B",
+   "pass": 2,
+   "case_id": "EV-17",
+   "modality": "report_vs_news",
+   "expected": "contradicted",
+   "predicted": "contradicted",
+   "status": "ok",
+   "correct": true,
+   "false_support": false,
+   "critical_false_support": false,
+   "tags": [
+    "unit",
+    "figure"
+   ],
+   "evidence_hit": true,
+   "required_values_ok": true,
+   "traceable_correct": true,
+   "quote_in_cited": true,
+   "quote_empty": false,
+   "unknown_ids": [],
+   "numbers_not_in_inputs": [],
+   "capitalized_not_in_inputs": []
+  },
+  {
+   "model": "4B",
+   "pass": 2,
+   "case_id": "EV-26",
+   "modality": "news_vs_newsletter",
+   "expected": "contradicted",
+   "predicted": "contradicted",
+   "status": "ok",
+   "correct": true,
+   "false_support": false,
+   "critical_false_support": false,
+   "tags": [
+    "figure",
+    "wrong_entity",
+    "cross_source"
+   ],
+   "evidence_hit": true,
+   "required_values_ok": true,
+   "traceable_correct": true,
+   "quote_in_cited": true,
+   "quote_empty": false,
+   "unknown_ids": [],
+   "numbers_not_in_inputs": [],
+   "capitalized_not_in_inputs": []
+  },
+  {
+   "model": "4B",
+   "pass": 2,
+   "case_id": "EV-29",
+   "modality": "news_vs_newsletter",
+   "expected": "contradicted",
+   "predicted": "contradicted",
+   "status": "ok",
+   "correct": true,
+   "false_support": false,
+   "critical_false_support": false,
+   "tags": [
+    "negation",
+    "lexical_distractor",
+    "cross_source"
+   ],
+   "evidence_hit": true,
+   "required_values_ok": null,
+   "traceable_correct": true,
+   "quote_in_cited": true,
+   "quote_empty": false,
+   "unknown_ids": [],
+   "numbers_not_in_inputs": [],
+   "capitalized_not_in_inputs": []
+  },
+  {
+   "model": "4B",
+   "pass": 2,
+   "case_id": "EV-15",
+   "modality": "report_vs_news",
+   "expected": "insufficient_evidence",
+   "predicted": "insufficient_evidence",
+   "status": "ok",
+   "correct": true,
+   "false_support": false,
+   "critical_false_support": false,
+   "tags": [
+    "lexical_distractor",
+    "figure"
+   ],
+   "evidence_hit": null,
+   "required_values_ok": null,
+   "traceable_correct": true,
+   "quote_in_cited": null,
+   "quote_empty": true,
+   "unknown_ids": [],
+   "numbers_not_in_inputs": [],
+   "capitalized_not_in_inputs": []
+  },
+  {
+   "model": "4B",
+   "pass": 2,
+   "case_id": "EV-22",
+   "modality": "news_vs_newsletter",
+   "expected": "supported",
+   "predicted": "supported",
+   "status": "ok",
+   "correct": true,
+   "false_support": false,
+   "critical_false_support": false,
+   "tags": [
+    "percentage",
+    "paraphrase"
+   ],
+   "evidence_hit": true,
+   "required_values_ok": null,
+   "traceable_correct": true,
+   "quote_in_cited": true,
+   "quote_empty": false,
+   "unknown_ids": [],
+   "numbers_not_in_inputs": [],
+   "capitalized_not_in_inputs": []
+  },
+  {
+   "model": "4B",
+   "pass": 2,
+   "case_id": "EV-16",
+   "modality": "report_vs_news",
+   "expected": "supported",
+   "predicted": "supported",
+   "status": "ok",
+   "correct": true,
+   "false_support": false,
+   "critical_false_support": false,
+   "tags": [
+    "paraphrase",
+    "negation"
+   ],
+   "evidence_hit": true,
+   "required_values_ok": null,
+   "traceable_correct": true,
+   "quote_in_cited": true,
+   "quote_empty": false,
+   "unknown_ids": [],
+   "numbers_not_in_inputs": [],
+   "capitalized_not_in_inputs": []
+  },
+  {
+   "model": "9B",
+   "pass": 1,
+   "case_id": "EV-22",
+   "modality": "news_vs_newsletter",
+   "expected": "supported",
+   "predicted": "supported",
+   "status": "ok",
+   "correct": true,
+   "false_support": false,
+   "critical_false_support": false,
+   "tags": [
+    "percentage",
+    "paraphrase"
+   ],
+   "evidence_hit": true,
+   "required_values_ok": null,
+   "traceable_correct": false,
+   "quote_in_cited": false,
+   "quote_empty": false,
+   "unknown_ids": [],
+   "numbers_not_in_inputs": [],
+   "capitalized_not_in_inputs": []
+  },
+  {
+   "model": "9B",
+   "pass": 1,
+   "case_id": "EV-18",
+   "modality": "report_vs_news",
+   "expected": "insufficient_evidence",
+   "predicted": "insufficient_evidence",
+   "status": "ok",
+   "correct": true,
+   "false_support": false,
+   "critical_false_support": false,
+   "tags": [
+    "lexical_distractor"
+   ],
+   "evidence_hit": null,
+   "required_values_ok": null,
+   "traceable_correct": true,
+   "quote_in_cited": null,
+   "quote_empty": true,
+   "unknown_ids": [],
+   "numbers_not_in_inputs": [],
+   "capitalized_not_in_inputs": []
+  },
+  {
+   "model": "9B",
+   "pass": 1,
+   "case_id": "EV-10",
+   "modality": "report_vs_news",
+   "expected": "supported",
+   "predicted": "supported",
+   "status": "ok",
+   "correct": true,
+   "false_support": false,
+   "critical_false_support": false,
+   "tags": [
+    "percentage",
+    "paraphrase"
+   ],
+   "evidence_hit": true,
+   "required_values_ok": null,
+   "traceable_correct": true,
+   "quote_in_cited": true,
+   "quote_empty": false,
+   "unknown_ids": [],
+   "numbers_not_in_inputs": [],
+   "capitalized_not_in_inputs": []
+  },
+  {
+   "model": "9B",
+   "pass": 1,
+   "case_id": "EV-24",
+   "modality": "news_vs_newsletter",
+   "expected": "insufficient_evidence",
+   "predicted": "contradicted",
+   "status": "ok",
+   "correct": false,
+   "false_support": false,
+   "critical_false_support": false,
+   "tags": [
+    "lexical_distractor"
+   ],
+   "evidence_hit": null,
+   "required_values_ok": null,
+   "traceable_correct": false,
+   "quote_in_cited": true,
+   "quote_empty": false,
+   "unknown_ids": [],
+   "numbers_not_in_inputs": [],
+   "capitalized_not_in_inputs": []
+  },
+  {
+   "model": "9B",
+   "pass": 1,
+   "case_id": "EV-04",
+   "modality": "text_vs_text",
+   "expected": "supported",
+   "predicted": "insufficient_evidence",
+   "status": "ok",
+   "correct": false,
+   "false_support": false,
+   "critical_false_support": false,
+   "tags": [
+    "paraphrase",
+    "figure",
+    "simple_sum"
+   ],
+   "evidence_hit": true,
+   "required_values_ok": null,
+   "traceable_correct": false,
+   "quote_in_cited": true,
+   "quote_empty": false,
+   "unknown_ids": [],
+   "numbers_not_in_inputs": [],
+   "capitalized_not_in_inputs": []
+  },
+  {
+   "model": "9B",
+   "pass": 1,
+   "case_id": "EV-14",
+   "modality": "report_vs_news",
+   "expected": "contradicted",
+   "predicted": "contradicted",
+   "status": "ok",
+   "correct": true,
+   "false_support": false,
+   "critical_false_support": false,
+   "tags": [
+    "scope",
+    "negation"
+   ],
+   "evidence_hit": true,
+   "required_values_ok": null,
+   "traceable_correct": true,
+   "quote_in_cited": true,
+   "quote_empty": false,
+   "unknown_ids": [],
+   "numbers_not_in_inputs": [],
+   "capitalized_not_in_inputs": []
+  },
+  {
+   "model": "9B",
+   "pass": 1,
+   "case_id": "EV-17",
+   "modality": "report_vs_news",
+   "expected": "contradicted",
+   "predicted": "contradicted",
+   "status": "ok",
+   "correct": true,
+   "false_support": false,
+   "critical_false_support": false,
+   "tags": [
+    "unit",
+    "figure"
+   ],
+   "evidence_hit": true,
+   "required_values_ok": true,
+   "traceable_correct": true,
+   "quote_in_cited": true,
+   "quote_empty": false,
+   "unknown_ids": [],
+   "numbers_not_in_inputs": [],
+   "capitalized_not_in_inputs": []
+  },
+  {
+   "model": "9B",
+   "pass": 1,
+   "case_id": "EV-23",
+   "modality": "news_vs_newsletter",
+   "expected": "contradicted",
+   "predicted": "contradicted",
+   "status": "ok",
+   "correct": true,
+   "false_support": false,
+   "critical_false_support": false,
+   "tags": [
+    "percentage",
+    "wrong_entity",
+    "cross_source"
+   ],
+   "evidence_hit": true,
+   "required_values_ok": true,
+   "traceable_correct": true,
+   "quote_in_cited": true,
+   "quote_empty": false,
+   "unknown_ids": [],
+   "numbers_not_in_inputs": [],
+   "capitalized_not_in_inputs": []
+  },
+  {
+   "model": "9B",
+   "pass": 1,
+   "case_id": "EV-29",
+   "modality": "news_vs_newsletter",
+   "expected": "contradicted",
+   "predicted": "contradicted",
+   "status": "ok",
+   "correct": true,
+   "false_support": false,
+   "critical_false_support": false,
+   "tags": [
+    "negation",
+    "lexical_distractor",
+    "cross_source"
+   ],
+   "evidence_hit": true,
+   "required_values_ok": null,
+   "traceable_correct": true,
+   "quote_in_cited": true,
+   "quote_empty": false,
+   "unknown_ids": [],
+   "numbers_not_in_inputs": [],
+   "capitalized_not_in_inputs": []
+  },
+  {
+   "model": "9B",
+   "pass": 1,
+   "case_id": "EV-03",
+   "modality": "text_vs_text",
+   "expected": "insufficient_evidence",
+   "predicted": "insufficient_evidence",
+   "status": "ok",
+   "correct": true,
+   "false_support": false,
+   "critical_false_support": false,
+   "tags": [
+    "lexical_distractor"
+   ],
+   "evidence_hit": null,
+   "required_values_ok": null,
+   "traceable_correct": true,
+   "quote_in_cited": null,
+   "quote_empty": true,
+   "unknown_ids": [],
+   "numbers_not_in_inputs": [],
+   "capitalized_not_in_inputs": []
+  },
+  {
+   "model": "9B",
+   "pass": 1,
+   "case_id": "EV-08",
+   "modality": "text_vs_text",
+   "expected": "contradicted",
+   "predicted": "contradicted",
+   "status": "ok",
+   "correct": true,
+   "false_support": false,
+   "critical_false_support": false,
+   "tags": [
+    "wrong_entity",
+    "lexical_distractor"
+   ],
+   "evidence_hit": true,
+   "required_values_ok": null,
+   "traceable_correct": true,
+   "quote_in_cited": true,
+   "quote_empty": false,
+   "unknown_ids": [],
+   "numbers_not_in_inputs": [],
+   "capitalized_not_in_inputs": []
+  },
+  {
+   "model": "9B",
+   "pass": 1,
+   "case_id": "EV-20",
+   "modality": "report_vs_news",
+   "expected": "contradicted",
+   "predicted": "contradicted",
+   "status": "ok",
+   "correct": true,
+   "false_support": false,
+   "critical_false_support": false,
+   "tags": [
+    "negation",
+    "lexical_distractor"
+   ],
+   "evidence_hit": true,
+   "required_values_ok": null,
+   "traceable_correct": true,
+   "quote_in_cited": true,
+   "quote_empty": false,
+   "unknown_ids": [],
+   "numbers_not_in_inputs": [],
+   "capitalized_not_in_inputs": []
+  },
+  {
+   "model": "9B",
+   "pass": 1,
+   "case_id": "EV-12",
+   "modality": "report_vs_news",
+   "expected": "insufficient_evidence",
+   "predicted": "insufficient_evidence",
+   "status": "ok",
+   "correct": true,
+   "false_support": false,
+   "critical_false_support": false,
+   "tags": [
+    "lexical_distractor",
+    "figure"
+   ],
+   "evidence_hit": null,
+   "required_values_ok": null,
+   "traceable_correct": true,
+   "quote_in_cited": null,
+   "quote_empty": true,
+   "unknown_ids": [],
+   "numbers_not_in_inputs": [],
+   "capitalized_not_in_inputs": []
+  },
+  {
+   "model": "9B",
+   "pass": 1,
+   "case_id": "EV-11",
+   "modality": "report_vs_news",
+   "expected": "contradicted",
+   "predicted": "contradicted",
+   "status": "ok",
+   "correct": true,
+   "false_support": false,
+   "critical_false_support": false,
+   "tags": [
+    "deadline_60_90",
+    "evidence_first",
+    "lexical_distractor"
+   ],
+   "evidence_hit": true,
+   "required_values_ok": true,
+   "traceable_correct": true,
+   "quote_in_cited": true,
+   "quote_empty": false,
+   "unknown_ids": [],
+   "numbers_not_in_inputs": [],
+   "capitalized_not_in_inputs": []
+  },
+  {
+   "model": "9B",
+   "pass": 1,
+   "case_id": "EV-26",
+   "modality": "news_vs_newsletter",
+   "expected": "contradicted",
+   "predicted": "contradicted",
+   "status": "ok",
+   "correct": true,
+   "false_support": false,
+   "critical_false_support": false,
+   "tags": [
+    "figure",
+    "wrong_entity",
+    "cross_source"
+   ],
+   "evidence_hit": true,
+   "required_values_ok": true,
+   "traceable_correct": true,
+   "quote_in_cited": true,
+   "quote_empty": false,
+   "unknown_ids": [],
+   "numbers_not_in_inputs": [],
+   "capitalized_not_in_inputs": []
+  },
+  {
+   "model": "9B",
+   "pass": 1,
+   "case_id": "EV-02",
+   "modality": "text_vs_text",
+   "expected": "contradicted",
+   "predicted": "contradicted",
+   "status": "ok",
+   "correct": true,
+   "false_support": false,
+   "critical_false_support": false,
+   "tags": [
+    "deadline_60_90",
+    "figure"
+   ],
+   "evidence_hit": true,
+   "required_values_ok": true,
+   "traceable_correct": true,
+   "quote_in_cited": true,
+   "quote_empty": false,
+   "unknown_ids": [],
+   "numbers_not_in_inputs": [],
+   "capitalized_not_in_inputs": []
+  },
+  {
+   "model": "9B",
+   "pass": 1,
+   "case_id": "EV-15",
+   "modality": "report_vs_news",
+   "expected": "insufficient_evidence",
+   "predicted": "insufficient_evidence",
+   "status": "ok",
+   "correct": true,
+   "false_support": false,
+   "critical_false_support": false,
+   "tags": [
+    "lexical_distractor",
+    "figure"
+   ],
+   "evidence_hit": null,
+   "required_values_ok": null,
+   "traceable_correct": true,
+   "quote_in_cited": null,
+   "quote_empty": true,
+   "unknown_ids": [],
+   "numbers_not_in_inputs": [],
+   "capitalized_not_in_inputs": []
+  },
+  {
+   "model": "9B",
+   "pass": 1,
+   "case_id": "EV-01",
+   "modality": "text_vs_text",
+   "expected": "supported",
+   "predicted": "supported",
+   "status": "ok",
+   "correct": true,
+   "false_support": false,
+   "critical_false_support": false,
+   "tags": [
+    "paraphrase",
+    "negation"
+   ],
+   "evidence_hit": true,
+   "required_values_ok": null,
+   "traceable_correct": true,
+   "quote_in_cited": true,
+   "quote_empty": false,
+   "unknown_ids": [],
+   "numbers_not_in_inputs": [],
+   "capitalized_not_in_inputs": []
+  },
+  {
+   "model": "9B",
+   "pass": 1,
+   "case_id": "EV-05",
+   "modality": "text_vs_text",
+   "expected": "contradicted",
+   "predicted": "contradicted",
+   "status": "ok",
+   "correct": true,
+   "false_support": false,
+   "critical_false_support": false,
+   "tags": [
+    "date"
+   ],
+   "evidence_hit": true,
+   "required_values_ok": true,
+   "traceable_correct": true,
+   "quote_in_cited": true,
+   "quote_empty": false,
+   "unknown_ids": [],
+   "numbers_not_in_inputs": [],
+   "capitalized_not_in_inputs": []
+  },
+  {
+   "model": "9B",
+   "pass": 1,
+   "case_id": "EV-25",
+   "modality": "news_vs_newsletter",
+   "expected": "supported",
+   "predicted": "supported",
+   "status": "ok",
+   "correct": true,
+   "false_support": false,
+   "critical_false_support": false,
+   "tags": [
+    "paraphrase"
+   ],
+   "evidence_hit": true,
+   "required_values_ok": null,
+   "traceable_correct": true,
+   "quote_in_cited": true,
+   "quote_empty": false,
+   "unknown_ids": [],
+   "numbers_not_in_inputs": [],
+   "capitalized_not_in_inputs": []
+  },
+  {
+   "model": "9B",
+   "pass": 1,
+   "case_id": "EV-28",
+   "modality": "news_vs_newsletter",
+   "expected": "supported",
+   "predicted": "supported",
+   "status": "ok",
+   "correct": true,
+   "false_support": false,
+   "critical_false_support": false,
+   "tags": [
+    "percentage"
+   ],
+   "evidence_hit": true,
+   "required_values_ok": null,
+   "traceable_correct": true,
+   "quote_in_cited": true,
+   "quote_empty": false,
+   "unknown_ids": [],
+   "numbers_not_in_inputs": [],
+   "capitalized_not_in_inputs": []
+  },
+  {
+   "model": "9B",
+   "pass": 1,
+   "case_id": "EV-27",
+   "modality": "news_vs_newsletter",
+   "expected": "insufficient_evidence",
+   "predicted": "contradicted",
+   "status": "ok",
+   "correct": false,
+   "false_support": false,
+   "critical_false_support": false,
+   "tags": [
+    "lexical_distractor"
+   ],
+   "evidence_hit": null,
+   "required_values_ok": null,
+   "traceable_correct": false,
+   "quote_in_cited": true,
+   "quote_empty": false,
+   "unknown_ids": [],
+   "numbers_not_in_inputs": [],
+   "capitalized_not_in_inputs": []
+  },
+  {
+   "model": "9B",
+   "pass": 1,
+   "case_id": "EV-06",
+   "modality": "text_vs_text",
+   "expected": "insufficient_evidence",
+   "predicted": "insufficient_evidence",
+   "status": "ok",
+   "correct": true,
+   "false_support": false,
+   "critical_false_support": false,
+   "tags": [
+    "lexical_distractor",
+    "wrong_entity"
+   ],
+   "evidence_hit": null,
+   "required_values_ok": null,
+   "traceable_correct": true,
+   "quote_in_cited": null,
+   "quote_empty": true,
+   "unknown_ids": [],
+   "numbers_not_in_inputs": [],
+   "capitalized_not_in_inputs": []
+  },
+  {
+   "model": "9B",
+   "pass": 1,
+   "case_id": "EV-07",
+   "modality": "text_vs_text",
+   "expected": "supported",
+   "predicted": "supported",
+   "status": "ok",
+   "correct": true,
+   "false_support": false,
+   "critical_false_support": false,
+   "tags": [
+    "paraphrase",
+    "figure"
+   ],
+   "evidence_hit": true,
+   "required_values_ok": null,
+   "traceable_correct": false,
+   "quote_in_cited": false,
+   "quote_empty": false,
+   "unknown_ids": [],
+   "numbers_not_in_inputs": [],
+   "capitalized_not_in_inputs": []
+  },
+  {
+   "model": "9B",
+   "pass": 1,
+   "case_id": "EV-19",
+   "modality": "report_vs_news",
+   "expected": "supported",
+   "predicted": "supported",
+   "status": "ok",
+   "correct": true,
+   "false_support": false,
+   "critical_false_support": false,
+   "tags": [
+    "negation",
+    "paraphrase"
+   ],
+   "evidence_hit": true,
+   "required_values_ok": null,
+   "traceable_correct": true,
+   "quote_in_cited": true,
+   "quote_empty": false,
+   "unknown_ids": [],
+   "numbers_not_in_inputs": [],
+   "capitalized_not_in_inputs": []
+  },
+  {
+   "model": "9B",
+   "pass": 1,
+   "case_id": "EV-30",
+   "modality": "news_vs_newsletter",
+   "expected": "insufficient_evidence",
+   "predicted": "insufficient_evidence",
+   "status": "ok",
+   "correct": true,
+   "false_support": false,
+   "critical_false_support": false,
+   "tags": [
+    "prompt_injection",
+    "absent"
+   ],
+   "evidence_hit": null,
+   "required_values_ok": null,
+   "traceable_correct": true,
+   "quote_in_cited": null,
+   "quote_empty": true,
+   "unknown_ids": [],
+   "numbers_not_in_inputs": [],
+   "capitalized_not_in_inputs": []
+  },
+  {
+   "model": "9B",
+   "pass": 1,
+   "case_id": "EV-09",
+   "modality": "text_vs_text",
+   "expected": "insufficient_evidence",
+   "predicted": "insufficient_evidence",
+   "status": "ok",
+   "correct": true,
+   "false_support": false,
+   "critical_false_support": false,
+   "tags": [
+    "absent"
+   ],
+   "evidence_hit": null,
+   "required_values_ok": null,
+   "traceable_correct": true,
+   "quote_in_cited": null,
+   "quote_empty": true,
+   "unknown_ids": [],
+   "numbers_not_in_inputs": [],
+   "capitalized_not_in_inputs": []
+  },
+  {
+   "model": "9B",
+   "pass": 1,
+   "case_id": "EV-21",
+   "modality": "report_vs_news",
+   "expected": "insufficient_evidence",
+   "predicted": "insufficient_evidence",
+   "status": "ok",
+   "correct": true,
+   "false_support": false,
+   "critical_false_support": false,
+   "tags": [
+    "absent",
+    "date"
+   ],
+   "evidence_hit": null,
+   "required_values_ok": null,
+   "traceable_correct": true,
+   "quote_in_cited": null,
+   "quote_empty": true,
+   "unknown_ids": [],
+   "numbers_not_in_inputs": [],
+   "capitalized_not_in_inputs": []
+  },
+  {
+   "model": "9B",
+   "pass": 1,
+   "case_id": "EV-16",
+   "modality": "report_vs_news",
+   "expected": "supported",
+   "predicted": "supported",
+   "status": "ok",
+   "correct": true,
+   "false_support": false,
+   "critical_false_support": false,
+   "tags": [
+    "paraphrase",
+    "negation"
+   ],
+   "evidence_hit": true,
+   "required_values_ok": null,
+   "traceable_correct": true,
+   "quote_in_cited": true,
+   "quote_empty": false,
+   "unknown_ids": [],
+   "numbers_not_in_inputs": [],
+   "capitalized_not_in_inputs": []
+  },
+  {
+   "model": "9B",
+   "pass": 1,
+   "case_id": "EV-13",
+   "modality": "report_vs_news",
+   "expected": "supported",
+   "predicted": "supported",
+   "status": "ok",
+   "correct": true,
+   "false_support": false,
+   "critical_false_support": false,
+   "tags": [
+    "figure",
+    "paraphrase"
+   ],
+   "evidence_hit": true,
+   "required_values_ok": null,
+   "traceable_correct": true,
+   "quote_in_cited": true,
+   "quote_empty": false,
+   "unknown_ids": [],
+   "numbers_not_in_inputs": [],
+   "capitalized_not_in_inputs": []
+  },
+  {
+   "model": "9B",
+   "pass": 2,
+   "case_id": "EV-25",
+   "modality": "news_vs_newsletter",
+   "expected": "supported",
+   "predicted": "supported",
+   "status": "ok",
+   "correct": true,
+   "false_support": false,
+   "critical_false_support": false,
+   "tags": [
+    "paraphrase"
+   ],
+   "evidence_hit": true,
+   "required_values_ok": null,
+   "traceable_correct": true,
+   "quote_in_cited": true,
+   "quote_empty": false,
+   "unknown_ids": [],
+   "numbers_not_in_inputs": [],
+   "capitalized_not_in_inputs": []
+  },
+  {
+   "model": "9B",
+   "pass": 2,
+   "case_id": "EV-12",
+   "modality": "report_vs_news",
+   "expected": "insufficient_evidence",
+   "predicted": "insufficient_evidence",
+   "status": "ok",
+   "correct": true,
+   "false_support": false,
+   "critical_false_support": false,
+   "tags": [
+    "lexical_distractor",
+    "figure"
+   ],
+   "evidence_hit": null,
+   "required_values_ok": null,
+   "traceable_correct": true,
+   "quote_in_cited": null,
+   "quote_empty": true,
+   "unknown_ids": [],
+   "numbers_not_in_inputs": [],
+   "capitalized_not_in_inputs": []
+  },
+  {
+   "model": "9B",
+   "pass": 2,
+   "case_id": "EV-01",
+   "modality": "text_vs_text",
+   "expected": "supported",
+   "predicted": "supported",
+   "status": "ok",
+   "correct": true,
+   "false_support": false,
+   "critical_false_support": false,
+   "tags": [
+    "paraphrase",
+    "negation"
+   ],
+   "evidence_hit": true,
+   "required_values_ok": null,
+   "traceable_correct": true,
+   "quote_in_cited": true,
+   "quote_empty": false,
+   "unknown_ids": [],
+   "numbers_not_in_inputs": [],
+   "capitalized_not_in_inputs": []
+  },
+  {
+   "model": "9B",
+   "pass": 2,
+   "case_id": "EV-04",
+   "modality": "text_vs_text",
+   "expected": "supported",
+   "predicted": "no_valid_answer",
+   "status": "truncated",
+   "correct": false,
+   "false_support": false,
+   "critical_false_support": false,
+   "tags": [
+    "paraphrase",
+    "figure",
+    "simple_sum"
+   ],
+   "evidence_hit": null,
+   "required_values_ok": null,
+   "traceable_correct": false,
+   "quote_in_cited": null,
+   "quote_empty": null,
+   "unknown_ids": [],
+   "numbers_not_in_inputs": [],
+   "capitalized_not_in_inputs": []
+  },
+  {
+   "model": "9B",
+   "pass": 2,
+   "case_id": "EV-19",
+   "modality": "report_vs_news",
+   "expected": "supported",
+   "predicted": "supported",
+   "status": "ok",
+   "correct": true,
+   "false_support": false,
+   "critical_false_support": false,
+   "tags": [
+    "negation",
+    "paraphrase"
+   ],
+   "evidence_hit": true,
+   "required_values_ok": null,
+   "traceable_correct": true,
+   "quote_in_cited": true,
+   "quote_empty": false,
+   "unknown_ids": [],
+   "numbers_not_in_inputs": [],
+   "capitalized_not_in_inputs": []
+  },
+  {
+   "model": "9B",
+   "pass": 2,
+   "case_id": "EV-18",
+   "modality": "report_vs_news",
+   "expected": "insufficient_evidence",
+   "predicted": "insufficient_evidence",
+   "status": "ok",
+   "correct": true,
+   "false_support": false,
+   "critical_false_support": false,
+   "tags": [
+    "lexical_distractor"
+   ],
+   "evidence_hit": null,
+   "required_values_ok": null,
+   "traceable_correct": true,
+   "quote_in_cited": null,
+   "quote_empty": true,
+   "unknown_ids": [],
+   "numbers_not_in_inputs": [],
+   "capitalized_not_in_inputs": []
+  },
+  {
+   "model": "9B",
+   "pass": 2,
+   "case_id": "EV-28",
+   "modality": "news_vs_newsletter",
+   "expected": "supported",
+   "predicted": "supported",
+   "status": "ok",
+   "correct": true,
+   "false_support": false,
+   "critical_false_support": false,
+   "tags": [
+    "percentage"
+   ],
+   "evidence_hit": true,
+   "required_values_ok": null,
+   "traceable_correct": true,
+   "quote_in_cited": true,
+   "quote_empty": false,
+   "unknown_ids": [],
+   "numbers_not_in_inputs": [],
+   "capitalized_not_in_inputs": []
+  },
+  {
+   "model": "9B",
+   "pass": 2,
+   "case_id": "EV-05",
+   "modality": "text_vs_text",
+   "expected": "contradicted",
+   "predicted": "contradicted",
+   "status": "ok",
+   "correct": true,
+   "false_support": false,
+   "critical_false_support": false,
+   "tags": [
+    "date"
+   ],
+   "evidence_hit": true,
+   "required_values_ok": true,
+   "traceable_correct": true,
+   "quote_in_cited": true,
+   "quote_empty": false,
+   "unknown_ids": [],
+   "numbers_not_in_inputs": [],
+   "capitalized_not_in_inputs": []
+  },
+  {
+   "model": "9B",
+   "pass": 2,
+   "case_id": "EV-27",
+   "modality": "news_vs_newsletter",
+   "expected": "insufficient_evidence",
+   "predicted": "contradicted",
+   "status": "ok",
+   "correct": false,
+   "false_support": false,
+   "critical_false_support": false,
+   "tags": [
+    "lexical_distractor"
+   ],
+   "evidence_hit": null,
+   "required_values_ok": null,
+   "traceable_correct": false,
+   "quote_in_cited": true,
+   "quote_empty": false,
+   "unknown_ids": [],
+   "numbers_not_in_inputs": [],
+   "capitalized_not_in_inputs": []
+  },
+  {
+   "model": "9B",
+   "pass": 2,
+   "case_id": "EV-03",
+   "modality": "text_vs_text",
+   "expected": "insufficient_evidence",
+   "predicted": "insufficient_evidence",
+   "status": "ok",
+   "correct": true,
+   "false_support": false,
+   "critical_false_support": false,
+   "tags": [
+    "lexical_distractor"
+   ],
+   "evidence_hit": null,
+   "required_values_ok": null,
+   "traceable_correct": true,
+   "quote_in_cited": null,
+   "quote_empty": true,
+   "unknown_ids": [],
+   "numbers_not_in_inputs": [],
+   "capitalized_not_in_inputs": []
+  },
+  {
+   "model": "9B",
+   "pass": 2,
+   "case_id": "EV-10",
+   "modality": "report_vs_news",
+   "expected": "supported",
+   "predicted": "supported",
+   "status": "ok",
+   "correct": true,
+   "false_support": false,
+   "critical_false_support": false,
+   "tags": [
+    "percentage",
+    "paraphrase"
+   ],
+   "evidence_hit": true,
+   "required_values_ok": null,
+   "traceable_correct": true,
+   "quote_in_cited": true,
+   "quote_empty": false,
+   "unknown_ids": [],
+   "numbers_not_in_inputs": [],
+   "capitalized_not_in_inputs": []
+  },
+  {
+   "model": "9B",
+   "pass": 2,
+   "case_id": "EV-20",
+   "modality": "report_vs_news",
+   "expected": "contradicted",
+   "predicted": "contradicted",
+   "status": "ok",
+   "correct": true,
+   "false_support": false,
+   "critical_false_support": false,
+   "tags": [
+    "negation",
+    "lexical_distractor"
+   ],
+   "evidence_hit": true,
+   "required_values_ok": null,
+   "traceable_correct": true,
+   "quote_in_cited": true,
+   "quote_empty": false,
+   "unknown_ids": [],
+   "numbers_not_in_inputs": [],
+   "capitalized_not_in_inputs": []
+  },
+  {
+   "model": "9B",
+   "pass": 2,
+   "case_id": "EV-02",
+   "modality": "text_vs_text",
+   "expected": "contradicted",
+   "predicted": "contradicted",
+   "status": "ok",
+   "correct": true,
+   "false_support": false,
+   "critical_false_support": false,
+   "tags": [
+    "deadline_60_90",
+    "figure"
+   ],
+   "evidence_hit": true,
+   "required_values_ok": true,
+   "traceable_correct": true,
+   "quote_in_cited": true,
+   "quote_empty": false,
+   "unknown_ids": [],
+   "numbers_not_in_inputs": [],
+   "capitalized_not_in_inputs": []
+  },
+  {
+   "model": "9B",
+   "pass": 2,
+   "case_id": "EV-09",
+   "modality": "text_vs_text",
+   "expected": "insufficient_evidence",
+   "predicted": "insufficient_evidence",
+   "status": "ok",
+   "correct": true,
+   "false_support": false,
+   "critical_false_support": false,
+   "tags": [
+    "absent"
+   ],
+   "evidence_hit": null,
+   "required_values_ok": null,
+   "traceable_correct": true,
+   "quote_in_cited": null,
+   "quote_empty": true,
+   "unknown_ids": [],
+   "numbers_not_in_inputs": [],
+   "capitalized_not_in_inputs": []
+  },
+  {
+   "model": "9B",
+   "pass": 2,
+   "case_id": "EV-24",
+   "modality": "news_vs_newsletter",
+   "expected": "insufficient_evidence",
+   "predicted": "insufficient_evidence",
+   "status": "ok",
+   "correct": true,
+   "false_support": false,
+   "critical_false_support": false,
+   "tags": [
+    "lexical_distractor"
+   ],
+   "evidence_hit": null,
+   "required_values_ok": null,
+   "traceable_correct": true,
+   "quote_in_cited": null,
+   "quote_empty": true,
+   "unknown_ids": [],
+   "numbers_not_in_inputs": [],
+   "capitalized_not_in_inputs": []
+  },
+  {
+   "model": "9B",
+   "pass": 2,
+   "case_id": "EV-11",
+   "modality": "report_vs_news",
+   "expected": "contradicted",
+   "predicted": "contradicted",
+   "status": "ok",
+   "correct": true,
+   "false_support": false,
+   "critical_false_support": false,
+   "tags": [
+    "deadline_60_90",
+    "evidence_first",
+    "lexical_distractor"
+   ],
+   "evidence_hit": true,
+   "required_values_ok": true,
+   "traceable_correct": true,
+   "quote_in_cited": true,
+   "quote_empty": false,
+   "unknown_ids": [],
+   "numbers_not_in_inputs": [],
+   "capitalized_not_in_inputs": []
+  },
+  {
+   "model": "9B",
+   "pass": 2,
+   "case_id": "EV-23",
+   "modality": "news_vs_newsletter",
+   "expected": "contradicted",
+   "predicted": "contradicted",
+   "status": "ok",
+   "correct": true,
+   "false_support": false,
+   "critical_false_support": false,
+   "tags": [
+    "percentage",
+    "wrong_entity",
+    "cross_source"
+   ],
+   "evidence_hit": true,
+   "required_values_ok": true,
+   "traceable_correct": true,
+   "quote_in_cited": true,
+   "quote_empty": false,
+   "unknown_ids": [],
+   "numbers_not_in_inputs": [],
+   "capitalized_not_in_inputs": []
+  },
+  {
+   "model": "9B",
+   "pass": 2,
+   "case_id": "EV-30",
+   "modality": "news_vs_newsletter",
+   "expected": "insufficient_evidence",
+   "predicted": "insufficient_evidence",
+   "status": "ok",
+   "correct": true,
+   "false_support": false,
+   "critical_false_support": false,
+   "tags": [
+    "prompt_injection",
+    "absent"
+   ],
+   "evidence_hit": null,
+   "required_values_ok": null,
+   "traceable_correct": true,
+   "quote_in_cited": null,
+   "quote_empty": true,
+   "unknown_ids": [],
+   "numbers_not_in_inputs": [],
+   "capitalized_not_in_inputs": []
+  },
+  {
+   "model": "9B",
+   "pass": 2,
+   "case_id": "EV-14",
+   "modality": "report_vs_news",
+   "expected": "contradicted",
+   "predicted": "contradicted",
+   "status": "ok",
+   "correct": true,
+   "false_support": false,
+   "critical_false_support": false,
+   "tags": [
+    "scope",
+    "negation"
+   ],
+   "evidence_hit": true,
+   "required_values_ok": null,
+   "traceable_correct": true,
+   "quote_in_cited": true,
+   "quote_empty": false,
+   "unknown_ids": [],
+   "numbers_not_in_inputs": [],
+   "capitalized_not_in_inputs": []
+  },
+  {
+   "model": "9B",
+   "pass": 2,
+   "case_id": "EV-13",
+   "modality": "report_vs_news",
+   "expected": "supported",
+   "predicted": "supported",
+   "status": "ok",
+   "correct": true,
+   "false_support": false,
+   "critical_false_support": false,
+   "tags": [
+    "figure",
+    "paraphrase"
+   ],
+   "evidence_hit": true,
+   "required_values_ok": null,
+   "traceable_correct": true,
+   "quote_in_cited": true,
+   "quote_empty": false,
+   "unknown_ids": [],
+   "numbers_not_in_inputs": [],
+   "capitalized_not_in_inputs": []
+  },
+  {
+   "model": "9B",
+   "pass": 2,
+   "case_id": "EV-06",
+   "modality": "text_vs_text",
+   "expected": "insufficient_evidence",
+   "predicted": "insufficient_evidence",
+   "status": "ok",
+   "correct": true,
+   "false_support": false,
+   "critical_false_support": false,
+   "tags": [
+    "lexical_distractor",
+    "wrong_entity"
+   ],
+   "evidence_hit": null,
+   "required_values_ok": null,
+   "traceable_correct": true,
+   "quote_in_cited": null,
+   "quote_empty": true,
+   "unknown_ids": [],
+   "numbers_not_in_inputs": [],
+   "capitalized_not_in_inputs": []
+  },
+  {
+   "model": "9B",
+   "pass": 2,
+   "case_id": "EV-08",
+   "modality": "text_vs_text",
+   "expected": "contradicted",
+   "predicted": "contradicted",
+   "status": "ok",
+   "correct": true,
+   "false_support": false,
+   "critical_false_support": false,
+   "tags": [
+    "wrong_entity",
+    "lexical_distractor"
+   ],
+   "evidence_hit": true,
+   "required_values_ok": null,
+   "traceable_correct": true,
+   "quote_in_cited": true,
+   "quote_empty": false,
+   "unknown_ids": [],
+   "numbers_not_in_inputs": [],
+   "capitalized_not_in_inputs": []
+  },
+  {
+   "model": "9B",
+   "pass": 2,
+   "case_id": "EV-21",
+   "modality": "report_vs_news",
+   "expected": "insufficient_evidence",
+   "predicted": "insufficient_evidence",
+   "status": "ok",
+   "correct": true,
+   "false_support": false,
+   "critical_false_support": false,
+   "tags": [
+    "absent",
+    "date"
+   ],
+   "evidence_hit": null,
+   "required_values_ok": null,
+   "traceable_correct": true,
+   "quote_in_cited": null,
+   "quote_empty": true,
+   "unknown_ids": [],
+   "numbers_not_in_inputs": [],
+   "capitalized_not_in_inputs": []
+  },
+  {
+   "model": "9B",
+   "pass": 2,
+   "case_id": "EV-07",
+   "modality": "text_vs_text",
+   "expected": "supported",
+   "predicted": "supported",
+   "status": "ok",
+   "correct": true,
+   "false_support": false,
+   "critical_false_support": false,
+   "tags": [
+    "paraphrase",
+    "figure"
+   ],
+   "evidence_hit": true,
+   "required_values_ok": null,
+   "traceable_correct": false,
+   "quote_in_cited": false,
+   "quote_empty": false,
+   "unknown_ids": [],
+   "numbers_not_in_inputs": [],
+   "capitalized_not_in_inputs": []
+  },
+  {
+   "model": "9B",
+   "pass": 2,
+   "case_id": "EV-17",
+   "modality": "report_vs_news",
+   "expected": "contradicted",
+   "predicted": "contradicted",
+   "status": "ok",
+   "correct": true,
+   "false_support": false,
+   "critical_false_support": false,
+   "tags": [
+    "unit",
+    "figure"
+   ],
+   "evidence_hit": true,
+   "required_values_ok": true,
+   "traceable_correct": true,
+   "quote_in_cited": true,
+   "quote_empty": false,
+   "unknown_ids": [],
+   "numbers_not_in_inputs": [],
+   "capitalized_not_in_inputs": []
+  },
+  {
+   "model": "9B",
+   "pass": 2,
+   "case_id": "EV-26",
+   "modality": "news_vs_newsletter",
+   "expected": "contradicted",
+   "predicted": "contradicted",
+   "status": "ok",
+   "correct": true,
+   "false_support": false,
+   "critical_false_support": false,
+   "tags": [
+    "figure",
+    "wrong_entity",
+    "cross_source"
+   ],
+   "evidence_hit": true,
+   "required_values_ok": true,
+   "traceable_correct": true,
+   "quote_in_cited": true,
+   "quote_empty": false,
+   "unknown_ids": [],
+   "numbers_not_in_inputs": [],
+   "capitalized_not_in_inputs": []
+  },
+  {
+   "model": "9B",
+   "pass": 2,
+   "case_id": "EV-29",
+   "modality": "news_vs_newsletter",
+   "expected": "contradicted",
+   "predicted": "contradicted",
+   "status": "ok",
+   "correct": true,
+   "false_support": false,
+   "critical_false_support": false,
+   "tags": [
+    "negation",
+    "lexical_distractor",
+    "cross_source"
+   ],
+   "evidence_hit": true,
+   "required_values_ok": null,
+   "traceable_correct": true,
+   "quote_in_cited": true,
+   "quote_empty": false,
+   "unknown_ids": [],
+   "numbers_not_in_inputs": [],
+   "capitalized_not_in_inputs": []
+  },
+  {
+   "model": "9B",
+   "pass": 2,
+   "case_id": "EV-15",
+   "modality": "report_vs_news",
+   "expected": "insufficient_evidence",
+   "predicted": "insufficient_evidence",
+   "status": "ok",
+   "correct": true,
+   "false_support": false,
+   "critical_false_support": false,
+   "tags": [
+    "lexical_distractor",
+    "figure"
+   ],
+   "evidence_hit": null,
+   "required_values_ok": null,
+   "traceable_correct": true,
+   "quote_in_cited": null,
+   "quote_empty": true,
+   "unknown_ids": [],
+   "numbers_not_in_inputs": [],
+   "capitalized_not_in_inputs": []
+  },
+  {
+   "model": "9B",
+   "pass": 2,
+   "case_id": "EV-22",
+   "modality": "news_vs_newsletter",
+   "expected": "supported",
+   "predicted": "supported",
+   "status": "ok",
+   "correct": true,
+   "false_support": false,
+   "critical_false_support": false,
+   "tags": [
+    "percentage",
+    "paraphrase"
+   ],
+   "evidence_hit": true,
+   "required_values_ok": null,
+   "traceable_correct": false,
+   "quote_in_cited": false,
+   "quote_empty": false,
+   "unknown_ids": [],
+   "numbers_not_in_inputs": [],
+   "capitalized_not_in_inputs": []
+  },
+  {
+   "model": "9B",
+   "pass": 2,
+   "case_id": "EV-16",
+   "modality": "report_vs_news",
+   "expected": "supported",
+   "predicted": "supported",
+   "status": "ok",
+   "correct": true,
+   "false_support": false,
+   "critical_false_support": false,
+   "tags": [
+    "paraphrase",
+    "negation"
+   ],
+   "evidence_hit": true,
+   "required_values_ok": null,
+   "traceable_correct": true,
+   "quote_in_cited": true,
+   "quote_empty": false,
+   "unknown_ids": [],
+   "numbers_not_in_inputs": [],
+   "capitalized_not_in_inputs": []
+  }
+ ],
+ "discordant": {
+  "1B|4B": {
+   "shared": 30,
+   "only_first_right": 0,
+   "only_second_right": 21
+  },
+  "1B|9B": {
+   "shared": 30,
+   "only_first_right": 0,
+   "only_second_right": 19
+  },
+  "4B|9B": {
+   "shared": 30,
+   "only_first_right": 2,
+   "only_second_right": 0
+  }
+ },
+ "selection": {
+  "complete": [
+   "1B",
+   "4B",
+   "9B"
+  ],
+  "ranking_primary": [
+   "9B",
+   "4B",
+   "1B"
+  ],
+  "ranking_other_pass": {
+   "2": [
+    "4B",
+    "9B",
+    "1B"
+   ]
+  },
+  "flips_between_passes": true,
+  "critical_false_supports": {
+   "1B": 13,
+   "4B": 1,
+   "9B": 0
+  },
+  "meets_latency_target": {
+   "1B": true,
+   "4B": true,
+   "9B": false
+  },
+  "top_gap": {
+   "false_support": 1,
+   "correct": -2,
+   "macro_f1": -0.06706159337738271,
+   "same_critical": false
+  },
+  "robust_winner": null,
+  "keep_comments_off_by_default": true
+ },
+ "e2e": {
+  "documents": [
+   {
+    "alias": "1B",
+    "modality": "text_vs_text",
+    "fragments": 4,
+    "chunks": 2,
+    "index_new_total_s": 1.2462555230013095,
+    "index_new_index_s": 0.9473874169998453,
+    "index_new_search_s": 0.28223020199948223,
+    "index_reused_total_s": 0.23748761800015927,
+    "index_reused_index_s": 0.00025862000074994285,
+    "index_reused_search_s": 0.23253336400011904,
+    "judge_document_s": 44.8165755480004,
+    "judge_warm_median_s": 10.121306021999771,
+    "judge_first_s": 12.915051531001154,
+    "judge_correct": 2,
+    "judge_errors": 2,
+    "retrieval_misses": 0,
+    "needed_retrieved": 4,
+    "needed_total": 4,
+    "judge_failed_requests": 0,
+    "app_total_s": 64.05105251500026,
+    "app_comment_s": 63.76500680100071,
+    "app_warm_median_s": 14.287551510000412,
+    "app_warm_max_s": 15.028062805000445,
+    "app_first_s": 20.496740654998575,
+    "app_comments_usable": 4,
+    "app_comments_total": 4,
+    "app_errors": []
+   },
+   {
+    "alias": "1B",
+    "modality": "report_vs_news",
+    "fragments": 4,
+    "chunks": 6,
+    "index_new_total_s": 1.9559030159998656,
+    "index_new_index_s": 1.6305039210001269,
+    "index_new_search_s": 0.15813324000009743,
+    "index_reused_total_s": 0.16749729000002844,
+    "index_reused_index_s": 0.00016011800107662566,
+    "index_reused_search_s": 0.15507625899954292,
+    "judge_document_s": 45.954570252999474,
+    "judge_warm_median_s": 12.290961785000036,
+    "judge_first_s": 11.490160405999632,
+    "judge_correct": 1,
+    "judge_errors": 3,
+    "retrieval_misses": 0,
+    "needed_retrieved": 3,
+    "needed_total": 3,
+    "judge_failed_requests": 0,
+    "app_total_s": 92.29125930000009,
+    "app_comment_s": 92.10567404300309,
+    "app_warm_median_s": 25.221211690000928,
+    "app_warm_max_s": 29.575099177000084,
+    "app_first_s": 23.48544186000072,
+    "app_comments_usable": 4,
+    "app_comments_total": 4,
+    "app_errors": []
+   },
+   {
+    "alias": "1B",
+    "modality": "news_vs_newsletter",
+    "fragments": 6,
+    "chunks": 4,
+    "index_new_total_s": 1.1729337820015644,
+    "index_new_index_s": 0.9029909869987023,
+    "index_new_search_s": 0.2625919870006328,
+    "index_reused_total_s": 0.27428595399942424,
+    "index_reused_index_s": 0.00011398899914638605,
+    "index_reused_search_s": 0.2656969760009815,
+    "judge_document_s": 63.61247082299997,
+    "judge_warm_median_s": 11.166107481998552,
+    "judge_first_s": 12.303722197999377,
+    "judge_correct": 5,
+    "judge_errors": 1,
+    "retrieval_misses": 0,
+    "needed_retrieved": 5,
+    "needed_total": 5,
+    "judge_failed_requests": 0,
+    "app_total_s": 147.49640084800012,
+    "app_comment_s": 147.12897621900083,
+    "app_warm_median_s": 23.104161317000035,
+    "app_warm_max_s": 28.081476844999997,
+    "app_first_s": 35.0068172299998,
+    "app_comments_usable": 6,
+    "app_comments_total": 6,
+    "app_errors": []
+   },
+   {
+    "alias": "4B",
+    "modality": "text_vs_text",
+    "fragments": 4,
+    "chunks": 2,
+    "index_new_total_s": 1.3265810030006833,
+    "index_new_index_s": 1.0004253329989297,
+    "index_new_search_s": 0.3201822040009574,
+    "index_reused_total_s": 0.321461941999587,
+    "index_reused_index_s": 0.00013545999900088646,
+    "index_reused_search_s": 0.3163680170000589,
+    "judge_document_s": 98.5827233,
+    "judge_warm_median_s": 25.647388682000383,
+    "judge_first_s": 24.379770014000314,
+    "judge_correct": 4,
+    "judge_errors": 0,
+    "retrieval_misses": 0,
+    "needed_retrieved": 4,
+    "needed_total": 4,
+    "judge_failed_requests": 0,
+    "app_total_s": 331.7753535259999,
+    "app_comment_s": 331.5300351700007,
+    "app_warm_median_s": 83.62871028300106,
+    "app_warm_max_s": 83.79266571800144,
+    "app_first_s": 88.14334705099827,
+    "app_comments_usable": 0,
+    "app_comments_total": 4,
+    "app_errors": [
+     "RuntimeError: el modelo ha devuelto una respuesta vacía"
+    ]
+   },
+   {
+    "alias": "4B",
+    "modality": "report_vs_news",
+    "fragments": 4,
+    "chunks": 6,
+    "index_new_total_s": 2.15907199799949,
+    "index_new_index_s": 1.970550022999305,
+    "index_new_search_s": 0.17506451300141634,
+    "index_reused_total_s": 0.1893462419993739,
+    "index_reused_index_s": 0.00018571800137578975,
+    "index_reused_search_s": 0.17466829000113648,
+    "judge_document_s": 167.27331497500018,
+    "judge_warm_median_s": 42.65839240300011,
+    "judge_first_s": 46.84583510000084,
+    "judge_correct": 4,
+    "judge_errors": 0,
+    "retrieval_misses": 0,
+    "needed_retrieved": 3,
+    "needed_total": 3,
+    "judge_failed_requests": 0,
+    "app_total_s": 336.6610927700003,
+    "app_comment_s": 336.29836758400234,
+    "app_warm_median_s": 82.25782924300074,
+    "app_warm_max_s": 82.48983828300152,
+    "app_first_s": 90.00285604599958,
+    "app_comments_usable": 0,
+    "app_comments_total": 4,
+    "app_errors": [
+     "RuntimeError: el modelo ha devuelto una respuesta vacía"
+    ]
+   },
+   {
+    "alias": "4B",
+    "modality": "news_vs_newsletter",
+    "fragments": 6,
+    "chunks": 4,
+    "index_new_total_s": 1.5367819800012512,
+    "index_new_index_s": 1.1931778660000418,
+    "index_new_search_s": 0.33618025299983856,
+    "index_reused_total_s": 0.3018194059986854,
+    "index_reused_index_s": 0.00012916900050186086,
+    "index_reused_search_s": 0.29434754099929705,
+    "judge_document_s": 145.34081815100035,
+    "judge_warm_median_s": 25.088734996999847,
+    "judge_first_s": 28.534276933,
+    "judge_correct": 6,
+    "judge_errors": 0,
+    "retrieval_misses": 0,
+    "needed_retrieved": 5,
+    "needed_total": 5,
+    "judge_failed_requests": 0,
+    "app_total_s": 471.66313797600014,
+    "app_comment_s": 471.3487155449984,
+    "app_warm_median_s": 78.81545305899999,
+    "app_warm_max_s": 79.11050234399954,
+    "app_first_s": 85.39473392599939,
+    "app_comments_usable": 0,
+    "app_comments_total": 6,
+    "app_errors": [
+     "RuntimeError: el modelo ha devuelto una respuesta vacía"
+    ]
+   },
+   {
+    "alias": "9B",
+    "modality": "text_vs_text",
+    "fragments": 4,
+    "chunks": 2,
+    "index_new_total_s": 1.2537804069997946,
+    "index_new_index_s": 0.9553895509998256,
+    "index_new_search_s": 0.29257987900018634,
+    "index_reused_total_s": 0.25693060900084674,
+    "index_reused_index_s": 0.00011303300016152207,
+    "index_reused_search_s": 0.25218536499960464,
+    "judge_document_s": 171.8943721329997,
+    "judge_warm_median_s": 41.80198869800006,
+    "judge_first_s": 42.3931415449988,
+    "judge_correct": 4,
+    "judge_errors": 0,
+    "retrieval_misses": 0,
+    "needed_retrieved": 4,
+    "needed_total": 4,
+    "judge_failed_requests": 0,
+    "app_total_s": 541.5303555580012,
+    "app_comment_s": 541.0982678649998,
+    "app_warm_median_s": 130.30927639900074,
+    "app_warm_max_s": 131.58275548799975,
+    "app_first_s": 149.4966546199994,
+    "app_comments_usable": 0,
+    "app_comments_total": 4,
+    "app_errors": [
+     "RuntimeError: el modelo ha devuelto una respuesta vacía"
+    ]
+   },
+   {
+    "alias": "9B",
+    "modality": "report_vs_news",
+    "fragments": 4,
+    "chunks": 6,
+    "index_new_total_s": 2.001242670001375,
+    "index_new_index_s": 1.812023518999922,
+    "index_new_search_s": 0.16830535199915175,
+    "index_reused_total_s": 0.1843112349997682,
+    "index_reused_index_s": 0.0001866629991127411,
+    "index_reused_search_s": 0.1692020379996393,
+    "judge_document_s": 210.4359392719998,
+    "judge_warm_median_s": 51.98857838299955,
+    "judge_first_s": 53.46376548899934,
+    "judge_correct": 4,
+    "judge_errors": 0,
+    "retrieval_misses": 0,
+    "needed_retrieved": 3,
+    "needed_total": 3,
+    "judge_failed_requests": 0,
+    "app_total_s": 575.3022899309999,
+    "app_comment_s": 574.9095558070003,
+    "app_warm_median_s": 140.81245733799915,
+    "app_warm_max_s": 141.00541608300045,
+    "app_first_s": 154.53934062500048,
+    "app_comments_usable": 0,
+    "app_comments_total": 4,
+    "app_errors": [
+     "RuntimeError: el modelo ha devuelto una respuesta vacía"
+    ]
+   },
+   {
+    "alias": "9B",
+    "modality": "news_vs_newsletter",
+    "fragments": 6,
+    "chunks": 4,
+    "index_new_total_s": 1.4939467230014998,
+    "index_new_index_s": 1.1957754919985746,
+    "index_new_search_s": 0.2876161690001027,
+    "index_reused_total_s": 0.28587375200004317,
+    "index_reused_index_s": 0.00012313099978200626,
+    "index_reused_search_s": 0.27837468899997475,
+    "judge_document_s": 271.02034383299906,
+    "judge_warm_median_s": 45.15924640799858,
+    "judge_first_s": 50.146738576000644,
+    "judge_correct": 6,
+    "judge_errors": 0,
+    "retrieval_misses": 0,
+    "needed_retrieved": 5,
+    "needed_total": 5,
+    "judge_failed_requests": 0,
+    "app_total_s": 790.5591990230005,
+    "app_comment_s": 789.9360084489999,
+    "app_warm_median_s": 128.19941136799935,
+    "app_warm_max_s": 136.74116718000005,
+    "app_first_s": 150.40135989900045,
+    "app_comments_usable": 0,
+    "app_comments_total": 6,
+    "app_errors": [
+     "RuntimeError: el modelo ha devuelto una respuesta vacía"
+    ]
+   }
+  ],
+  "fragments": [
+   {
+    "alias": "1B",
+    "modality": "text_vs_text",
+    "fragment": 1,
+    "claim": "El plan de movilidad de Puerto Alcor destina 30 millones de euros al transporte público.",
+    "expected": "supported",
+    "predicted": "supported",
+    "status": "ok",
+    "needed_passage_retrieved": true,
+    "outcome": "correct",
+    "values_named": null,
+    "tags": [],
+    "wall_s": 12.915051531001154,
+    "explanation": "El fragmento dice que el pleno aprobó el plan de movilidad el 12 de noviembre de 2025 con 14 votos a favor y 7 en contra.",
+    "top_score": 0.8153
+   },
+   {
+    "alias": "1B",
+    "modality": "text_vs_text",
+    "fragment": 2,
+    "claim": "La zona de bajas emisiones entrará en vigor el 1 de septiembre de 2026.",
+    "expected": "contradicted",
+    "predicted": "supported",
+    "status": "ok",
+    "needed_passage_retrieved": true,
+    "outcome": "judge_error",
+    "values_named": false,
+    "tags": [],
+    "wall_s": 13.212920988000405,
+    "explanation": "El ayuntamiento creará una tarjeta única de transporte que permitirá usar autobús y bicicleta pública con el mismo abono. La tarifa mensual general será de 28 euros y la de menores de 26 años, de 15 euros.",
+    "top_score": 0.7355
+   },
+   {
+    "alias": "1B",
+    "modality": "text_vs_text",
+    "fragment": 3,
+    "claim": "Los vehículos sin etiqueta ambiental no podrán entrar en el distrito centro, con excepción de los de residentes y los de personas con movilidad reducida.",
+    "expected": "supported",
+    "predicted": "supported",
+    "status": "ok",
+    "needed_passage_retrieved": true,
+    "outcome": "correct",
+    "values_named": null,
+    "tags": [],
+    "wall_s": 10.121306021999771,
+    "explanation": "El ayuntamiento creará una tarjeta única de transporte que permitirá usar autobús y bicicleta pública con el mismo abono. La tarifa mensual general será de 28 euros y la de menores de 26 años, de 15 euros.",
+    "top_score": 0.7354
+   },
+   {
+    "alias": "1B",
+    "modality": "text_vs_text",
+    "fragment": 4,
+    "claim": "El plan prevé 60 kilómetros de carriles bici, reduce un 40 % los desplazamientos en coche privado antes de 2030 e incluye una línea de tranvía hasta el puerto.",
+    "expected": "contradicted",
+    "predicted": "supported",
+    "status": "ok",
+    "needed_passage_retrieved": true,
+    "outcome": "judge_error",
+    "values_named": false,
+    "tags": [
+     "multi_claim"
+    ],
+    "wall_s": 8.560502002999783,
+    "explanation": "El plan prevé 60 kilómetros de carriles bici, reduce un 40 % los desplazamientos en coche privado antes de 2030 e incluye una línea de tranvía hasta el puerto.",
+    "top_score": 0.8019
+   },
+   {
+    "alias": "1B",
+    "modality": "report_vs_news",
+    "fragment": 1,
+    "claim": "Una exposición entra en default con más de 60 días de impago.",
+    "expected": "contradicted",
+    "predicted": "insufficient_evidence",
+    "status": "ok",
+    "needed_passage_retrieved": true,
+    "outcome": "judge_error",
+    "values_named": false,
+    "tags": [],
+    "wall_s": 11.490160405999632,
+    "explanation": "El fragmento dice que una exposición entra en default con más de 60 días de impago.",
+    "top_score": 0.7133
+   },
+   {
+    "alias": "1B",
+    "modality": "report_vs_news",
+    "fragment": 2,
+    "claim": "La tasa media de default a largo plazo se calcula con un periodo de observación de al menos cinco años.",
+    "expected": "supported",
+    "predicted": "contradicted",
+    "status": "ok",
+    "needed_passage_retrieved": true,
+    "outcome": "judge_error",
+    "values_named": null,
+    "tags": [],
+    "wall_s": 14.101368134999575,
+    "explanation": "El fragmento dice que la tasa media de default a largo plazo se calcula con un periodo de observación de al menos cinco años. Esto contradice el pasaje R2. Profundidad histórica de los datos, que menciona que la tasa media se calcula con un periodo de observación de al menos cinco años.",
+    "top_score": 0.7297
+   },
+   {
+    "alias": "1B",
+    "modality": "report_vs_news",
+    "fragment": 3,
+    "claim": "La PD estimada se compara con la tasa observada al menos una vez al año.",
+    "expected": "supported",
+    "predicted": "insufficient_evidence",
+    "status": "ok",
+    "needed_passage_retrieved": true,
+    "outcome": "judge_error",
+    "values_named": null,
+    "tags": [],
+    "wall_s": 12.290961785000036,
+    "explanation": "El fragmento R9 menciona la estimación de pérdidas esperadas bajo IFRS 9, pero no menciona la información prospectiva.",
+    "top_score": 0.6795
+   },
+   {
+    "alias": "1B",
+    "modality": "report_vs_news",
+    "fragment": 4,
+    "claim": "La guía obliga a las entidades a publicar sus modelos de PD en su página web.",
+    "expected": "insufficient_evidence",
+    "predicted": "insufficient_evidence",
+    "status": "ok",
+    "needed_passage_retrieved": null,
+    "outcome": "correct",
+    "values_named": null,
+    "tags": [],
+    "wall_s": 8.065866038999957,
+    "explanation": "El pasaje P1 no proporciona información sobre la normativa sintética PD, por lo que no respalda el fragmento.",
+    "top_score": 0.6415
+   },
+   {
+    "alias": "1B",
+    "modality": "news_vs_newsletter",
+    "fragment": 1,
+    "claim": "Las lluvias cerraron la línea ferroviaria del norte y Ferrovías del Norte espera recuperar el servicio el jueves.",
+    "expected": "supported",
+    "predicted": "supported",
+    "status": "ok",
+    "needed_passage_retrieved": true,
+    "outcome": "correct",
+    "values_named": null,
+    "tags": [],
+    "wall_s": 12.303722197999377,
+    "explanation": "El Puerto de Bahía Clara movió 1,8 millones de contenedores en 2024, un récord histórico.",
+    "top_score": 0.8426
+   },
+   {
+    "alias": "1B",
+    "modality": "news_vs_newsletter",
+    "fragment": 2,
+    "claim": "El Puerto de Bahía Clara movió 1,8 millones de contenedores en 2024, un récord.",
+    "expected": "supported",
+    "predicted": "supported",
+    "status": "ok",
+    "needed_passage_retrieved": true,
+    "outcome": "correct",
+    "values_named": null,
+    "tags": [],
+    "wall_s": 9.994554734999838,
+    "explanation": "El fragmento dice que el Puerto de Bahía Clara movió 1,8 millones de contenedores en 2024, un récord histórico.",
+    "top_score": 0.8934
+   },
+   {
+    "alias": "1B",
+    "modality": "news_vs_newsletter",
+    "fragment": 3,
+    "claim": "El Puerto de Bahía Clara invertirá 90 millones de euros en electrificar sus muelles.",
+    "expected": "contradicted",
+    "predicted": "contradicted",
+    "status": "ok",
+    "needed_passage_retrieved": true,
+    "outcome": "correct",
+    "values_named": false,
+    "tags": [],
+    "wall_s": 11.166107481998552,
+    "explanation": "El fragmento dice que el Puerto de Bahía Clara movió 1,8 millones de contenedores en 2024, un récord histórico. Sin embargo, el pasaje también menciona que el puerto invertirá 40 millones de euros en electrificar sus muelles antes de 2028, lo que contradice el fragmento.",
+    "top_score": 0.7889
+   },
+   {
+    "alias": "1B",
+    "modality": "news_vs_newsletter",
+    "fragment": 4,
+    "claim": "El Museo Marítimo abrirá en junio una sala de fotografía portuaria con entrada gratuita durante seis meses.",
+    "expected": "contradicted",
+    "predicted": "supported",
+    "status": "ok",
+    "needed_passage_retrieved": true,
+    "outcome": "judge_error",
+    "values_named": null,
+    "tags": [],
+    "wall_s": 11.461781380001412,
+    "explanation": "El Museo Marítimo de Bahía Clara abrirá en junio una sala de fotografía portuaria con entrada gratuita durante seis meses.",
+    "top_score": 0.7938
+   },
+   {
+    "alias": "1B",
+    "modality": "news_vs_newsletter",
+    "fragment": 5,
+    "claim": "Villanúa dará ayudas de hasta 6.000 euros a pequeños comercios del casco antiguo.",
+    "expected": "supported",
+    "predicted": "supported",
+    "status": "ok",
+    "needed_passage_retrieved": true,
+    "outcome": "correct",
+    "values_named": null,
+    "tags": [],
+    "wall_s": 11.523391758999423,
+    "explanation": "El fragmento dice que el ayuntamiento de Villanúa dará ayudas de hasta 6.000 euros a pequeños comercios del casco antiguo.",
+    "top_score": 0.8304
+   },
+   {
+    "alias": "1B",
+    "modality": "news_vs_newsletter",
+    "fragment": 6,
+    "claim": "La línea norte se reforzará con trenes nuevos a partir de 2026.",
+    "expected": "insufficient_evidence",
+    "predicted": "insufficient_evidence",
+    "status": "ok",
+    "needed_passage_retrieved": null,
+    "outcome": "correct",
+    "values_named": null,
+    "tags": [],
+    "wall_s": 7.154148050998629,
+    "explanation": "El Eco de Villanúa no proporciona información sobre la fecha del corte de la línea ferroviaria.",
+    "top_score": 0.6818
+   },
+   {
+    "alias": "4B",
+    "modality": "text_vs_text",
+    "fragment": 1,
+    "claim": "El plan de movilidad de Puerto Alcor destina 30 millones de euros al transporte público.",
+    "expected": "supported",
+    "predicted": "supported",
+    "status": "ok",
+    "needed_passage_retrieved": true,
+    "outcome": "correct",
+    "values_named": null,
+    "tags": [],
+    "wall_s": 24.379770014000314,
+    "explanation": "El pasaje P1 confirma que 30 millones de euros del presupuesto total se asignan al transporte público, coincidiendo exactamente con el fragmento revisado.",
+    "top_score": 0.8153
+   },
+   {
+    "alias": "4B",
+    "modality": "text_vs_text",
+    "fragment": 2,
+    "claim": "La zona de bajas emisiones entrará en vigor el 1 de septiembre de 2026.",
+    "expected": "contradicted",
+    "predicted": "contradicted",
+    "status": "ok",
+    "needed_passage_retrieved": true,
+    "outcome": "correct",
+    "values_named": true,
+    "tags": [],
+    "wall_s": 25.647388682000383,
+    "explanation": "El pasaje P1 establece que la zona entrará en vigor en 2027, lo cual contradice la fecha de 2026 indicada en el fragmento.",
+    "top_score": 0.7355
+   },
+   {
+    "alias": "4B",
+    "modality": "text_vs_text",
+    "fragment": 3,
+    "claim": "Los vehículos sin etiqueta ambiental no podrán entrar en el distrito centro, con excepción de los de residentes y los de personas con movilidad reducida.",
+    "expected": "supported",
+    "predicted": "supported",
+    "status": "ok",
+    "needed_passage_retrieved": true,
+    "outcome": "correct",
+    "values_named": null,
+    "tags": [],
+    "wall_s": 25.663370345999283,
+    "explanation": "El pasaje P1 confirma que la restricción de vehículos sin etiqueta ambiental en el distrito centro aplica a residentes y personas con movilidad reducida, coincidiendo con el fragmento revisado.",
+    "top_score": 0.7354
+   },
+   {
+    "alias": "4B",
+    "modality": "text_vs_text",
+    "fragment": 4,
+    "claim": "El plan prevé 60 kilómetros de carriles bici, reduce un 40 % los desplazamientos en coche privado antes de 2030 e incluye una línea de tranvía hasta el puerto.",
+    "expected": "contradicted",
+    "predicted": "contradicted",
+    "status": "ok",
+    "needed_passage_retrieved": true,
+    "outcome": "correct",
+    "values_named": true,
+    "tags": [
+     "multi_claim"
+    ],
+    "wall_s": 22.883670318999066,
+    "explanation": "El pasaje confirma la extensión de 60 km, pero indica una reducción del 25% en desplazamientos en coche, no del 40%, y no menciona la inclusión de una línea de tranvía.",
+    "top_score": 0.8019
+   },
+   {
+    "alias": "4B",
+    "modality": "report_vs_news",
+    "fragment": 1,
+    "claim": "Una exposición entra en default con más de 60 días de impago.",
+    "expected": "contradicted",
+    "predicted": "contradicted",
+    "status": "ok",
+    "needed_passage_retrieved": true,
+    "outcome": "correct",
+    "values_named": true,
+    "tags": [],
+    "wall_s": 46.84583510000084,
+    "explanation": "El pasaje establece un umbral de 90 días para el default, lo cual contradice el valor de 60 días del fragmento.",
+    "top_score": 0.7133
+   },
+   {
+    "alias": "4B",
+    "modality": "report_vs_news",
+    "fragment": 2,
+    "claim": "La tasa media de default a largo plazo se calcula con un periodo de observación de al menos cinco años.",
+    "expected": "supported",
+    "predicted": "supported",
+    "status": "ok",
+    "needed_passage_retrieved": true,
+    "outcome": "correct",
+    "values_named": null,
+    "tags": [],
+    "wall_s": 51.25140884800021,
+    "explanation": "El pasaje P1 confirma que la tasa media de default a largo plazo se calcula con un periodo de observación de al menos cinco años, coincidiendo exactamente con el fragmento revisado.",
+    "top_score": 0.7297
+   },
+   {
+    "alias": "4B",
+    "modality": "report_vs_news",
+    "fragment": 3,
+    "claim": "La PD estimada se compara con la tasa observada al menos una vez al año.",
+    "expected": "supported",
+    "predicted": "supported",
+    "status": "ok",
+    "needed_passage_retrieved": true,
+    "outcome": "correct",
+    "values_named": null,
+    "tags": [],
+    "wall_s": 42.65839240300011,
+    "explanation": "El pasaje P1 confirma que la comparación se realiza al menos una vez al año, coincidiendo con el fragmento.",
+    "top_score": 0.6795
+   },
+   {
+    "alias": "4B",
+    "modality": "report_vs_news",
+    "fragment": 4,
+    "claim": "La guía obliga a las entidades a publicar sus modelos de PD en su página web.",
+    "expected": "insufficient_evidence",
+    "predicted": "insufficient_evidence",
+    "status": "ok",
+    "needed_passage_retrieved": null,
+    "outcome": "correct",
+    "values_named": null,
+    "tags": [],
+    "wall_s": 26.507933282999147,
+    "explanation": "Los pasajes proporcionados no mencionan ningún requisito de publicación pública de modelos de PD en páginas web.",
+    "top_score": 0.6415
+   },
+   {
+    "alias": "4B",
+    "modality": "news_vs_newsletter",
+    "fragment": 1,
+    "claim": "Las lluvias cerraron la línea ferroviaria del norte y Ferrovías del Norte espera recuperar el servicio el jueves.",
+    "expected": "supported",
+    "predicted": "supported",
+    "status": "ok",
+    "needed_passage_retrieved": true,
+    "outcome": "correct",
+    "values_named": null,
+    "tags": [],
+    "wall_s": 28.534276933,
+    "explanation": "El pasaje P1 confirma que las lluvias cerraron la línea y que Ferrovías del Norte espera la recuperación el jueves, coincidiendo con el fragmento.",
+    "top_score": 0.8426
+   },
+   {
+    "alias": "4B",
+    "modality": "news_vs_newsletter",
+    "fragment": 2,
+    "claim": "El Puerto de Bahía Clara movió 1,8 millones de contenedores en 2024, un récord.",
+    "expected": "supported",
+    "predicted": "supported",
+    "status": "ok",
+    "needed_passage_retrieved": true,
+    "outcome": "correct",
+    "values_named": null,
+    "tags": [],
+    "wall_s": 25.088734996999847,
+    "explanation": "El pasaje P1 confirma exactamente la cifra de contenedores y la naturaleza del récord mencionados en el fragmento.",
+    "top_score": 0.8934
+   },
+   {
+    "alias": "4B",
+    "modality": "news_vs_newsletter",
+    "fragment": 3,
+    "claim": "El Puerto de Bahía Clara invertirá 90 millones de euros en electrificar sus muelles.",
+    "expected": "contradicted",
+    "predicted": "contradicted",
+    "status": "ok",
+    "needed_passage_retrieved": true,
+    "outcome": "correct",
+    "values_named": true,
+    "tags": [],
+    "wall_s": 21.981203430999813,
+    "explanation": "El pasaje P1 afirma que el puerto invertirá 40 millones de euros, mientras que el fragmento afirma 90 millones, lo que constituye una contradicción directa en la cifra del presupuesto.",
+    "top_score": 0.7889
+   },
+   {
+    "alias": "4B",
+    "modality": "news_vs_newsletter",
+    "fragment": 4,
+    "claim": "El Museo Marítimo abrirá en junio una sala de fotografía portuaria con entrada gratuita durante seis meses.",
+    "expected": "contradicted",
+    "predicted": "contradicted",
+    "status": "ok",
+    "needed_passage_retrieved": true,
+    "outcome": "correct",
+    "values_named": null,
+    "tags": [],
+    "wall_s": 25.20297429800121,
+    "explanation": "El pasaje P1 afirma que la entrada será gratuita durante dos meses, mientras que el fragmento afirma que lo será durante seis meses, lo que constituye una contradicción directa en el plazo.",
+    "top_score": 0.7938
+   },
+   {
+    "alias": "4B",
+    "modality": "news_vs_newsletter",
+    "fragment": 5,
+    "claim": "Villanúa dará ayudas de hasta 6.000 euros a pequeños comercios del casco antiguo.",
+    "expected": "supported",
+    "predicted": "supported",
+    "status": "ok",
+    "needed_passage_retrieved": true,
+    "outcome": "correct",
+    "values_named": null,
+    "tags": [],
+    "wall_s": 26.53251233100127,
+    "explanation": "El pasaje P1 confirma que las ayudas para reformar pequeños comercios en el casco antiguo de Villanúa tienen un límite máximo de 6.000 euros, lo cual coincide con el fragmento.",
+    "top_score": 0.8304
+   },
+   {
+    "alias": "4B",
+    "modality": "news_vs_newsletter",
+    "fragment": 6,
+    "claim": "La línea norte se reforzará con trenes nuevos a partir de 2026.",
+    "expected": "insufficient_evidence",
+    "predicted": "insufficient_evidence",
+    "status": "ok",
+    "needed_passage_retrieved": null,
+    "outcome": "correct",
+    "values_named": null,
+    "tags": [],
+    "wall_s": 17.989876209001523,
+    "explanation": "Los pasajes mencionan el cierre temporal de la línea norte por lluvias y la inversión en electrificación del puerto, pero no contienen información sobre la renovación de trenes ni fechas de modernización de la infraestructura ferroviaria.",
+    "top_score": 0.6818
+   },
+   {
+    "alias": "9B",
+    "modality": "text_vs_text",
+    "fragment": 1,
+    "claim": "El plan de movilidad de Puerto Alcor destina 30 millones de euros al transporte público.",
+    "expected": "supported",
+    "predicted": "supported",
+    "status": "ok",
+    "needed_passage_retrieved": true,
+    "outcome": "correct",
+    "values_named": null,
+    "tags": [],
+    "wall_s": 42.3931415449988,
+    "explanation": "El pasaje P1 confirma que el presupuesto para transporte público es de 30 millones de euros, lo cual coincide exactamente con el fragmento revisado.",
+    "top_score": 0.8153
+   },
+   {
+    "alias": "9B",
+    "modality": "text_vs_text",
+    "fragment": 2,
+    "claim": "La zona de bajas emisiones entrará en vigor el 1 de septiembre de 2026.",
+    "expected": "contradicted",
+    "predicted": "contradicted",
+    "status": "ok",
+    "needed_passage_retrieved": true,
+    "outcome": "correct",
+    "values_named": true,
+    "tags": [],
+    "wall_s": 47.388242287999674,
+    "explanation": "El pasaje P1 indica que la zona de bajas emisiones entrará en vigor el 1 de septiembre de 2027, lo cual contradice la fecha de 2026 mencionada en el fragmento.",
+    "top_score": 0.7355
+   },
+   {
+    "alias": "9B",
+    "modality": "text_vs_text",
+    "fragment": 3,
+    "claim": "Los vehículos sin etiqueta ambiental no podrán entrar en el distrito centro, con excepción de los de residentes y los de personas con movilidad reducida.",
+    "expected": "supported",
+    "predicted": "supported",
+    "status": "ok",
+    "needed_passage_retrieved": true,
+    "outcome": "correct",
+    "values_named": null,
+    "tags": [],
+    "wall_s": 40.3012912030008,
+    "explanation": "El pasaje P1 confirma exactamente las restricciones de acceso al distrito centro para vehículos sin etiqueta ambiental y las excepciones para residentes y personas con movilidad reducida.",
+    "top_score": 0.7354
+   },
+   {
+    "alias": "9B",
+    "modality": "text_vs_text",
+    "fragment": 4,
+    "claim": "El plan prevé 60 kilómetros de carriles bici, reduce un 40 % los desplazamientos en coche privado antes de 2030 e incluye una línea de tranvía hasta el puerto.",
+    "expected": "contradicted",
+    "predicted": "contradicted",
+    "status": "ok",
+    "needed_passage_retrieved": true,
+    "outcome": "correct",
+    "values_named": true,
+    "tags": [
+     "multi_claim"
+    ],
+    "wall_s": 41.80198869800006,
+    "explanation": "El pasaje P1 confirma que la red de carriles bici alcanzará los 60 kilómetros, pero contradice la cifra del fragmento al indicar que la reducción de desplazamientos en coche debe ser del 25 % y no del 40 %, además de no mencionar ninguna línea de tranvía.",
+    "top_score": 0.8019
+   },
+   {
+    "alias": "9B",
+    "modality": "report_vs_news",
+    "fragment": 1,
+    "claim": "Una exposición entra en default con más de 60 días de impago.",
+    "expected": "contradicted",
+    "predicted": "contradicted",
+    "status": "ok",
+    "needed_passage_retrieved": true,
+    "outcome": "correct",
+    "values_named": true,
+    "tags": [],
+    "wall_s": 53.46376548899934,
+    "explanation": "El fragmento indica más de 60 días de impago, mientras que el pasaje P1 establece que el default se considera con más de 90 días de impago.",
+    "top_score": 0.7133
+   },
+   {
+    "alias": "9B",
+    "modality": "report_vs_news",
+    "fragment": 2,
+    "claim": "La tasa media de default a largo plazo se calcula con un periodo de observación de al menos cinco años.",
+    "expected": "supported",
+    "predicted": "supported",
+    "status": "ok",
+    "needed_passage_retrieved": true,
+    "outcome": "correct",
+    "values_named": null,
+    "tags": [],
+    "wall_s": 54.6098237770002,
+    "explanation": "El fragmento coincide con la información de los pasajes P1 y P2, que establecen que el periodo de observación para la tasa media de default a largo plazo debe ser de al menos cinco años.",
+    "top_score": 0.7297
+   },
+   {
+    "alias": "9B",
+    "modality": "report_vs_news",
+    "fragment": 3,
+    "claim": "La PD estimada se compara con la tasa observada al menos una vez al año.",
+    "expected": "supported",
+    "predicted": "supported",
+    "status": "ok",
+    "needed_passage_retrieved": true,
+    "outcome": "correct",
+    "values_named": null,
+    "tags": [],
+    "wall_s": 51.98857838299955,
+    "explanation": "El pasaje P1 confirma que la comparación entre la PD estimada y la tasa de default observada debe realizarse al menos una vez al año, lo cual coincide exactamente con el fragmento revisado.",
+    "top_score": 0.6795
+   },
+   {
+    "alias": "9B",
+    "modality": "report_vs_news",
+    "fragment": 4,
+    "claim": "La guía obliga a las entidades a publicar sus modelos de PD en su página web.",
+    "expected": "insufficient_evidence",
+    "predicted": "insufficient_evidence",
+    "status": "ok",
+    "needed_passage_retrieved": null,
+    "outcome": "correct",
+    "values_named": null,
+    "tags": [],
+    "wall_s": 50.36134912799935,
+    "explanation": "Los pasajes proporcionados definen la metodología de estimación de la PD, la gestión de riesgos y los requisitos de validación, pero no mencionan ninguna obligación de publicar los modelos en la página web. Por tanto, no hay evidencia para respaldar ni contradecir la afirmación del fragmento.",
+    "top_score": 0.6415
+   },
+   {
+    "alias": "9B",
+    "modality": "news_vs_newsletter",
+    "fragment": 1,
+    "claim": "Las lluvias cerraron la línea ferroviaria del norte y Ferrovías del Norte espera recuperar el servicio el jueves.",
+    "expected": "supported",
+    "predicted": "supported",
+    "status": "ok",
+    "needed_passage_retrieved": true,
+    "outcome": "correct",
+    "values_named": null,
+    "tags": [],
+    "wall_s": 50.146738576000644,
+    "explanation": "El pasaje P1 confirma que las lluvias cerraron la línea y que Ferrovías del Norte espera la recuperación el jueves, coincidiendo con el fragmento.",
+    "top_score": 0.8426
+   },
+   {
+    "alias": "9B",
+    "modality": "news_vs_newsletter",
+    "fragment": 2,
+    "claim": "El Puerto de Bahía Clara movió 1,8 millones de contenedores en 2024, un récord.",
+    "expected": "supported",
+    "predicted": "supported",
+    "status": "ok",
+    "needed_passage_retrieved": true,
+    "outcome": "correct",
+    "values_named": null,
+    "tags": [],
+    "wall_s": 48.385492206998606,
+    "explanation": "El pasaje P1 confirma exactamente la cifra de 1,8 millones de contenedores y el año 2024 como un récord histórico para el Puerto de Bahía Clara.",
+    "top_score": 0.8934
+   },
+   {
+    "alias": "9B",
+    "modality": "news_vs_newsletter",
+    "fragment": 3,
+    "claim": "El Puerto de Bahía Clara invertirá 90 millones de euros en electrificar sus muelles.",
+    "expected": "contradicted",
+    "predicted": "contradicted",
+    "status": "ok",
+    "needed_passage_retrieved": true,
+    "outcome": "correct",
+    "values_named": true,
+    "tags": [],
+    "wall_s": 36.55867159599984,
+    "explanation": "El pasaje P1 indica que la inversión será de 40 millones de euros, lo cual contradice la cifra de 90 millones de euros mencionada en el fragmento.",
+    "top_score": 0.7889
+   },
+   {
+    "alias": "9B",
+    "modality": "news_vs_newsletter",
+    "fragment": 4,
+    "claim": "El Museo Marítimo abrirá en junio una sala de fotografía portuaria con entrada gratuita durante seis meses.",
+    "expected": "contradicted",
+    "predicted": "contradicted",
+    "status": "ok",
+    "needed_passage_retrieved": true,
+    "outcome": "correct",
+    "values_named": null,
+    "tags": [],
+    "wall_s": 45.15924640799858,
+    "explanation": "El pasaje P1 indica que la entrada es gratuita solo durante los dos primeros meses, lo cual contradice la afirmación del fragmento de que la entrada será gratuita durante seis meses.",
+    "top_score": 0.7938
+   },
+   {
+    "alias": "9B",
+    "modality": "news_vs_newsletter",
+    "fragment": 5,
+    "claim": "Villanúa dará ayudas de hasta 6.000 euros a pequeños comercios del casco antiguo.",
+    "expected": "supported",
+    "predicted": "supported",
+    "status": "ok",
+    "needed_passage_retrieved": true,
+    "outcome": "correct",
+    "values_named": null,
+    "tags": [],
+    "wall_s": 57.882513399001255,
+    "explanation": "El pasaje P1 confirma que el ayuntamiento de Villanúa ofrece ayudas de hasta 6.000 euros para pequeños comercios, lo cual coincide con el fragmento. Los otros pasajes tratan sobre temas diferentes (puerto y trenes) y no son relevantes para esta afirmación.",
+    "top_score": 0.8304
+   },
+   {
+    "alias": "9B",
+    "modality": "news_vs_newsletter",
+    "fragment": 6,
+    "claim": "La línea norte se reforzará con trenes nuevos a partir de 2026.",
+    "expected": "insufficient_evidence",
+    "predicted": "insufficient_evidence",
+    "status": "ok",
+    "needed_passage_retrieved": null,
+    "outcome": "correct",
+    "values_named": null,
+    "tags": [],
+    "wall_s": 32.875623044999884,
+    "explanation": "Los pasajes proporcionados hablan sobre el cierre temporal de la línea por lluvias y la apertura de un museo, pero no contienen ninguna información sobre la adquisición de trenes nuevos ni sobre una modernización programada para 2026.",
+    "top_score": 0.6818
+   }
+  ]
+ },
+ "legacy": [
+  {
+   "case_id": "EV-02",
+   "expected": "contradicted",
+   "claim": "El ayuntamiento dispone de hasta 90 días para resolver las solicitudes de subvención del contenedor.",
+   "status": "ok",
+   "wall_s": 17.603264049001154,
+   "output_tokens": 186,
+   "comment": "La diferencia principal entre el fragmento y los pasajes es la información proporcionada sobre el plazo de resolución de las solicitudes de subvención. En los pasajes, se menciona un plazo máximo de 60 días, mientras que en el fragmento se menciona hasta 90 días.\n\nEn cuanto al significado, el fragmento proporciona información adicional sobre la disponibilidad del ayuntamiento para resolver las solicitudes de subvención, lo que podría ser relevante para los usuarios. Los pasajes, por otro lado, se centran en la información general sobre la ordenanza de residuos y la obligación de las comunidades de instalar contenedores de compostaje.\n\nLa diferencia más notable es que el fragmento proporciona información adicional y detallada sobre la situación, mientras que los pasajes son más generales y se centran en la información general.",
+   "values_named": true,
+   "required_values": [
+    "90",
+    "60"
+   ],
+   "numbers_not_in_inputs": [],
+   "capitalized_not_in_inputs": []
+  },
+  {
+   "case_id": "EV-11",
+   "expected": "contradicted",
+   "claim": "El OREN da a las comercializadoras 60 días naturales para resolver las reclamaciones de facturación.",
+   "status": "ok",
+   "wall_s": 28.068987433000075,
+   "output_tokens": 402,
+   "comment": "1.  El plazo de 90 días naturales para resolver las reclamaciones de facturación se establece en el informe anual 2024 del Organismo Regulador de Energía de Nortia (OREN), lo que indica que las comercializadoras tendrán 90 días naturales para resolver las reclamaciones de facturación. Sin embargo, se menciona que el cliente podrá acudir de forma gratuita al servicio arbitral del organismo si no se resuelve el derecho en el plazo establecido. Esto sugiere que el plazo de 90 días naturales no es un límite absoluto, sino más bien un límite relativo que dependerá de la acción del cliente.\n2.  El informe anual 2024 del Organismo Regulador de Energía de Nortia (OREN) menciona que los operadores de telefonía móvil deben responder a las reclamaciones en un plazo de 60 días, conforme a su normativa sectorial. Sin embargo, se menciona que el OREN no supervisa a estos operadores y se limita a trasladar a la autoridad competente las quejas que recibe por error. Esto sugiere que el plazo de 60 días no es un límite absoluto, sino más bien un límite relativo que dependerá de la acción del cliente.\n3.  El informe anual 2024 del Organismo Regulador de Energía de Nortia (OREN) menciona que la región con más reclamaciones por cada mil clientes fue Costa Nortia, seguida de la meseta central, mientras que las islas registraron la cifra más baja. Esto sugiere que la cifra de reclamaciones no es un indicador fiable de la calidad del servicio, sino más bien un indicador de la demanda de servicios.",
+   "values_named": true,
+   "required_values": [
+    "60",
+    "90"
+   ],
+   "numbers_not_in_inputs": [],
+   "capitalized_not_in_inputs": []
+  },
+  {
+   "case_id": "EV-12",
+   "expected": "insufficient_evidence",
+   "claim": "El servicio arbitral del OREN tarda una media de 30 días en dictar su resolución.",
+   "status": "ok",
+   "wall_s": 24.597321462000764,
+   "output_tokens": 376,
+   "comment": "1.  El informe anual 2024 del Organismo Regulador de Energía de Nortia (OREN) establece que las comercializadoras deberán informar de este derecho en la primera respuesta que envíen al cliente y en todas las facturas posteriores a la reclamación. Sin embargo, no se menciona explícitamente la fecha límite para esta comunicación. Por lo tanto, la observación \"El OREN establece que las comercializadoras deberán informar de este derecho en la primera respuesta que envíen al cliente y en todas las facturas posteriores a la reclamación\" no se respalda con una fecha específica.\n2.  El informe anual 2024 del Organismo Regulador de Energía de Nortia (OREN) menciona que el 64 % de las reclamaciones se referían a errores de facturación. Sin embargo, no se menciona explícitamente la población total de clientes en el país. Por lo tanto, la observación \"El 64 % de las reclamaciones se referían a errores de facturación\" no se respalda con una población específica.\n3.  El informe anual 2024 del Organismo Regulador de Energía de Nortia (OREN) menciona que el servicio arbitral del OREN tarda una media de 30 días en dictar su resolución. Sin embargo, no se menciona explícitamente la región con más reclamaciones por cada mil clientes. Por lo tanto, la observación \"El servicio arbitral del OREN tarda una media de 30 días en dictar su resolución\" no se respalda con una región específica.",
+   "values_named": null,
+   "required_values": [],
+   "numbers_not_in_inputs": [],
+   "capitalized_not_in_inputs": []
+  },
+  {
+   "case_id": "EV-17",
+   "expected": "contradicted",
+   "claim": "El Grupo Alvento invirtió 35.000 euros en energías renovables en 2024.",
+   "status": "ok",
+   "wall_s": 20.602745297999718,
+   "output_tokens": 308,
+   "comment": "1.  El Grupo Alvento invirtió 35.000 euros en energías renovables en 2024, según el informe de sostenibilidad de la empresa. Sin embargo, la noticia no proporciona información sobre la cantidad total de inversión realizada en energías renovables en el año 2024, lo que sugiere que la cifra de 35.000 euros es una mención específica y no una afirmación generalizada.\n2.  La inversión en energías renovables alcanzó los 35 millones de euros en 2024, según el informe de sostenibilidad de la empresa. Sin embargo, la noticia no proporciona información sobre la cantidad total de inversión realizada en energías renovables en el año 2024, lo que sugiere que la cifra de 35 millones de euros es una mención específica y no una afirmación generalizada.\n3.  El Grupo Alvento invirtió 35.000 euros en energías renovables en 2024, según el informe de sostenibilidad de la empresa. La noticia proporciona información sobre la inversión realizada en energías renovables en 2024, pero no proporciona información sobre la cantidad total de inversión realizada en energías renovables en el año 2024, lo que sugiere que la cifra de 35.000 euros es una mención específica y no una afirmación generalizada.",
+   "values_named": true,
+   "required_values": [
+    "35.000",
+    "35 millones"
+   ],
+   "numbers_not_in_inputs": [],
+   "capitalized_not_in_inputs": []
+  },
+  {
+   "case_id": "EV-23",
+   "expected": "contradicted",
+   "claim": "El Puerto de Bahía Clara registró en 2024 un descenso del 3 % en su tráfico de contenedores.",
+   "status": "ok",
+   "wall_s": 26.158442215000832,
+   "output_tokens": 378,
+   "comment": "1.  El texto menciona que el Puerto de Bahía Clara movió 1,8 millones de contenedores en 2024, un récord histórico, según informó su presidenta, Marta Ilundain. Sin embargo, no se menciona la fecha exacta en la que se registró este récord. La fecha se menciona en el texto como \"2023\", pero no se indica si se refiere a la fecha de presentación de los datos o a la fecha en la que se registró el récord. Por lo tanto, no se puede concluir que el récord se registró en 2024.\n2.  El texto menciona que el tráfico creció un 7 % respecto a 2023, impulsado por las nuevas rutas con el norte de Europa. Sin embargo, no se menciona la fecha exacta en la que se registró este crecimiento. La fecha se menciona en el texto como \"2023\", pero no se indica si se refiere a la fecha de presentación de los datos o a la fecha en la que se registró el crecimiento. Por lo tanto, no se puede concluir que el crecimiento se registró en 2023.\n3.  El texto menciona que el director Óscar Bellido espera recuperar los servicios de dragado cuando terminen los trabajos, previsto para otoño. Sin embargo, no se menciona la fecha exacta en la que se espera que se realicen los trabajos. La fecha se menciona en el texto como \"otoño\", pero no se indica si se refiere a la fecha de inicio o de fin de los trabajos. Por lo tanto, no se puede concluir que se espera que se realicen los trabajos en otoño.",
+   "values_named": false,
+   "required_values": [
+    "3",
+    "7"
+   ],
+   "numbers_not_in_inputs": [],
+   "capitalized_not_in_inputs": []
+  },
+  {
+   "case_id": "EV-26",
+   "expected": "contradicted",
+   "claim": "La Cooperativa San Isidro de Valtierra recogió 12.500 toneladas de aceituna en la campaña de 2025.",
+   "status": "ok",
+   "wall_s": 33.134481250001045,
+   "output_tokens": 504,
+   "comment": "1.  El texto menciona que la Cooperativa Olivar del Sur recogió 12.500 toneladas de aceituna en la campaña de 2025, frente a las 15.000 toneladas de la anterior. La fuente que respalda esta afirmación es el artículo de la Cooperativa Olivar del Sur, pero no se menciona en el texto. La Cooperativa Olivar del Sur es una organización que agrupa a 640 familias y destina la mayor parte de la cosecha a la producción de aceite virgen extra. La Cooperativa Olivar del Sur no menciona la sequía de la primavera como causa de la reducción de la producción de aceituna en la campaña de 2025.\n2.  El texto menciona que la Cooperativa San Isidro de Valtierra mantuvo su producción en 8.000 toneladas de aceituna en la campaña de 2025, la misma cifra que el año anterior. La fuente que respalda esta afirmación es el artículo de la Cooperativa San Isidro de Valtierra, pero no se menciona en el texto. La Cooperativa San Isidro de Valtierra es una cooperativa que agrupa a 640 familias y destinará la mayor parte de la cosecha a la producción de aceite virgen extra. La Cooperativa San Isidro de Valtierra no menciona el riego por goteo instalado en 2023 como causa de la reducción de la producción de aceituna en la campaña de 2025.\n3.  El texto menciona que el precio medio del aceite de oliva subió a 6,40 euros por kilo en septiembre, según la lonja de Campomayor. La fuente que respalda esta afirmación es el artículo de la lonja de Campomayor, pero no se menciona en el texto. La lonja de Campomayor es una organización que maneja las exportaciones de aceite de oliva y prevén una subida a lo largo del invierno por la escasez de existencias. La lonja de Campomayor no menciona la escasez de existencias como causa de la subida del precio del aceite de oliva en septiembre.",
+   "values_named": true,
+   "required_values": [
+    "12.500",
+    "8.000"
+   ],
+   "numbers_not_in_inputs": [],
+   "capitalized_not_in_inputs": []
+  }
+ ],
+ "timeline": {
+  "first": "2026-11-05T10:25:31+00:00",
+  "last": "2026-11-05T13:02:08+00:00",
+  "wall_s_by_stage": {
+   "pilot": 210.62567460100036,
+   "eval": 4177.9485218489945,
+   "legacy": 150.1652417070036
+  },
+  "resumed": 0,
+  "cold_load_s": 139.38327610199758,
+  "e2e_model_s": 4586.541308047004
+ },
+ "state": {
+  "updated_at": "2026-11-05T13:02:09+00:00",
+  "budget_used_hours": 2.602,
+  "budget_hours": 6,
+  "viability": {
+   "1B": {
+    "viable": true,
+    "reasons": []
+   },
+   "4B": {
+    "viable": true,
+    "reasons": []
+   },
+   "9B": {
+    "viable": true,
+    "reasons": []
+   }
+  },
+  "blocks": {
+   "eval|1B|1": {
+    "planned": 30,
+    "statuses": {
+     "ok": 30
+    },
+    "not_executed": []
+   },
+   "eval|4B|1": {
+    "planned": 30,
+    "statuses": {
+     "ok": 30
+    },
+    "not_executed": []
+   },
+   "eval|9B|1": {
+    "planned": 30,
+    "statuses": {
+     "ok": 30
+    },
+    "not_executed": []
+   },
+   "eval|9B|2": {
+    "planned": 30,
+    "statuses": {
+     "ok": 29,
+     "truncated": 1
+    },
+    "not_executed": []
+   },
+   "eval|4B|2": {
+    "planned": 30,
+    "statuses": {
+     "ok": 30
+    },
+    "not_executed": []
+   },
+   "eval|1B|2": {
+    "planned": 30,
+    "statuses": {
+     "ok": 30
+    },
+    "not_executed": []
+   },
+   "pilot|1B": {
+    "planned": 3,
+    "attempted": 3
+   },
+   "pilot|4B": {
+    "planned": 3,
+    "attempted": 3
+   },
+   "pilot|9B": {
+    "planned": 3,
+    "attempted": 3
+   },
+   "legacy|1B": {
+    "planned": 6,
+    "attempted": 6
+   }
+  },
+  "e2e_examples_finished": {
+   "1B": [
+    "text_vs_text",
+    "report_vs_news",
+    "news_vs_newsletter"
+   ],
+   "4B": [
+    "text_vs_text",
+    "report_vs_news",
+    "news_vs_newsletter"
+   ],
+   "9B": [
+    "text_vs_text",
+    "report_vs_news",
+    "news_vs_newsletter"
+   ]
+  },
+  "server_log_truncation_lines": 0
+ }
+}
