@@ -3,6 +3,9 @@
 # IC-02/03, which reuse sentences of the repository's synthetic documents to test the points that failed in earlier
 # free-text comments: the 60/90 day contrast and the wording of the exceptions.
 #
+# IC-11 to IC-15 were added for integration-check-v2, again before running them: v2 changes the prompt after reading the results of
+# v1, so IC-01 to IC-10 are no longer unseen.
+#
 # Paragraphs with several claims follow the documented rule: one contradicted claim makes the paragraph contradicted;
 # otherwise a missing material claim makes it insufficient_evidence; supported needs all of them backed.
 split: integration
@@ -152,3 +155,76 @@ scenarios:
         critical: true
         tags: [simple_control, lexical_distractor]
         rationale: La fundación y las becas aparecen, pero nada dice sobre universitarios ni sobre el próximo curso.
+  C5:
+    modality: report_vs_news
+    passages:
+      A:
+        source: informe_agua_valdeluna.pdf · p. 2
+        text: >-
+          Informe ficticio de gestión del agua de Valdeluna. A1. Consumo. El consumo medio por habitante fue de 118 litros al
+          día en 2024, frente a los 126 litros de 2023. A2. Pérdidas. Las pérdidas en la red de distribución se situaron en el
+          14 % del agua captada. El objetivo para 2030 es bajar del 10 %.
+      B:
+        source: informe_agua_valdeluna.pdf · p. 3
+        text: >-
+          A3. Inversiones. El plan prevé renovar 30 kilómetros de tuberías antes de 2028, con un coste de 9 millones de euros.
+          A4. Tarifas. La tarifa no cambiará durante 2025.
+    cases:
+      - id: IC-11
+        claim: Las pérdidas en la red de distribución de Valdeluna fueron del 21 % del agua captada.
+        passage_order: [B, A]
+        label: contradicted
+        evidence: [A]
+        quote: Las pérdidas en la red de distribución se situaron en el 14 % del agua captada
+        required_values: ["21", "14"]
+        critical: true
+        tags: [number, long_passage_with_headings]
+        rationale: El informe da un 14 %, no un 21 %.
+      - id: IC-12
+        claim: El informe obliga al ayuntamiento a instalar contadores inteligentes en todas las viviendas.
+        passage_order: [A, B]
+        label: insufficient_evidence
+        critical: true
+        tags: [long_passage_with_headings, lexical_distractor]
+        rationale: El informe habla de consumo, pérdidas, inversiones y tarifas, pero no de contadores.
+      - id: IC-13
+        claim: El plan renovará 30 kilómetros de tuberías antes de 2028 y subirá la tarifa durante 2025.
+        passage_order: [A, B]
+        label: contradicted
+        evidence: [B]
+        quote: La tarifa no cambiará durante 2025
+        critical: true
+        tags: [multi_claim, correct_and_contradicted, negation]
+        rationale: Los 30 kilómetros son correctos; la subida de la tarifa contradice que no cambiará.
+  C6:
+    modality: news_vs_newsletter
+    passages:
+      A:
+        source: La Voz de Riomar, 03/06/2025
+        text: >-
+          El festival de cine de Riomar reunió a 12.000 espectadores en su última edición. La película ganadora fue «El faro
+          apagado», de la directora Inés Soler.
+      B:
+        source: Crónica del Sur, 04/06/2025
+        text: >-
+          La concejala de Cultura de Riomar anunció que la próxima edición del festival se celebrará en septiembre.
+    cases:
+      - id: IC-14
+        claim: >-
+          El festival de cine de Riomar reunió a 12.000 espectadores, su próxima edición será en octubre y contará con un
+          jurado internacional.
+        passage_order: [A, B]
+        label: contradicted
+        evidence: [B]
+        quote: la próxima edición del festival se celebrará en septiembre
+        required_values: ["octubre", "septiembre"]
+        critical: true
+        tags: [multi_claim, correct_contradicted_unsupported, cross_source]
+        rationale: Los espectadores son correctos, octubre contradice septiembre y el jurado no aparece.
+      - id: IC-15
+        claim: La película ganadora del festival de Riomar fue «El faro apagado», de Inés Soler.
+        passage_order: [B, A]
+        label: supported
+        evidence: [A]
+        tags: [simple_control]
+        rationale: El pasaje da el título y la directora.

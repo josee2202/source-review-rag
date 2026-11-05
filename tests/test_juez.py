@@ -130,6 +130,30 @@ def test_la_cita_solo_normaliza_espacios_comillas_y_punto_final(ollama):
     assert analizar(ollama, salida_ollama(respuesta(ids=("[P1]",))))["evidencia"][0]["id"] == "P1"
 
 
+def test_una_cita_con_varios_trozos_se_comprueba_trozo_a_trozo_y_en_su_pasaje(ollama):
+    cita = "90 días naturales ... La tarifa general será de 28 euros [...] 28 euros al mes…"
+    analisis = analizar(ollama, salida_ollama(respuesta("supported", ("P1", "P2"), cita)))
+    assert analisis["estado"] == "validado"
+    assert analisis["evidencia"] == [{"id": "P1", "pasaje": 1, "cita": "90 días naturales"},
+                                     {"id": "P2", "pasaje": 2, "cita": "La tarifa general será de 28 euros"},
+                                     {"id": "P2", "pasaje": 2, "cita": "28 euros al mes"}]
+
+
+@pytest.mark.parametrize("cita,motivo", [
+    ("90 días naturales ... un trozo inventado", "literalmente"),
+    ("90 días naturales ... 28", "literalmente"),  # no está en el único pasaje citado
+    ("90 días naturales ... máximo", "demasiado corta"),
+])
+def test_basta_un_trozo_sin_comprobar_para_rechazar_la_cita(ollama, cita, motivo):
+    analisis = analizar(ollama, salida_ollama(respuesta("supported", ("P1",), cita)))
+    assert analisis["estado"] == "no_validado" and motivo in analisis["motivo"]
+
+
+def test_un_pasaje_citado_sin_trozo_conserva_su_referencia(ollama):
+    analisis = analizar(ollama, salida_ollama(respuesta("supported", ("P1", "P2"), "90 días naturales")))
+    assert analisis["evidencia"] == [{"id": "P1", "pasaje": 1, "cita": "90 días naturales"}, {"id": "P2", "pasaje": 2, "cita": None}]
+
+
 def test_una_salida_cortada_no_se_valida_aunque_sea_utilizable(ollama):
     analisis = analizar(ollama, salida_ollama(respuesta(), done_reason="length"))
     assert analisis["estado"] == "no_validado" and "límite de tokens" in analisis["motivo"]
