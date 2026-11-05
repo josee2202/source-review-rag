@@ -1,6 +1,6 @@
 """Prompt y esquema del análisis opcional: el juez estructurado evaluado en benchmarks/, para las tres modalidades.
 
-Respecto al protocolo congelado (benchmarks/protocol.yaml) solo se añaden las dos normas de NORMAS_AÑADIDAS; una prueba
+Respecto al protocolo congelado (benchmarks/protocol.yaml) solo se añade la norma de NORMAS_AÑADIDAS; una prueba
 comprueba que el resto, el esquema y los roles son idénticos. Los pasajes y el fragmento son datos no fiables aportados
 por el usuario. No hay estado compartido: cada petición construye su propio prompt.
 """
@@ -36,14 +36,12 @@ ROLES = {
                           "No mezcles lo que dicen fuentes distintas.",
 }
 
+# La única norma añadida al juez evaluado, para párrafos con varias afirmaciones. Es corta a propósito: una versión más larga,
+# con otra sobre omisiones, hizo perder la evidencia en casos que el juez congelado resolvía (docs/integration-check.md).
 NORMAS_AÑADIDAS = (
-    "- Si el fragmento contiene varias afirmaciones, revisa una por una. Basta con que un pasaje desmienta una de ellas "
-    "para que la etiqueta sea contradicted, aunque las demás estén respaldadas o no aparezcan en los pasajes; la "
-    "explicación dice cuál es y da los dos valores. Si ninguna queda desmentida y alguna no aparece en los pasajes, la "
-    "etiqueta es insufficient_evidence y no se llama falso a lo que solo carece de respaldo. supported exige que los "
-    "pasajes respalden todas.",
-    "- Juzga solo lo que el fragmento afirma. Que omita datos de los pasajes no es un error si no cambia lo que afirma. "
-    "No des recomendaciones de redacción.",
+    "- Si el fragmento hace varias afirmaciones: una sola desmentida basta para contradicted y la explicación dice cuál; si "
+    "ninguna está desmentida y a alguna le falta respaldo, insufficient_evidence, sin llamarla falsa; supported exige "
+    "respaldo para todas.",
 )
 
 PLANTILLA = """Ayudas a una persona a revisar un texto.

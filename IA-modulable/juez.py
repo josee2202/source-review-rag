@@ -12,6 +12,7 @@ Un fallo técnico nunca se convierte en información insuficiente, y no hay rein
 """
 import http.client
 import json
+import re
 import time
 import unicodedata
 
@@ -120,6 +121,14 @@ def normalizar_cita(texto: str) -> str:
     return " ".join(texto.split())
 
 
+def partes_de_cita(cita: str) -> list:
+    """Unos puntos suspensivos separan trozos de una cita, y cada trozo debe aparecer tal cual en un pasaje citado: un párrafo
+    con varias afirmaciones puede necesitar más de una cita. Las comillas que la envuelven y su punto final no forman parte."""
+    trozos = re.split(r"\[?\.{3,}\]?", normalizar_cita(cita))
+    limpios = (t.strip(" \"'«»").rstrip(".").strip() for t in trozos)
+    return [t for t in limpios if t]
+
+
 def validar_respuesta(texto: str, done_reason, pasajes: list) -> tuple:
     """Devuelve (datos, None) si la respuesta es utilizable, o (None, motivo). Nada se repara."""
     if done_reason == "length":
@@ -141,18 +150,20 @@ def validar_respuesta(texto: str, done_reason, pasajes: list) -> tuple:
     desconocidos = [i for i in citados if i not in textos]
     if desconocidos:
         return None, f"Cita pasajes que no existen: {', '.join(desconocidos)}."
-    # Las comillas que envuelven la cita y su punto final no forman parte de ella
-    limpia = normalizar_cita(cita).strip(" \"'«»").rstrip(".").strip()
-    if obj["label"] != "insufficient_evidence" and not (citados and limpia):
+    partes = partes_de_cita(cita)
+    if obj["label"] != "insufficient_evidence" and not (citados and partes):
         return None, "Falta la evidencia: esta etiqueta exige un pasaje citado y una cita literal."
-    con_cita = [i for i in citados if limpia and limpia in textos[i]]
-    if limpia and not con_cita:
-        return None, "La cita no aparece literalmente en los pasajes citados."
-    if limpia and len(limpia.split()) < 2:
-        return None, "La cita es demasiado corta para servir de evidencia."
+    citas = {i: [] for i in citados}
+    for parte in partes:
+        destino = next((i for i in citados if parte in textos[i]), None)
+        if destino is None:
+            return None, "La cita no aparece literalmente en los pasajes citados."
+        if len(parte.split()) < 2:
+            return None, "La cita es demasiado corta para servir de evidencia."
+        citas[destino].append(parte)
 
     numero = {p["id"]: n for n, p in enumerate(pasajes, start=1)}
-    evidencia = [{"id": i, "pasaje": numero[i], "cita": limpia if i in con_cita else None} for i in citados]
+    evidencia = [{"id": i, "pasaje": numero[i], "cita": c} for i in citados for c in (citas[i] or [None])]
     return {"etiqueta": obj["label"], "explicacion": explicacion.strip(), "evidencia": evidencia}, None
 
 
