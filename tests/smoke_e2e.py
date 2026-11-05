@@ -3,7 +3,7 @@
 No es una evaluación ni una demo: usa entradas mínimas temporales para confirmar que las tres
 modalidades recorren el pipeline real (Ollama + Qdrant). No mide la calidad de los resultados.
 
-    python tests/smoke_e2e.py [--api http://localhost:8010] [--con-comentario]
+    python tests/smoke_e2e.py [--api http://localhost:8010] [--con-analisis]
 """
 import argparse
 import json
@@ -35,11 +35,11 @@ def post(api, modalidad, refs, revisado, **form):
     return requests.post(f"{api}/validar", files=files, data={"modalidad": modalidad, "texto_query": revisado, **form})
 
 
-def comprobar_modalidad(api, modalidad, caso, con_comentario):
+def comprobar_modalidad(api, modalidad, caso, con_analisis):
     marca = uuid.uuid4().hex[:8]  # corpus nuevo en cada ejecución: la primera vez siempre indexa
     refs = {nombre: f"{texto}\n\nRun {marca}." for nombre, texto in caso["refs"].items()}
     metadatos = [{"title": nombre, "url": f"https://example.org/{nombre}"} for nombre in refs]
-    form = {"ref_metadata": json.dumps(metadatos), "usar_agente": str(con_comentario).lower()}
+    form = {"ref_metadata": json.dumps(metadatos), "usar_agente": str(con_analisis).lower()}
 
     r = post(api, modalidad, refs, caso["revisado"], **form)
     assert r.status_code == 200, f"{modalidad}: {r.status_code} {r.text[:300]}"
@@ -53,8 +53,9 @@ def comprobar_modalidad(api, modalidad, caso, con_comentario):
         assert len(res["sources"]) == len(res["scores"]) == len(res["relevant_chunks"])
         assert all(s["filename"] in refs and s["location"] and s["url"] for s in res["sources"])
         assert all(-1 <= s <= 1 for s in res["scores"]), res["scores"]
-        if con_comentario:
-            assert res.get("comentario") or res.get("comentario_error")
+        if con_analisis:
+            assert res["analisis"]["estado"] in ("validado", "no_validado", "no_disponible"), res["analisis"]
+            assert (res["analisis"]["etiqueta"] is not None) == (res["analisis"]["estado"] == "validado"), res["analisis"]
     if modalidad == "news_vs_newsletter":
         assert len(cuerpo["resultados"]) == 3, "cada párrafo de la newsletter debe ser un fragmento revisado"
         vistas = {s["filename"] for res in cuerpo["resultados"] for s in res["sources"]}
@@ -72,18 +73,18 @@ def comprobar_modalidad(api, modalidad, caso, con_comentario):
     primera = cuerpo["resultados"][0]
     print(f"OK {modalidad}: {len(cuerpo['resultados'])} fragmento(s); mejor pasaje {primera['sources'][0]['filename']} "
           f"{primera['sources'][0]['location']} (similitud {primera['scores'][0]:.3f})")
-    if con_comentario:
-        print(f"   comentario: {(primera.get('comentario') or primera.get('comentario_error'))[:200]!r}")
+    if con_analisis:
+        print(f"   análisis: {primera['analisis']['etiqueta_texto']}: {(primera['analisis']['explicacion'] or primera['analisis']['motivo'])[:200]!r}")
 
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--api", default="http://localhost:8010")
-    parser.add_argument("--con-comentario", action="store_true", help="también genera el comentario con el LLM")
+    parser.add_argument("--con-analisis", action="store_true", help="también ejecuta el análisis con el modelo configurado")
     args = parser.parse_args()
 
     for modalidad, caso in CASOS.items():
-        comprobar_modalidad(args.api, modalidad, caso, args.con_comentario)
+        comprobar_modalidad(args.api, modalidad, caso, args.con_analisis)
 
     r = requests.post(f"{args.api}/validar", data={"modalidad": "Normativo vs Funcional", "texto_ref": "a", "texto_query": "b"})
     assert r.status_code == 400, r.text

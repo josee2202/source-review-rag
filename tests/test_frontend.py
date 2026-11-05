@@ -100,7 +100,7 @@ def test_texto_pegado_se_envia_con_la_modalidad_elegida_y_se_muestra():
     textos = " ".join(m.value for m in at.markdown)
     assert "fragmento revisado" in textos and "único pasaje" in textos and "0.812" in textos
     assert any("R1 · norma.pdf · p. 3 · Informe" in c.value.replace("\\", "") for c in at.caption)
-    assert not any("Comentario del modelo" in m.value for m in at.markdown)
+    assert not any("Análisis del modelo" in m.value for m in at.markdown)
     assert any("no es una probabilidad" in c.value for c in at.caption)
 
 
@@ -128,22 +128,68 @@ def test_backend_caido_se_muestra_como_error():
     assert any("No se ha podido conectar con el backend" in e.value for e in at.error)
 
 
-def test_fallo_del_comentario_se_muestra_junto_a_los_pasajes():
-    res = {**respuesta_api()["resultados"][0], "comentario": None, "comentario_error": "ConnectionError: sin Ollama"}
-    cuerpo = respuesta_api(comentario_solicitado=True, resultados=[res])
+def analisis_validado(etiqueta="contradicted", texto="Contradicción con los pasajes"):
+    return {"estado": "validado", "etiqueta": etiqueta, "etiqueta_texto": texto, "motivo": None, "modelo": "qwen3.5:4b-q4_K_M",
+            "explicacion": "El fragmento dice 60 días y el pasaje 90.",
+            "evidencia": [{"id": "P1", "pasaje": 1, "cita": "90 días de impago", "fuente": FUENTE}], "metricas": {}}
+
+
+def analisis_sin_resultado(estado="no_validado", texto="Resultado no validado", motivo="La cita no aparece literalmente en los pasajes citados."):
+    return {"estado": estado, "etiqueta": None, "etiqueta_texto": texto, "explicacion": None, "evidencia": [], "motivo": motivo,
+            "modelo": "qwen3.5:4b-q4_K_M", "metricas": {}}
+
+
+def con_analisis(analisis):
+    res = {**respuesta_api()["resultados"][0], "analisis": analisis}
+    if analisis["estado"] == "validado":
+        res["comentario"] = "resumen"
+    else:
+        res.update(comentario=None, comentario_error=f"{analisis['etiqueta_texto']}: {analisis['motivo']}")
+    return respuesta_api(comentario_solicitado=True, modelo_analisis="qwen3.5:4b-q4_K_M", resultados=[res])
+
+
+def mostrar(cuerpo):
     at = rellenar_y_revisar(app(), mock.Mock(return_value=mock.Mock(status_code=200, json=lambda: cuerpo)))
     assert not at.exception
-    assert any("1 de 1 fragmentos" in e.value for e in at.error)
-    assert any("sin Ollama" in e.value for e in at.error)
-    assert "único pasaje" in " ".join(m.value for m in at.markdown)
+    return at
 
 
-def test_comentario_del_modelo_se_distingue_de_los_pasajes():
-    res = {**respuesta_api()["resultados"][0], "comentario": "primera [R1 · p. 3]\nsegunda"}
-    cuerpo = respuesta_api(comentario_solicitado=True, resultados=[res])
-    at = rellenar_y_revisar(app(), mock.Mock(return_value=mock.Mock(status_code=200, json=lambda: cuerpo)))
-    assert any("Comentario del modelo" in m.value and "no es un veredicto" in m.value for m in at.markdown)
-    assert any("primera" in m.value and "  \nsegunda" in m.value for m in at.markdown)  # conserva los saltos de línea
+@pytest.mark.parametrize("etiqueta,texto,elemento", [
+    ("supported", "Respaldado por los pasajes", "success"),
+    ("contradicted", "Contradicción con los pasajes", "error"),
+    ("insufficient_evidence", "Información insuficiente en los pasajes", "info"),
+])
+def test_el_analisis_se_muestra_en_lenguaje_natural_con_su_evidencia(etiqueta, texto, elemento):
+    at = mostrar(con_analisis(analisis_validado(etiqueta, texto)))
+    assert any(texto == e.value for e in getattr(at, elemento))
+    assert any(texto in e.label for e in at.expander)
+    contenido = " ".join(m.value for m in at.markdown)
+    assert "60 días" in contenido and "90 días de impago" in contenido.replace("\\", "")
+    assert "único pasaje" in contenido  # las referencias originales siguen visibles
+    assert any("Pasaje 1 · R1" in c.value for c in at.caption)
+    assert any("no comprueba si algo es cierto" in c.value for c in at.caption)
+    for interno in ("supported", "contradicted", "insufficient_evidence"):
+        assert interno not in contenido
+
+
+@pytest.mark.parametrize("estado,texto,motivo", [
+    ("no_validado", "Resultado no validado", "La cita no aparece literalmente en los pasajes citados."),
+    ("no_disponible", "Análisis no disponible", "El modelo qwen3.5:4b-q4_K_M no está instalado en Ollama. Instálalo con: ollama pull qwen3.5:4b-q4_K_M"),
+])
+def test_sin_resultado_no_se_muestra_ninguna_etiqueta_y_se_conservan_los_pasajes(estado, texto, motivo):
+    at = mostrar(con_analisis(analisis_sin_resultado(estado, texto, motivo)))
+    assert any(texto == w.value for w in at.warning)
+    assert any("1 de 1 fragmentos" in w.value for w in at.warning)
+    contenido = " ".join(m.value for m in at.markdown)
+    assert "único pasaje" in contenido and motivo.split(":")[0].split(" ")[-1] in contenido.replace("\\", "")
+    assert not at.success and not at.error and not any("pasajes" in i.value for i in at.info)
+    assert not any(t in " ".join(e.label for e in at.expander) for t in ("Respaldado", "Contradicción", "Información insuficiente"))
+
+
+def test_el_analisis_esta_desactivado_por_defecto_y_no_aparece_si_no_se_pide():
+    at = mostrar(respuesta_api())
+    assert at.checkbox(key="usar_comentario").value is False
+    assert not any("Análisis del modelo" in m.value and "experimental" in m.value for m in at.markdown)
 
 
 def test_solo_el_inicio_se_nombra_y_avisa_de_lo_no_revisado():
@@ -197,22 +243,36 @@ def test_menos_de_tres_pasajes_dejan_columnas_vacias():
     fila = df.iloc[0]
     assert fila["Pasaje 1"] == "único pasaje" and fila["Pasaje 2"] is None and fila["Fuente 3"] is None
     assert fila["Fuentes (similitud)"] == "R1 · norma.pdf · p. 3 · Informe · 2025-05-02 · https://ejemplo.org/a · 0.812"
-    assert "Comentario del modelo" not in df.columns
+    assert "Análisis del modelo" not in df.columns
 
 
-def test_excel_incluye_referencias_comentarios_y_lo_no_revisado():
-    res = {**respuesta_api()["resultados"][0], "comentario": "observación del modelo"}
+def test_excel_incluye_referencias_analisis_y_lo_no_revisado():
+    res = {**respuesta_api()["resultados"][0], "analisis": analisis_validado()}
     rev = {"filename": "n.txt", "fragmentos_totales": 5, "fragmentos_revisados": 1, "fragmentos_sin_revisar": 4,
            "sin_revisar_desde": "párr. 2"}
-    libro = load_workbook(io.BytesIO(exportar_excel(respuesta_api(comentario_solicitado=True, resultados=[res], texto_revisado=rev))))
+    libro = load_workbook(io.BytesIO(exportar_excel(respuesta_api(comentario_solicitado=True, modelo_analisis="qwen3.5:4b-q4_K_M", resultados=[res], texto_revisado=rev))))
     assert libro.sheetnames == ["Resultados", "Referencias", "Resumen"]
     filas = list(libro["Resultados"].values)
     fila = dict(zip(filas[0], filas[1]))
-    assert fila["Ubicación"] == "párr. 1" and fila["Comentario del modelo"] == "observación del modelo"
+    assert fila["Ubicación"] == "párr. 1" and fila["Análisis del modelo"] == "Contradicción con los pasajes"
+    assert fila["Explicación del modelo"] == "El fragmento dice 60 días y el pasaje 90."
+    assert "Pasaje 1 · R1 · norma.pdf" in fila["Evidencia citada"] and "«90 días de impago»" in fila["Evidencia citada"]
+    assert fila["Motivo sin resultado"] is None
     assert fila["Similitud 1"] == 0.81234 and "p. 3" in fila["Fuente 1"]
     resumen = dict(list(libro["Resumen"].values)[1:])
     assert resumen["Fragmentos sin revisar"] == 4 and resumen["Sin revisar a partir de"] == "párr. 2"
     assert "no es una probabilidad" in resumen["Nota sobre la similitud"]
+    assert resumen["Modelo del análisis"] == "qwen3.5:4b-q4_K_M"
+    assert "Contradicción con los pasajes: 1" in resumen["Resumen del análisis"]
+
+
+def test_excel_sin_resultado_conserva_pasajes_y_no_trae_etiqueta():
+    cuerpo = con_analisis(analisis_sin_resultado())
+    filas = list(load_workbook(io.BytesIO(exportar_excel(cuerpo)))["Resultados"].values)
+    fila = dict(zip(filas[0], filas[1]))
+    assert fila["Análisis del modelo"] == "Resultado no validado" and fila["Explicación del modelo"] is None
+    assert fila["Evidencia citada"] is None and "literalmente" in fila["Motivo sin resultado"]
+    assert fila["Pasaje 1"] == "único pasaje"
 
 
 def test_excel_trata_los_textos_aportados_como_datos():

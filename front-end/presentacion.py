@@ -12,8 +12,8 @@ FORMATOS = ["pdf", "docx", "txt", "md", "markdown"]
 NOTA_SIMILITUD = ("La similitud coseno indica cercanía entre textos: no es una probabilidad de que algo sea cierto "
                   "ni demuestra que la referencia respalde el fragmento. Se muestran siempre hasta tres pasajes, "
                   "aunque ninguno sea realmente pertinente.")
-NOTA_COMENTARIO = ("Comentario generado por un modelo local a partir solo de los pasajes recuperados. Es orientativo: "
-                   "puede equivocarse y no es una aprobación ni un veredicto.")
+NOTA_ANALISIS = ("Análisis experimental de un modelo local a partir solo de los pasajes recuperados. Compara el fragmento "
+                 "con esos pasajes: no comprueba si algo es cierto en general y puede equivocarse. Lee siempre los pasajes.")
 
 
 def construir_peticion(modalidad, ref_origen, ref_archivos, ref_texto, ref_metadatos,
@@ -63,6 +63,19 @@ def _pasajes(resultado: dict):
     return list(zip(textos, fuentes, similitudes))
 
 
+def citas_de(analisis: dict) -> list:
+    """Cada cita validada con el pasaje del que procede: [(cita, 'Pasaje 1 · R1 · informe.pdf · p. 3')]."""
+    return [(e["cita"], f"Pasaje {e['pasaje']} · {etiqueta_fuente(e.get('fuente') or {})}".rstrip(" ·"))
+            for e in analisis.get("evidencia") or [] if e.get("cita")]
+
+
+def resumen_analisis(respuesta: dict) -> str:
+    """Recuento por estado, con su denominador: un fragmento sin resultado no cuenta como ningún estado."""
+    analisis = [r["analisis"] for r in respuesta.get("resultados", []) if r.get("analisis")]
+    partes = [(texto, sum(1 for a in analisis if a["etiqueta_texto"] == texto)) for texto in dict.fromkeys(a["etiqueta_texto"] for a in analisis)]
+    return f"Análisis de {len(analisis)} fragmentos: " + " · ".join(f"{texto}: {n}" for texto, n in partes) + "."
+
+
 def resultados_a_dataframe(respuesta: dict) -> pd.DataFrame:
     """Una fila por fragmento revisado. Puede haber menos de tres pasajes: las columnas quedan vacías."""
     filas = []
@@ -75,8 +88,11 @@ def resultados_a_dataframe(respuesta: dict) -> pd.DataFrame:
             "Fuentes (similitud)": " | ".join(f"{etiqueta_fuente(f)} · {s:.3f}" for _, f, s in pasajes),
         }
         if respuesta.get("comentario_solicitado"):
-            fila["Comentario del modelo"] = res.get("comentario")
-            fila["Fallo del comentario"] = res.get("comentario_error")
+            analisis = res.get("analisis") or {}
+            fila["Análisis del modelo"] = analisis.get("etiqueta_texto")
+            fila["Explicación del modelo"] = analisis.get("explicacion")
+            fila["Evidencia citada"] = " | ".join(f"{origen}: «{cita}»" for cita, origen in citas_de(analisis)) or None
+            fila["Motivo sin resultado"] = analisis.get("motivo")
         for i in range(3):
             texto, fuente, similitud = pasajes[i] if i < len(pasajes) else (None, None, None)
             fila[f"Pasaje {i + 1}"] = texto
@@ -109,11 +125,13 @@ def _resumen_a_dataframe(respuesta: dict) -> pd.DataFrame:
         ("Fragmentos revisados", rev.get("fragmentos_revisados")),
         ("Fragmentos sin revisar", rev.get("fragmentos_sin_revisar")),
         ("Sin revisar a partir de", rev.get("sin_revisar_desde")),
-        ("Comentario del modelo solicitado", "Sí" if respuesta.get("comentario_solicitado") else "No"),
+        ("Análisis del modelo solicitado", "Sí" if respuesta.get("comentario_solicitado") else "No"),
         ("Nota sobre la similitud", NOTA_SIMILITUD),
     ]
     if respuesta.get("comentario_solicitado"):
-        filas.append(("Nota sobre el comentario", NOTA_COMENTARIO))
+        filas.append(("Modelo del análisis", respuesta.get("modelo_analisis")))
+        filas.append(("Resumen del análisis", resumen_analisis(respuesta)))
+        filas.append(("Nota sobre el análisis", NOTA_ANALISIS))
     return pd.DataFrame(filas, columns=["Campo", "Valor"])
 
 

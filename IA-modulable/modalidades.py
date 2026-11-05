@@ -1,7 +1,7 @@
 """Las tres modalidades de la interfaz.
 
 Comparten el mismo pipeline: solo cambian las etiquetas, el número de referencias admitidas y el
-prompt del comentario opcional (prompt.py). Este módulo no tiene dependencias para que también
+rol que recibe el análisis opcional (prompt.py). Este módulo no tiene dependencias para que también
 pueda importarlo el front-end.
 """
 from dataclasses import dataclass

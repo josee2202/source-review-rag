@@ -15,9 +15,8 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 from config import config
 from modalidades import MODALIDADES
-from prompt import PROMPTS_MODALIDAD
+import juez
 from RAG3 import RAG
-from X_AGENT import agente_dinamico
 from X_FUNCTIONS import EntradaInvalida
 from X_qderant import PREFIJO_COLECCION
 
@@ -118,7 +117,7 @@ async def validar_documentos(modalidad: Optional[str] = Form(None),
                              texto_query: Optional[str] = Form(None),
                              fraccion_inicial: float = Form(1.0),
                              usar_agente: bool = Form(False)):
-    print(f"🔍 Modalidad: {modalidad} · 🤖 Comentario: {'sí' if usar_agente else 'no'}")
+    print(f"🔍 Modalidad: {modalidad} · 🤖 Análisis del modelo: {'sí' if usar_agente else 'no'}")
     try:
         return _ejecutar_revision(modalidad, file_ref, texto_ref, ref_metadata, file_query, texto_query,
                                   fraccion_inicial, usar_agente)
@@ -165,10 +164,8 @@ def _ejecutar_revision(modalidad, file_ref, texto_ref, ref_metadata, file_query,
         results = consulta.process_query_chunks_v2(query_chunks, collection_name=indice["coleccion"])
 
         if usar_agente:
-            print("🧠 Generando comentarios...")
-            agente_dinamico.set_prompt(PROMPTS_MODALIDAD[config_modalidad.id])
-            consulta.generar_respuesta(agente_dinamico)
-            results = consulta.results
+            print(f"🧠 Analizando {len(results)} fragmentos con {juez.configuracion()['modelo']}...")
+            juez.analizar_resultados(results, config_modalidad.id)
 
         referencias = []
         vistos = set()
@@ -181,6 +178,7 @@ def _ejecutar_revision(modalidad, file_ref, texto_ref, ref_metadata, file_query,
             "modalidad": config_modalidad.id,
             "modalidad_nombre": config_modalidad.nombre,
             "comentario_solicitado": usar_agente,
+            "modelo_analisis": juez.configuracion()["modelo"] if usar_agente else None,
             "referencias": referencias,
             "indice": indice,
             "texto_revisado": {
