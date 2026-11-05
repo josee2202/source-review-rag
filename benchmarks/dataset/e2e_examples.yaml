@@ -1,0 +1,122 @@
+# End-to-end examples: one per mode, run through the real pipeline (reading, cleaning, splitting, embeddings,
+# Qdrant, top-3 search). Integration check only: a handful of fragments, not a retrieval evaluation.
+#
+# For each reviewed fragment, in order:
+#   label            expected label against the reference as a whole
+#   evidence         text (normalised for whitespace) that must be inside a retrieved passage for the fragment
+#                    to be judged at all; empty when no passage in the reference settles the claim
+#   required_values  values a correct explanation has to name
+# Mixed paragraphs get the "contradicted" label by convention, because one label cannot describe several claims.
+review_status: Constructed and reviewed by the assistant (Claude Code). No human review.
+examples:
+  text_vs_text:
+    references:
+      - filename: resumen_plan_movilidad.txt
+        text: |
+          Plan de movilidad de Puerto Alcor 2026-2030
+
+          El pleno de Puerto Alcor aprobó el plan de movilidad el 12 de noviembre de 2025 con 14 votos a favor y 7 en contra. El documento marca como objetivo reducir un 25 % los desplazamientos en coche privado antes de 2030, con 2024 como año de referencia.
+
+          El presupuesto total asciende a 48 millones de euros. De ellos, 30 millones se destinarán a transporte público, 12 millones a carriles bici y 6 millones a aparcamientos disuasorios en los accesos a la ciudad.
+
+          La red de carriles bici pasará de 22 a 60 kilómetros. Los nuevos tramos conectarán el campus universitario con la estación de autobuses y con el polígono de Las Dunas, donde trabajan unas 4.000 personas.
+
+          La zona de bajas emisiones entrará en vigor el 1 de septiembre de 2027 y afectará únicamente al distrito centro. Los vehículos sin etiqueta ambiental no podrán acceder, salvo los de residentes y los de personas con movilidad reducida.
+
+          El ayuntamiento creará una tarjeta única de transporte que permitirá usar autobús y bicicleta pública con el mismo abono. La tarifa mensual general será de 28 euros y la de menores de 26 años, de 15 euros.
+
+          La oposición votó en contra por considerar insuficiente la financiación del transporte nocturno. El equipo de gobierno respondió que ese servicio se revisará en la evaluación intermedia de 2028.
+    reviewed: |
+      El plan de movilidad de Puerto Alcor destina 30 millones de euros al transporte público.
+
+      La zona de bajas emisiones entrará en vigor el 1 de septiembre de 2026.
+
+      Los vehículos sin etiqueta ambiental no podrán entrar en el distrito centro, con excepción de los de residentes y los de personas con movilidad reducida.
+
+      El plan prevé 60 kilómetros de carriles bici, reduce un 40 % los desplazamientos en coche privado antes de 2030 e incluye una línea de tranvía hasta el puerto.
+    fragments:
+      - label: supported
+        evidence: 30 millones se destinarán a transporte público
+      - label: contradicted
+        evidence: 1 de septiembre de 2027
+        required_values: ["2026", "2027"]
+      - label: supported
+        evidence: salvo los de residentes y los de personas con movilidad reducida
+      - label: contradicted
+        evidence: un 25 % los desplazamientos en coche privado
+        required_values: ["40", "25"]
+        tags: [multi_claim]
+        note: >-
+          Three claims in one paragraph: 60 km is backed, 40 % contradicts the 25 % in the plan, and the tram line is
+          not mentioned. One label per fragment cannot express this; the check is whether the 40/25 conflict is flagged.
+  report_vs_news:
+    references:
+      - path: examples/synthetic/normativa_sintetica_pd.pdf
+    reviewed: |
+      Una exposición entra en default con más de 60 días de impago.
+
+      La tasa media de default a largo plazo se calcula con un periodo de observación de al menos cinco años.
+
+      La PD estimada se compara con la tasa observada al menos una vez al año.
+
+      La guía obliga a las entidades a publicar sus modelos de PD en su página web.
+    fragments:
+      - label: contradicted
+        evidence: más de 90 días de impago
+        required_values: ["60", "90"]
+      - label: supported
+        evidence: periodo de observación de al menos cinco años
+      - label: supported
+        evidence: Al menos una vez al año, la entidad comparará la PD estimada
+      - label: insufficient_evidence
+  news_vs_newsletter:
+    references:
+      - filename: lluvias_tren.txt
+        metadata: {title: "Las lluvias cortan la línea norte", outlet: "El Eco de Villanúa", date: "2025-03-10"}
+        text: |
+          Las fuertes lluvias obligaron a cerrar el lunes la línea ferroviaria del norte entre Villanúa y Puerto Alcor. La operadora Ferrovías del Norte estima que el servicio se recuperará el jueves, una vez retirados los desprendimientos del túnel de Peña Alta.
+
+          Mientras dure el corte, los viajeros podrán usar autobuses gratuitos entre ambas estaciones. Unos 6.000 pasajeros utilizan a diario este tramo, según la operadora, que ha reforzado el personal de información en las estaciones afectadas.
+      - filename: puerto_contenedores.txt
+        metadata: {title: "Récord en el puerto", outlet: "La Gaceta de Bahía Clara", date: "2025-03-11"}
+        text: |
+          El Puerto de Bahía Clara movió 1,8 millones de contenedores en 2024, un récord histórico. El tráfico creció un 7 % respecto a 2023, según informó su presidenta, Marta Ilundain, durante la presentación de la memoria anual.
+
+          La presidenta anunció además que el puerto invertirá 40 millones de euros en electrificar sus muelles antes de 2028, con el objetivo de que los buques atracados puedan apagar sus motores auxiliares.
+      - filename: museo_fotografia.txt
+        metadata: {title: "Nueva sala en el Museo Marítimo", outlet: "Noticias Bahía", date: "2025-03-12"}
+        text: |
+          El Museo Marítimo de Bahía Clara abrirá en junio una sala dedicada a la fotografía portuaria, con más de 300 imágenes cedidas por antiguos trabajadores del puerto. La entrada a la sala será gratuita durante los dos primeros meses.
+
+          El museo recibió 85.000 visitantes en 2024, un 10 % más que el año anterior. Su directora, Clara Ansorena, atribuye el aumento a la exposición temporal sobre naufragios, que se prorrogó hasta enero.
+      - filename: ayudas_comercio.txt
+        metadata: {title: "Ayudas al comercio", outlet: "Diario del Litoral", date: "2025-03-13"}
+        text: |
+          El ayuntamiento de Villanúa destinará 500.000 euros a ayudas para reformar pequeños comercios. Cada establecimiento podrá recibir un máximo de 6.000 euros, y las solicitudes se presentarán durante el mes de abril.
+
+          Las ayudas se dirigen a locales con menos de diez empleados situados en el casco antiguo. La concejala de Comercio explicó que se concederán por orden de presentación hasta agotar el presupuesto.
+    reviewed: |
+      Las lluvias cerraron la línea ferroviaria del norte y Ferrovías del Norte espera recuperar el servicio el jueves.
+
+      El Puerto de Bahía Clara movió 1,8 millones de contenedores en 2024, un récord.
+
+      El Puerto de Bahía Clara invertirá 90 millones de euros en electrificar sus muelles.
+
+      El Museo Marítimo abrirá en junio una sala de fotografía portuaria con entrada gratuita durante seis meses.
+
+      Villanúa dará ayudas de hasta 6.000 euros a pequeños comercios del casco antiguo.
+
+      La línea norte se reforzará con trenes nuevos a partir de 2026.
+    fragments:
+      - label: supported
+        evidence: estima que el servicio se recuperará el jueves
+      - label: supported
+        evidence: 1,8 millones de contenedores en 2024
+      - label: contradicted
+        evidence: invertirá 40 millones de euros
+        required_values: ["90", "40"]
+      - label: contradicted
+        evidence: gratuita durante los dos primeros meses
+      - label: supported
+        evidence: un máximo de 6.000 euros
+      - label: insufficient_evidence
