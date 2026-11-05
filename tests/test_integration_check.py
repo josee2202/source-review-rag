@@ -145,3 +145,55 @@ def test_la_ci_arranca_ollama_y_no_oculta_fallos():
     assert "ollama serve > ollama.log" in flujo and "did not answer on port 11434" in flujo
     assert 'if [ -f "$log" ]' in flujo and "cat api.log" not in flujo
     assert "qwen3.5" not in flujo and "llama3.2" not in flujo  # los modelos generativos no se descargan en CI
+
+
+# * === Resultados publicados ===================================================================
+
+RESULTADOS = ROOT / "benchmarks/results/2026-11-05_integration-check-v2"
+
+
+def test_las_tablas_del_informe_son_las_generadas_con_los_resultados_guardados():
+    tablas = report.build_tables(report.build_summary(RESULTADOS))
+    assert tablas == (RESULTADOS / "tables.md").read_text("utf-8")
+    assert tablas.strip() in (ROOT / "docs/integration-check.md").read_text("utf-8")
+
+
+def test_la_ejecucion_publicada_se_completo_y_uso_el_modelo_configurado():
+    manifiesto = json.loads((RESULTADOS / "manifest.json").read_text("utf-8"))
+    assert manifiesto["model"]["tag"] == juez.configuracion()["modelo"] == "qwen3.5:4b-q4_K_M"
+    assert manifiesto["request"]["think"] is False and manifiesto["request"]["options"]["num_thread"] == 8
+    assert json.loads((RESULTADOS / "run_status.json").read_text("utf-8"))["status"] == "completed"
+    assert json.loads((RESULTADOS / "interface_check/ui_check.json").read_text("utf-8"))["all_ok"] is True
+    assert json.loads((RESULTADOS / "interface_check/missing_model_check.json").read_text("utf-8"))["all_ok"] is True
+
+
+def test_las_cifras_del_readme_coinciden_con_los_resultados():
+    readme = (ROOT / "README.md").read_text("utf-8")
+    resumen = report.build_summary(RESULTADOS)
+    regresion, controles = resumen["regression"], resumen["controls"]
+    documentos = resumen["e2e"]
+    aciertos, fragmentos = sum(d["correct"] for d in documentos), sum(d["fragments"] for d in documentos)
+    assert (f"| The 30 known cases | {regresion['accepted_view']['correct']}/30 | {regresion['without_result']} | "
+            f"{regresion['accepted_view']['false_support']}/{regresion['accepted_view']['negatives_attempted']} |") in readme
+    assert (f"| 15 control cases, 5 of them unseen by the final prompt | {controles['accepted_view']['correct']}/{controles['planned']} | {controles['without_result']} | "
+            f"{controles['accepted_view']['false_support']}/{controles['accepted_view']['negatives_attempted']} |") in readme
+    assert f"14 fragments | {aciertos}/{fragmentos} | {fragmentos - sum(f['state'] == 'validado' for d in documentos for f in d['detail'])} | none |" in readme
+    assert not any(f["shown"] == "supported" and f["expected"] != "supported" for d in documentos for f in d["detail"])
+    assert regresion["unavailable"] == controles["unavailable"] == 0
+
+
+def test_el_readme_no_atribuye_el_resultado_del_benchmark_a_la_aplicacion():
+    readme = (ROOT / "README.md").read_text("utf-8")
+    assert "96.7" not in readme and "96,7" not in readme
+    for prohibido in ("real time", "state of the art", "better than Claude", "fully private", "GDPR", "encrypted at rest"):
+        assert prohibido.lower() not in readme.lower(), prohibido
+    assert "not real news and not the application as a whole" in readme
+
+
+def test_los_enlaces_e_imagenes_locales_de_la_documentacion_existen():
+    import re
+    for ruta in ("README.md", "docs/how-it-works.md", "docs/api.md", "docs/integration-check.md", "benchmarks/README.md"):
+        fichero = ROOT / ruta
+        for destino in re.findall(r"\]\(([^)#\s]+?)(?:#[^)]*)?\)", fichero.read_text("utf-8")):
+            if not destino.startswith(("http://", "https://", "mailto:")):
+                assert (fichero.parent / destino).exists(), f"{ruta}: {destino}"
