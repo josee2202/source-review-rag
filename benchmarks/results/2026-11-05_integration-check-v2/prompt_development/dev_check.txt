@@ -1,0 +1,18 @@
+DV-01 esperada supported | estado validado etiqueta supported 22.6s tok 879 73
+    El pasaje P2 confirma que la entrada es gratuita para los residentes de la comarca. [{'id': 'P2', 'pasaje': 2, 'cita': 'La entrada es gratuita para los residentes en la comarca'}]
+DV-02 esperada contradicted | estado validado etiqueta contradicted 19.4s tok 872 87
+    El pasaje P2 afirma que la ruta mide 8 kilómetros, lo cual contradice la afirmación del fragmento de 12 kilómetros. [{'id': 'P2', 'pasaje': 2, 'cita': 'La ruta del Hayedo tiene una longitud de 8 kilómetros'}]
+DV-03 esperada contradicted | estado validado etiqueta contradicted 23.2s tok 884 113
+    El pasaje P1 establece un plazo de 30 días, mientras que el fragmento afirma 45 días, lo que constituye una contradicción directa en la cifra del plazo. [{'id': 'P1', 'pasaje': 1, 'cita': 'La Autoridad Portuaria de Isla Verde exige a las navieras presentar el plan de residuos con 30 días de antelación a cada temporada'}]
+DV-04 esperada insufficient_evidence | estado validado etiqueta insufficient_evidence 16.3s tok 879 63
+    Los pasajes mencionan la inauguración de la terminal y el aumento de pasajeros, pero no contienen información sobre las emisiones del puerto. []
+DV-05 esperada insufficient_evidence | estado validado etiqueta insufficient_evidence 19.7s tok 875 88
+    El fragmento afirma que Lumenar participará en la feria, pero ningún pasaje menciona esta participación; P1 habla de la feria sin citar a Lumenar, y P2 menciona a Lumenar sin referirse a la feria. []
+DV-06 esperada supported | estado validado etiqueta supported 21.9s tok 879 104
+    El pasaje P2 confirma que el fondo Capital Norte lideró la ronda de financiación de 6 millones de euros para la empresa Lumenar. [{'id': 'P2', 'pasaje': 2, 'cita': 'La startup Lumenar, con sede en Ciudad Alba, ha cerrado una ronda de financiación de 6 millones de euros liderada por el fondo Capital Norte'}]
+MIXTO contradictoria | estado validado etiqueta insufficient_evidence 12.8s
+    Los pasajes no mencionan la tarifa del carné, la existencia de una sala infantil ni el número de libros disponibles. []
+MIXTO sin evidencia | estado validado etiqueta insufficient_evidence 13.6s
+    Los pasajes no mencionan la existencia de una sala infantil ni el número de libros, por lo que no permiten confirmar ni desmentir estas afirmaciones. []
+MIXTO respaldado | estado validado etiqueta supported 16.3s
+    El pasaje confirma que la biblioteca municipal abre de lunes a viernes y que el carné cuesta cinco euros al año. [{'id': 'P1', 'pasaje': 1, 'cita': 'La biblioteca municipal abre de lunes a viernes de nueve a veinte horas. El carné de usuario cuesta cinco euros al año'}]
