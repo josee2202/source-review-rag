@@ -32,6 +32,9 @@ The first run found a problem that the second one corrects. Both are kept, and n
 | Documents, correct as shown | 12/14 | 13/14 |
 | `report_vs_news` document, correct as shown | 2/4, including no result on 60 vs. 90 days | 3/4, with 60 vs. 90 days found |
 
+These are the original commits, which the runs used. The history was reorganised afterwards, and [the note on the commit history](commit-history.md)
+gives their current equivalents.
+
 **What went wrong in v1.** In the `report_vs_news` document, the answers for two fragments came back with no evidence. One of them was the 60 vs. 90 day
 contrast. The frozen judge had answered both correctly, so the two rules added for this integration were the prime suspects. Validation did its job and
 showed no label, but that was a regression.

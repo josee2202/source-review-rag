@@ -9,6 +9,9 @@ the text around them was written after reading those results.
 > owner chose `qwen3.5:4b-q4_K_M` as the configured model and replaced the free-text comment with the structured judge evaluated here,
 > still off by default. The result of that work on the production code is in [the integration check](integration-check.md). The numbers
 > on this page describe the benchmark's judge on 30 synthetic cases, not the application as a whole.
+>
+> **Commit identifiers.** The commits cited on this page are the original ones, which the runs used. The history was reorganised afterwards,
+> and [the note on the commit history](commit-history.md) gives the current equivalent of each.
 
 ## Result in short
 

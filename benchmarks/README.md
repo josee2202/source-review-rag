@@ -61,10 +61,11 @@ but its end-to-end stage and `check_app_comments.py` exercised that earlier comm
 written for, in a separate worktree:
 
 ```bash
-git worktree add ../srr-frozen 1af7098     # frozen run; b52eb98 for the comments follow-up
+git worktree add ../srr-frozen c043e96     # frozen run; 6604f7a for the comments follow-up
 ```
 
-The saved results and the commits in their manifests are the record of what ran.
+The saved results and the commits in their manifests are the record of what ran. Those manifests keep the original identifiers. The two
+commits above are their current equivalents, with the same files ([note on the commit history](../docs/commit-history.md)).
 
 ## The integration check
 

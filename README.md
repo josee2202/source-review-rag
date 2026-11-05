@@ -182,6 +182,9 @@ The evaluations are reproducible from [`benchmarks/`](benchmarks/README.md), whi
 This is an adaptation of a master's thesis (TFM) prototype by José Tuñón, a local RAG for validating credit-risk model documentation, which remains a separate project. Its pipeline, stack and chunk sizes carried over. The adaptation into a general-purpose review tool, the benchmark, the integration and this documentation
 were done with an AI coding assistant (Claude Code), with commits marked accordingly. The assistant also wrote and labelled the evaluation cases and reviewed the explanations reported here, and that is not a human review.
 
+The first two commits were later combined into one, which changed the identifiers of the later ones. [The note on the commit history](docs/commit-history.md) explains
+this and how the evaluations stay traceable.
+
 ## Repository layout
 
 ```
@@ -189,7 +192,7 @@ IA-modulable/          backend: API, modes, pipeline, Qdrant handler, analysis, 
 front-end/             Streamlit interface and its testable helpers
 tests/                 pytest suite and the smoke script
 benchmarks/            protocol, datasets, runners and saved results
-docs/                  how it works, API, model comparison, integration check
+docs/                  how it works, API, model comparison, integration check, commit history
 examples/synthetic/    fictitious documents used by the tests
 ```
 

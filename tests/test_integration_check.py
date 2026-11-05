@@ -192,8 +192,17 @@ def test_el_readme_no_atribuye_el_resultado_del_benchmark_a_la_aplicacion():
 
 def test_los_enlaces_e_imagenes_locales_de_la_documentacion_existen():
     import re
-    for ruta in ("README.md", "docs/how-it-works.md", "docs/api.md", "docs/integration-check.md", "benchmarks/README.md"):
+    for ruta in ("README.md", "docs/how-it-works.md", "docs/api.md", "docs/integration-check.md", "docs/commit-history.md", "benchmarks/README.md"):
         fichero = ROOT / ruta
         for destino in re.findall(r"\]\(([^)#\s]+?)(?:#[^)]*)?\)", fichero.read_text("utf-8")):
             if not destino.startswith(("http://", "https://", "mailto:")):
                 assert (fichero.parent / destino).exists(), f"{ruta}: {destino}"
+
+
+def test_cada_commit_de_un_manifiesto_tiene_su_equivalente_publicado():
+    nota = (ROOT / "docs/commit-history.md").read_text("utf-8")
+    manifiestos = sorted((ROOT / "benchmarks/results").glob("*/manifest.json"))
+    assert len(manifiestos) == 4
+    for manifiesto in manifiestos:
+        commit = json.loads(manifiesto.read_text("utf-8"))["commit"]
+        assert f"`{commit[:12]}`" in nota, manifiesto.parent.name
