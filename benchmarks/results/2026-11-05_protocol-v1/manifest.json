@@ -1,0 +1,260 @@
+{
+  "run_id": "2026-11-05_protocol-v1",
+  "created_at": "2026-11-05T10:25:30+00:00",
+  "frozen": true,
+  "protocol_version": 1,
+  "commit": "1af70980aa314a6bd84eaaa08d7b99d4ff5abf4a",
+  "tracked_changes_at_start": false,
+  "locked_files": {
+    "protocol.yaml": "4fc661f33e16aca3d71db3ba1facfc2b118264b048b91c89a0b5e37fb37b5f6f",
+    "dataset/eval_cases.yaml": "7cc9c2776a553d76fd0204a73651b9cf67c2fd084a70110297851de93ad4243e",
+    "dataset/dev_cases.yaml": "babaa2e6929aac8b34586b67dd16fe5e4af92bebf91f08a75455d86d80f36039",
+    "dataset/e2e_examples.yaml": "4ab731b89b60e120f8576a84239626d40c5ecc31149446f876adfbc11b45649b"
+  },
+  "harness_sha256": "a9662194e1150b93b8b635295c9d66d1723feb24c4a6d9dbad8102311b7cfb23",
+  "ollama_version": "0.40.14",
+  "hardware": {
+    "cpu": "Intel(R) Core(TM) i9-9880H CPU @ 2.30GHz",
+    "physical_cores": 8,
+    "logical_cores": 16,
+    "memory_gib": 16.0,
+    "os": "macOS 14.5 (23F79)",
+    "gpus_reported_by_system": [
+      "Intel UHD Graphics 630",
+      "AMD Radeon Pro 5500M"
+    ]
+  },
+  "backend": {
+    "id": "cpu",
+    "library": "cpu",
+    "total": "16.0 GiB"
+  },
+  "python": "3.12.3",
+  "models": {
+    "1B": {
+      "tag": "llama3.2:1b",
+      "digest": "baf6a787fdffd633537aa2eb51cfd54cb93ff08e28040095462bb63daf552878",
+      "size_bytes": 1321098329,
+      "details": {
+        "format": "gguf",
+        "family": "llama",
+        "families": [
+          "llama"
+        ],
+        "parameter_size": "1.2B",
+        "quantization_level": "Q8_0"
+      },
+      "capabilities": [
+        "completion",
+        "tools"
+      ],
+      "thinking": {
+        "values": [
+          false
+        ],
+        "default": false
+      },
+      "inherited_parameters": null,
+      "template_sha256": "966de95ca8a62200913e3f8bfbf84c8494536f1b94b49166851e76644e966396",
+      "template": "<|start_header_id|>system<|end_header_id|>\n\nCutting Knowledge Date: December 2023\n\n{{ if .System }}{{ .System }}\n{{- end }}\n{{- if .Tools }}When you receive a tool call response, use the output to format an answer to the orginal user question.\n\nYou are a helpful assistant with tool calling capabilities.\n{{- end }}<|eot_id|>\n{{- range $i, $_ := .Messages }}\n{{- $last := eq (len (slice $.Messages $i)) 1 }}\n{{- if eq .Role \"user\" }}<|start_header_id|>user<|end_header_id|>\n{{- if and $.Tools $last }}\n\nGiven the following functions, please respond with a JSON for a function call with its proper arguments that best answers the given prompt.\n\nRespond in the format {\"name\": function name, \"parameters\": dictionary of argument name and its value}. Do not use variables.\n\n{{ range $.Tools }}\n{{- . }}\n{{ end }}\n{{ .Content }}<|eot_id|>\n{{- else }}\n\n{{ .Content }}<|eot_id|>\n{{- end }}{{ if $last }}<|start_header_id|>assistant<|end_header_id|>\n\n{{ end }}\n{{- else if eq .Role \"assistant\" }}<|start_header_id|>assistant<|end_header_id|>\n{{- if .ToolCalls }}\n{{ range .ToolCalls }}\n{\"name\": \"{{ .Function.Name }}\", \"parameters\": {{ .Function.Arguments }}}{{ end }}\n{{- else }}\n\n{{ .Content }}\n{{- end }}{{ if not $last }}<|eot_id|>{{ end }}\n{{- else if eq .Role \"tool\" }}<|start_header_id|>ipython<|end_header_id|>\n\n{{ .Content }}<|eot_id|>{{ if $last }}<|start_header_id|>assistant<|end_header_id|>\n\n{{ end }}\n{{- end }}\n{{- end }}",
+      "renderer": null,
+      "parser": null,
+      "context_length": 131072,
+      "parameter_count": 1235814432,
+      "layers": [
+        {
+          "media_type": "application/vnd.ollama.image.model",
+          "size_bytes": 1321082688,
+          "digest": "sha256:74701a8c35f6c8d9a4b91f3f3497643001d63e0c7a84e085bed452548fa88d45"
+        },
+        {
+          "media_type": "application/vnd.ollama.image.template",
+          "size_bytes": 1429,
+          "digest": "sha256:966de95ca8a62200913e3f8bfbf84c8494536f1b94b49166851e76644e966396"
+        },
+        {
+          "media_type": "application/vnd.ollama.image.license",
+          "size_bytes": 7711,
+          "digest": "sha256:fcc5a6bec9daf9b561a68827b67ab6088e1dba9d1fa2a50d7bbcc8384e0a265d"
+        },
+        {
+          "media_type": "application/vnd.ollama.image.license",
+          "size_bytes": 6016,
+          "digest": "sha256:a70ff7e570d97baaf4e62ac6e6ad9975e04caa6d900d3742d37698494479e0cd"
+        },
+        {
+          "media_type": "application/vnd.docker.distribution.manifest.v2+json",
+          "size_bytes": 860,
+          "digest": "sha256:baf6a787fdffd633537aa2eb51cfd54cb93ff08e28040095462bb63daf552878"
+        }
+      ]
+    },
+    "4B": {
+      "tag": "qwen3.5:4b-q4_K_M",
+      "digest": "d8b0f5e9760cd1682034f292d7ef72ec46f432149be0df7574bf2d6e92e38c04",
+      "size_bytes": 3324173934,
+      "details": {
+        "format": "gguf",
+        "family": "qwen35",
+        "families": [
+          "qwen35"
+        ],
+        "parameter_size": "4.2B",
+        "quantization_level": "Q4_K_M",
+        "runner": "llamacpp"
+      },
+      "capabilities": [
+        "completion",
+        "vision",
+        "tools",
+        "thinking"
+      ],
+      "thinking": {
+        "values": [
+          false,
+          true
+        ],
+        "default": true
+      },
+      "inherited_parameters": "presence_penalty               1.5\ntemperature                    1\ntop_k                          20\ntop_p                          0.95",
+      "template_sha256": "b507b9c2f6ca642bffcd06665ea7c91f235fd32daeefdf875a0f938db05fb315",
+      "template": "{{ .Prompt }}",
+      "renderer": "qwen3.5",
+      "parser": "qwen3.5",
+      "context_length": 262144,
+      "parameter_count": 4205751296,
+      "layers": [
+        {
+          "media_type": "application/vnd.ollama.image.projector",
+          "size_bytes": 675569120,
+          "digest": "sha256:e56a899b1540860385465756dd308c84417410b94dbc1c380adffd20a921ca60"
+        },
+        {
+          "media_type": "application/vnd.ollama.image.model",
+          "size_bytes": 2648593216,
+          "digest": "sha256:a9d0a3e1d8c91732a3812becd31f8d4a8ff57414903f226306069f0437e2ac50"
+        },
+        {
+          "media_type": "application/vnd.ollama.image.template",
+          "size_bytes": 13,
+          "digest": "sha256:b507b9c2f6ca642bffcd06665ea7c91f235fd32daeefdf875a0f938db05fb315"
+        },
+        {
+          "media_type": "application/vnd.ollama.image.license",
+          "size_bytes": 11343,
+          "digest": "sha256:50cbab8a892c5f2993b8c7351a99182507472def3b1374558308605d99b86b32"
+        },
+        {
+          "media_type": "application/vnd.ollama.image.params",
+          "size_bytes": 65,
+          "digest": "sha256:9371364b27a52acac9d87f88bd93c9db1174d8d6ec57f6888925cdc1788871ff"
+        },
+        {
+          "media_type": "application/vnd.docker.distribution.manifest.v2+json",
+          "size_bytes": 1088,
+          "digest": "sha256:d8b0f5e9760cd1682034f292d7ef72ec46f432149be0df7574bf2d6e92e38c04"
+        }
+      ]
+    },
+    "9B": {
+      "tag": "qwen3.5:9b-q4_K_M",
+      "digest": "56671c2ab9385f9cfcb404638e32cd62d88e3501d44822208363c010179a3c90",
+      "size_bytes": 6550825550,
+      "details": {
+        "format": "gguf",
+        "family": "qwen35",
+        "families": [
+          "qwen35"
+        ],
+        "parameter_size": "9.0B",
+        "quantization_level": "Q4_K_M",
+        "runner": "llamacpp"
+      },
+      "capabilities": [
+        "completion",
+        "vision",
+        "tools",
+        "thinking"
+      ],
+      "thinking": {
+        "values": [
+          false,
+          true
+        ],
+        "default": true
+      },
+      "inherited_parameters": "top_k                          20\ntop_p                          0.95\npresence_penalty               1.5\ntemperature                    1",
+      "template_sha256": "b507b9c2f6ca642bffcd06665ea7c91f235fd32daeefdf875a0f938db05fb315",
+      "template": "{{ .Prompt }}",
+      "renderer": "qwen3.5",
+      "parser": "qwen3.5",
+      "context_length": 262144,
+      "parameter_count": 8953803264,
+      "layers": [
+        {
+          "media_type": "application/vnd.ollama.image.projector",
+          "size_bytes": 921704832,
+          "digest": "sha256:f836f08f921193f4d6b6a6952dba0a6fb116759d26a757bcb395d570d73976ca"
+        },
+        {
+          "media_type": "application/vnd.ollama.image.model",
+          "size_bytes": 5629109120,
+          "digest": "sha256:02d45dc1cf451ba2475ac33b301c2dd8f985abe4c182ce04a1f2f5bf0260278d"
+        },
+        {
+          "media_type": "application/vnd.ollama.image.template",
+          "size_bytes": 13,
+          "digest": "sha256:b507b9c2f6ca642bffcd06665ea7c91f235fd32daeefdf875a0f938db05fb315"
+        },
+        {
+          "media_type": "application/vnd.ollama.image.license",
+          "size_bytes": 11343,
+          "digest": "sha256:50cbab8a892c5f2993b8c7351a99182507472def3b1374558308605d99b86b32"
+        },
+        {
+          "media_type": "application/vnd.ollama.image.params",
+          "size_bytes": 65,
+          "digest": "sha256:9371364b27a52acac9d87f88bd93c9db1174d8d6ec57f6888925cdc1788871ff"
+        },
+        {
+          "media_type": "application/vnd.docker.distribution.manifest.v2+json",
+          "size_bytes": 1088,
+          "digest": "sha256:56671c2ab9385f9cfcb404638e32cd62d88e3501d44822208363c010179a3c90"
+        }
+      ]
+    }
+  },
+  "embedding_model": {
+    "name": "nomic-embed-text:latest",
+    "size": 274302450,
+    "digest": "0a109f422b47e3a30ba2b10eca18548e944e8a23073ee3f3e947efcf3c45e59f"
+  },
+  "effective_request": {
+    "endpoint": "/api/generate",
+    "stream": true,
+    "think": false,
+    "keep_alive": "30m",
+    "options": {
+      "temperature": 0,
+      "seed": 42,
+      "top_k": 40,
+      "top_p": 0.9,
+      "min_p": 0,
+      "presence_penalty": 0,
+      "frequency_penalty": 0,
+      "repeat_penalty": 1.0,
+      "num_ctx": 4096,
+      "num_predict": 256,
+      "num_thread": 8
+    }
+  },
+  "data_note": "Constructed and reviewed by the assistant (Claude Code). No human review of the cases or labels had taken place when the set was frozen. Not an independent benchmark and not representative of real news.",
+  "server_log_truncation_lines_at_start": 0,
+  "system_at_start": {
+    "pressure_level": 1,
+    "memory_free_pct": 76,
+    "swap_used_mib": 4932.25,
+    "swapouts_pages": 3173651,
+    "cpu_speed_limit_pct": 100
+  }
+}
