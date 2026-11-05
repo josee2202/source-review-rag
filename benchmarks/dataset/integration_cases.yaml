@@ -1,0 +1,154 @@
+# Control cases for the integration check of the production judge (not part of the frozen comparison).
+# Written and labelled by the assistant before any of them was run. All content is fictitious, apart from IC-01 and
+# IC-02/03, which reuse sentences of the repository's synthetic documents to test the points that failed in earlier
+# free-text comments: the 60/90 day contrast and the wording of the exceptions.
+#
+# Paragraphs with several claims follow the documented rule: one contradicted claim makes the paragraph contradicted;
+# otherwise a missing material claim makes it insufficient_evidence; supported needs all of them backed.
+split: integration
+review_status: Constructed and labelled by the assistant (Claude Code). No human review.
+scenarios:
+  C1:
+    modality: report_vs_news
+    passages:
+      A:
+        source: normativa_sintetica_pd.pdf · p. 1
+        text: >-
+          La entidad considerará que una exposición está en situación de default cuando el deudor acumule más de 90 días
+          de impago en una obligación significativa o cuando se considere improbable que pague sus obligaciones sin
+          recurrir a la ejecución de garantías.
+      B:
+        source: normativa_sintetica_pd.pdf · p. 1
+        text: >-
+          La tasa media de default a largo plazo utilizada para calibrar la PD se calculará con un periodo de observación
+          de al menos cinco años. Si la entidad dispone de un histórico más largo y relevante, deberá utilizarlo.
+    cases:
+      - id: IC-01
+        claim: Una exposición entra en default con más de 60 días de impago.
+        passage_order: [B, A]
+        label: contradicted
+        evidence: [A]
+        quote: más de 90 días de impago
+        required_values: ["60", "90"]
+        critical: true
+        tags: [days_60_90, number]
+        rationale: La guía fija más de 90 días de impago, no 60.
+  C2:
+    modality: text_vs_text
+    passages:
+      A:
+        source: resumen_plan_movilidad.txt · párr. 4
+        text: >-
+          La zona de bajas emisiones entrará en vigor el 1 de septiembre de 2027 y afectará únicamente al distrito centro.
+          Los vehículos sin etiqueta ambiental no podrán acceder, salvo los de residentes y los de personas con movilidad
+          reducida.
+      B:
+        source: resumen_plan_movilidad.txt · párr. 5
+        text: >-
+          El ayuntamiento creará una tarjeta única de transporte que permitirá usar autobús y bicicleta pública con el
+          mismo abono.
+    cases:
+      - id: IC-02
+        claim: >-
+          Los vehículos sin etiqueta ambiental no podrán entrar en el distrito centro, con excepción de los de residentes
+          y los de personas con movilidad reducida.
+        passage_order: [A, B]
+        label: supported
+        evidence: [A]
+        quote: salvo los de residentes y los de personas con movilidad reducida
+        tags: [exceptions]
+        rationale: El pasaje enumera las dos excepciones. Un comentario libre anterior afirmó que no se mencionaban.
+      - id: IC-03
+        claim: Los vehículos sin etiqueta ambiental no podrán entrar en el distrito centro, sin ninguna excepción.
+        passage_order: [B, A]
+        label: contradicted
+        evidence: [A]
+        quote: salvo los de residentes y los de personas con movilidad reducida
+        critical: true
+        tags: [exceptions, scope]
+        rationale: El pasaje sí prevé excepciones para residentes y personas con movilidad reducida.
+  C3:
+    modality: text_vs_text
+    passages:
+      A:
+        source: memoria_monteluz.txt · párr. 1
+        text: >-
+          El centro de salud de Monteluz atendió 18.000 consultas en 2024. Abre de lunes a sábado y cuenta con seis
+          consultas de medicina general.
+      B:
+        source: memoria_monteluz.txt · párr. 2
+        text: >-
+          El centro ofrece fisioterapia desde 2022, con dos profesionales. Las citas se solicitan por teléfono o en la
+          aplicación municipal.
+    cases:
+      - id: IC-04
+        claim: >-
+          El centro de salud de Monteluz atendió 18.000 consultas en 2024, cuenta con ocho consultas de medicina general y
+          abrirá una unidad de pediatría en 2026.
+        passage_order: [A, B]
+        label: contradicted
+        evidence: [A]
+        quote: seis consultas de medicina general
+        critical: true
+        tags: [multi_claim, correct_contradicted_unsupported]
+        rationale: Las 18.000 consultas son correctas, ocho contradice las seis del pasaje y la pediatría no aparece.
+      - id: IC-05
+        claim: El centro de salud de Monteluz atendió 18.000 consultas en 2024 y abrirá una unidad de pediatría en 2026.
+        passage_order: [A, B]
+        label: insufficient_evidence
+        critical: true
+        tags: [multi_claim, correct_unsupported]
+        rationale: Las consultas están respaldadas; la pediatría carece de respaldo, pero nada la desmiente.
+      - id: IC-06
+        claim: El centro de salud de Monteluz abre de lunes a sábado y ofrece fisioterapia con dos profesionales.
+        passage_order: [B, A]
+        label: supported
+        evidence: [A, B]
+        tags: [multi_claim, all_supported]
+        rationale: Cada afirmación está respaldada por un pasaje distinto.
+      - id: IC-07
+        claim: El centro de salud de Monteluz atendió 18.000 consultas en 2024.
+        passage_order: [A, B]
+        label: supported
+        evidence: [A]
+        quote: atendió 18.000 consultas en 2024
+        tags: [irrelevant_omission]
+        rationale: Omitir el horario y las consultas de medicina general no cambia lo que afirma el fragmento.
+  C4:
+    modality: news_vs_newsletter
+    passages:
+      A:
+        source: El Correo de Arenales, 14/02/2025
+        text: >-
+          La Fundación Arenales entregó el viernes 40 becas de estudio a alumnos de bachillerato. Cada beca está dotada con
+          1.500 euros.
+      B:
+        source: Diario de Sierra Alta, 15/02/2025
+        text: >-
+          El ayuntamiento de Sierra Alta aprobó el presupuesto de 2025, que asciende a 12 millones de euros, con los votos
+          del equipo de gobierno.
+    cases:
+      - id: IC-08
+        claim: La Fundación Arenales entregó 40 becas de estudio dotadas con 1.500 euros cada una.
+        passage_order: [A, B]
+        label: supported
+        evidence: [A]
+        tags: [simple_control]
+        rationale: El pasaje da el número de becas y su dotación.
+      - id: IC-09
+        claim: El presupuesto de Sierra Alta para 2025 asciende a 21 millones de euros.
+        passage_order: [A, B]
+        label: contradicted
+        evidence: [B]
+        quote: 12 millones de euros
+        required_values: ["21", "12"]
+        critical: true
+        tags: [simple_control, number]
+        rationale: El presupuesto es de 12 millones, no de 21.
+      - id: IC-10
+        claim: La Fundación Arenales ampliará sus becas a estudiantes universitarios el próximo curso.
+        passage_order: [B, A]
+        label: insufficient_evidence
+        critical: true
+        tags: [simple_control, lexical_distractor]
+        rationale: La fundación y las becas aparecen, pero nada dice sobre universitarios ni sobre el próximo curso.
