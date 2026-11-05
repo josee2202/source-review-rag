@@ -628,10 +628,10 @@ def update_document(results: dict, protocol: dict, doc: Path) -> list:
     text = doc.read_text("utf-8")
     updated = []
     for name, build in BLOCKS.items():
-        pattern = re.compile(rf"(<!-- BEGIN GENERATED: {name} -->\n).*?(\n<!-- END GENERATED: {name} -->)", re.S)
+        pattern = re.compile(rf"(<!-- BEGIN GENERATED: {name} -->\n).*?(<!-- END GENERATED: {name} -->)", re.S)
         if pattern.search(text):
             content = build(results, protocol)
-            text = pattern.sub(lambda m: m.group(1) + content + m.group(2), text)
+            text = pattern.sub(lambda m: m.group(1) + content + "\n" + m.group(2), text)
             updated.append(name)
     doc.write_text(text, "utf-8")
     return updated
