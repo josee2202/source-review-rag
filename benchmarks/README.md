@@ -9,12 +9,13 @@ The `tests/test_benchmark.py` tests of the harness do run in CI, with no models.
 | Path | What it is |
 |---|---|
 | `protocol.yaml` | Models, request parameters, judge prompt, limits, order and selection rule |
-| `protocol.lock.json` | SHA-256 of the protocol and the datasets, stored before any evaluation case reached a model |
+| `protocol.lock.json` | SHA-256 of the protocol and the datasets, stored before any model answered an evaluation case |
 | `dataset/eval_cases.yaml` | 30 evaluation cases, written and labelled by the assistant |
 | `dataset/dev_cases.yaml` | 6 development cases, 3 of them used for the pilot |
 | `dataset/e2e_examples.yaml` | One document per mode for the end-to-end stage |
 | `run_benchmark.py` | Resumable runner |
 | `build_report.py` | Metrics, CSV, chart and the tables of the document, from saved results only |
+| `check_app_comments.py` | Follow-up outside the frozen protocol: the app's own comment path after turning thinking off |
 | `results/<run_id>/` | One run: see below |
 
 ## Reproduce or resume
@@ -37,6 +38,18 @@ The runner keeps the machine awake with `caffeinate` for as long as it lives, ru
 generative model loaded, and stops at the model-time budget in the protocol. The end-to-end index goes to a temporary
 directory, never to `qdrant_storage/`.
 
+## The published document
+
+The document in `docs/` was generated with:
+
+```bash
+.venv/bin/python benchmarks/check_app_comments.py --run-id 2026-11-05_app-comments-followup
+.venv/bin/python benchmarks/build_report.py --run-id 2026-11-05_protocol-v1 --comments-run-id 2026-11-05_app-comments-followup
+```
+
+The first command is resumable by model and mode. It runs nothing from the frozen protocol and changes none of its results. A test
+checks that the tables in the document are exactly what `build_report.py` generates from the saved results.
+
 ## Files in a run
 
 | File | Content |
@@ -49,5 +62,6 @@ directory, never to `qdrant_storage/`.
 | `resources.jsonl` | Telemetry every 5 s: runner RSS, memory pressure, free memory, swap, CPU speed limit |
 | `state.json` | Cases completed, failed and not executed; model time used |
 | `metrics.json`, `summary.csv` | Computed by `build_report.py` |
+| `comments.jsonl` | Follow-up only: the comments, their times and the text checks |
 
 Expected labels are not stored with the answers: they are joined from the dataset only at analysis time.

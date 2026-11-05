@@ -14,6 +14,8 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "benchmarks"))
 
 import bench_core as core  # noqa: E402
+import build_report as report  # noqa: E402
+import check_app_comments as checker  # noqa: E402
 import run_benchmark as runner  # noqa: E402
 from bench_ollama import OllamaClient  # noqa: E402
 
@@ -425,6 +427,65 @@ def test_the_deadline_covers_the_whole_request_and_closes_the_connection(fake_se
     assert result["status"] == "timeout"
     assert 0.4 < result["wall_s"] < 3
     assert _Handler.disconnected.wait(5), "the server must see the connection closed: that is what cancels the work"
+
+
+# * Report and selection rule
+# * ===========================================================================
+RUN_DIR = ROOT / "benchmarks/results/2026-11-05_protocol-v1"
+COMMENTS_RUN = ROOT / "benchmarks/results/2026-11-05_app-comments-followup/comments.jsonl"
+
+
+def ranked(**models):
+    """Each model: (false supports, macro-F1, correct, critical) for pass 1 and for pass 2."""
+    entry = lambda v: {"quality": {"attempted": 30, "false_support": v[0], "macro_f1": v[1], "correct": v[2],
+                                   "critical_false_support": v[3]},
+                       "latency": {"warm_wall_s": {"median": 20.0}}}
+    return {"aliases": list(models), "passes": [1, 2], "planned_per_pass": 30,
+            "models": {a: {"passes": {1: entry(p1), 2: entry(p2)}} for a, (p1, p2) in models.items()}}
+
+
+def test_selection_rule_names_no_winner_if_the_order_flips_between_passes():
+    outcome = report.apply_selection_rule(ranked(A=((0, .90, 27, 0), (0, .95, 28, 0)), B=((1, .97, 29, 1), (0, 1.0, 30, 0))), PROTOCOL)
+    assert outcome["ranking_primary"] == ["A", "B"] and outcome["flips_between_passes"]
+    assert outcome["robust_winner"] is None and outcome["keep_comments_off_by_default"]
+
+
+def test_selection_rule_names_no_winner_for_one_case_with_the_same_critical_errors():
+    outcome = report.apply_selection_rule(ranked(A=((1, .90, 27, 1), (1, .90, 27, 1)), B=((2, .87, 26, 1), (2, .87, 26, 1))), PROTOCOL)
+    assert not outcome["flips_between_passes"] and outcome["robust_winner"] is None
+
+
+def test_selection_rule_names_a_winner_only_for_a_clear_stable_gap():
+    outcome = report.apply_selection_rule(ranked(A=((0, .95, 28, 0), (0, .95, 28, 0)), B=((8, .50, 15, 0), (8, .50, 15, 0))), PROTOCOL)
+    assert outcome["robust_winner"] == "A" and not outcome["keep_comments_off_by_default"]
+
+
+def test_list_numbers_do_not_count_as_figures():
+    """Comment of EV-23: the "3." of a numbered list passed as the "3 %" of the claim."""
+    text = checker.without_list_markers("1.  El tráfico creció un 7 %.\n2) Sube.\n3. Baja un 5 %.")
+    assert core.value_mentioned("7", text) and not core.value_mentioned("3", text)
+    assert core.numbers_not_in_inputs(text, "7 % y 5 %") == []
+
+
+def test_followup_table_keeps_denominators_and_the_first_request_apart():
+    comment = {"numbers_not_in_inputs": [], "capitalized_not_in_inputs": []}
+    row = {"alias": "4B", "modality": "text_vs_text", "total_s": 100.0, "comments": [
+        {**comment, "comment": "a", "wall_s": 50.0, "first_after_load": True, "values_present": None},
+        {**comment, "comment": None, "wall_s": 20.0, "first_after_load": False, "values_present": False},
+        {**comment, "comment": "b", "wall_s": 30.0, "first_after_load": False, "values_present": True,
+         "numbers_not_in_inputs": ["9"]}]}
+    text = report.block_app_comments_followup({"comments_followup": [row]}, PROTOCOL)
+    assert "| 2/3 |" in text and "50.0 / 25.0" in text and "| 1/2 |" in text and "| 1/3 |" in text
+
+
+def test_document_tables_are_exactly_those_generated_from_the_saved_results(monkeypatch):
+    monkeypatch.setattr(report, "RUN_DIR", RUN_DIR, raising=False)
+    results = report.compute(RUN_DIR, PROTOCOL)
+    results["comments_followup"] = core.read_jsonl(COMMENTS_RUN)
+    document = (ROOT / "docs/model-comparison.md").read_text("utf-8")
+    assert "_PENDING" not in document
+    for name, build in report.BLOCKS.items():
+        assert f"<!-- BEGIN GENERATED: {name} -->\n{build(results, PROTOCOL)}\n<!-- END GENERATED: {name} -->" in document, name
 
 
 # * Published results

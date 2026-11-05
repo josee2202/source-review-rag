@@ -17,6 +17,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
+from check_app_comments import without_list_markers  # noqa: E402
 from bench_core import (BENCH_DIR, LABELS, NO_ANSWER, ROOT, capitalized_not_in_inputs, latency_metrics,  # noqa: E402
                         load_cases, load_protocol, median, numbers_not_in_inputs, percentile_nearest_rank,
                         quality_metrics, read_jsonl, score_row, value_mentioned)
@@ -242,9 +243,9 @@ def _legacy(rows, cases):
             continue
         case = cases[row["case_id"]]
         inputs = case["claim"] + "\n" + "\n".join(p["text"] + " " + p["source"] for p in case["passages"])
-        text = row["raw_response"]
+        text = without_list_markers(row["raw_response"])  # "3." in a numbered list is neither a figure nor the value 3
         table.append({"case_id": row["case_id"], "expected": case["label"], "claim": case["claim"], "status": row["status"],
-                      "wall_s": row["wall_s"], "output_tokens": row.get("output_tokens"), "comment": text,
+                      "wall_s": row["wall_s"], "output_tokens": row.get("output_tokens"), "comment": row["raw_response"],
                       "values_named": all(value_mentioned(v, text) for v in case["required_values"]) if case["required_values"] else None,
                       "required_values": case["required_values"],
                       "numbers_not_in_inputs": numbers_not_in_inputs(text, inputs),
@@ -517,6 +518,12 @@ def block_legacy(results, protocol):
                   "Capitalised words absent from the inputs"], rows)
 
 
+def inherited_parameters(text) -> str:
+    """Ollama pads these with spaces and lists them in no fixed order."""
+    lines = sorted(" ".join(line.split()) for line in (text or "").splitlines() if line.strip())
+    return "; ".join(lines) or "none"
+
+
 def block_environment(results, protocol):
     m = results["manifest"]
     hardware = m["hardware"]
@@ -525,13 +532,13 @@ def block_environment(results, protocol):
         d = m["models"][alias]
         model_rows.append([alias, f"`{d['tag']}`", f"`{d['digest'][:12]}`", d["details"].get("family"), d["details"].get("parameter_size"),
                            d["details"].get("quantization_level"), d.get("context_length"), ", ".join(d.get("capabilities") or []),
-                           (d.get("inherited_parameters") or "none").replace("\n", "; ").replace("  ", "").strip() or "none",
+                           inherited_parameters(d.get("inherited_parameters")),
                            f"renderer {d['renderer']}" if d.get("renderer") else f"template `{d['template_sha256'][:12]}`"])
     t = results["timeline"]
     state = results["state"]
     lines = [f"- **Machine:** {hardware['cpu']}, {hardware['physical_cores']} cores / {hardware['logical_cores']} threads, "
              f"{hardware['memory_gib']:.0f} GiB RAM, {hardware['os']}. The system also reports "
-             f"{' and '.join(hardware['gpus_reported_by_system'])}; Ollama does not use them on Intel Macs.",
+             f"{' and '.join(hardware['gpus_reported_by_system'])}; Ollama did not use them in this run.",
              f"- **Ollama:** {m['ollama_version']}. Backend according to its log: `library={m['backend'].get('library')}`; `/api/ps` reported "
              f"`size_vram` = 0 on every load, which is what `ollama ps` shows as 100 % CPU.",
              f"- **Run:** `{m['run_id']}`, protocol v{m['protocol_version']}, commit `{m['commit'][:12]}`, frozen: {'yes' if m['frozen'] else 'no'}. "
@@ -556,6 +563,9 @@ def block_pilot(results, protocol):
     return table(["Model", "Pilot statuses", "Pilot wall (s)", "Cancel check", "Longest eval prompt, tokens", "Decision"], rows)
 
 
+LABEL_WIDTH = 175  # approximate width of a point label in the figure
+
+
 def render_figure(results, protocol, path: Path) -> bool:
     """Quality against waiting time. Only drawn if at least two models completed the primary pass."""
     primary = protocol["selection"]["primary_pass"]
@@ -571,7 +581,7 @@ def render_figure(results, protocol, path: Path) -> bool:
         return False
     target = protocol["selection"]["latency_target_s"]
     width, height, left, right, top, bottom = 760, 420, 64, 24, 64, 56
-    x_max = max(max(p["x"] for p in points) * 1.25, target * 1.2)
+    x_max = max(max(p["x"] for p in points) * 1.5, target * 1.2)
     sx = lambda v: left + v / x_max * (width - left - right)
     sy = lambda v: height - bottom - v * (height - top - bottom)
     css = ":root{--bg:#fcfcfb;--ink:#0b0b0b;--muted:#52514e;--grid:#e4e3df;"
@@ -588,7 +598,7 @@ def render_figure(results, protocol, path: Path) -> bool:
     for alias in results["aliases"]:
         parts.append(f'<circle cx="{legend_x + 5}" cy="44" r="5" fill="var(--s{alias})"/><text x="{legend_x + 15}" y="48" class="m">{alias}</text>')
         legend_x += 56
-    parts.append(f'<circle cx="{legend_x + 5}" cy="44" r="4" fill="none" stroke="var(--muted)" stroke-width="2"/><text x="{legend_x + 15}" y="48" class="m">hollow: pass 2</text>')
+    parts.append(f'<circle cx="{legend_x + 5}" cy="44" r="4" fill="none" stroke="var(--muted)" stroke-width="2"/><text x="{legend_x + 15}" y="48" class="m">hollow: pass 2; labels describe pass 1</text>')
     for tick in (0, 0.25, 0.5, 0.75, 1):
         parts.append(f'<line x1="{left}" x2="{width - right}" y1="{sy(tick):.1f}" y2="{sy(tick):.1f}" stroke="var(--grid)" stroke-width="1"/>')
         parts.append(f'<text x="{left - 8}" y="{sy(tick) + 4:.1f}" text-anchor="end" class="m">{tick:g}</text>')
@@ -598,7 +608,7 @@ def render_figure(results, protocol, path: Path) -> bool:
         parts.append(f'<text x="{sx(tick):.1f}" y="{height - bottom + 20}" text-anchor="middle" class="m">{tick}</text>')
         tick += step
     parts.append(f'<line x1="{sx(target):.1f}" x2="{sx(target):.1f}" y1="{top}" y2="{height - bottom}" stroke="var(--muted)" stroke-width="1" stroke-dasharray="4 4"/>')
-    parts.append(f'<text x="{sx(target) + 6:.1f}" y="{top + 12}" class="m">{target} s preference</text>')
+    parts.append(f'<text x="{sx(target) + 6:.1f}" y="{height - bottom - 8}" class="m">{target} s preference</text>')
     parts.append(f'<text x="{(left + width - right) / 2}" y="{height - 14}" text-anchor="middle" class="m">Median wall time per warm request, seconds (lower is better)</text>')
     parts.append(f'<text transform="translate(16 {(top + height - bottom) / 2}) rotate(-90)" text-anchor="middle" class="m">Macro-F1 over attempted cases (higher is better)</text>')
     for p in sorted(points, key=lambda p: -p["pass"]):
@@ -608,12 +618,34 @@ def render_figure(results, protocol, path: Path) -> bool:
             parts.append(f'<circle cx="{sx(p["x"]):.1f}" cy="{sy(p["y"]):.1f}" r="5" fill="var(--bg)" stroke="var(--s{p["alias"]})" stroke-width="2"/>')
     for p in points:
         if p["pass"] == primary:
-            anchor, dx = ("end", -12) if sx(p["x"]) > width - 170 else ("start", 12)
-            parts.append(f'<text x="{sx(p["x"]) + dx:.1f}" y="{sy(p["y"]) - 8:.1f}" text-anchor="{anchor}">{p["alias"]}: {p["fs"]}/{p["neg"]} false supports</text>')
+            own = [sx(q["x"]) for q in points if q["alias"] == p["alias"]]
+            label_end = max(own) + 12 + LABEL_WIDTH
+            if label_end > width - right or max(own) < sx(target) < label_end:
+                anchor, x = "end", min(own) - 12
+            else:
+                anchor, x = "start", max(own) + 12
+            parts.append(f'<text x="{x:.1f}" y="{sy(p["y"]) + 5:.1f}" text-anchor="{anchor}">{p["alias"]}: {p["fs"]}/{p["neg"]} false supports</text>')
     parts.append("</svg>")
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text("\n".join(parts) + "\n", "utf-8")
     return True
+
+
+def block_app_comments_followup(results, protocol):
+    rows = []
+    for row in results.get("comments_followup", []):
+        comments = row["comments"]
+        warm = [c["wall_s"] for c in comments if not c["first_after_load"]]
+        first = next((c["wall_s"] for c in comments if c["first_after_load"]), None)
+        with_values = [c for c in comments if c["values_present"] is not None]
+        rows.append([row["alias"], row["modality"].replace("_", " "), fraction(sum(1 for c in comments if c["comment"]), len(comments)),
+                     fmt(row["total_s"]), f"{fmt(first)} / {fmt(median(warm))}",
+                     fraction(sum(1 for c in with_values if c["values_present"]), len(with_values)),
+                     fraction(sum(1 for c in comments if c["numbers_not_in_inputs"]), len(comments)),
+                     fraction(sum(1 for c in comments if c["capitalized_not_in_inputs"]), len(comments))])
+    return table(["Model", "Mode", "Non-empty comments", "Whole request, s", "Comment per fragment (first / warm median), s",
+                  "Both values named", "Comments with a figure absent from the inputs",
+                  "Comments with a capitalised word absent from the inputs"], rows)
 
 
 BLOCKS = {"environment": block_environment, "pilot": block_pilot, "overview": block_overview, "confusion": block_confusion,
@@ -621,7 +653,7 @@ BLOCKS = {"environment": block_environment, "pilot": block_pilot, "overview": bl
           "performance": block_performance, "memory": block_memory, "repeatability": block_repeatability, "by_tag": block_by_tag,
           "discordant": block_discordant, "selection": block_selection, "failure_examples": block_failure_examples,
           "e2e_documents": block_e2e_documents, "e2e_outcomes": block_e2e_outcomes, "e2e_fragments": block_e2e_fragments,
-          "legacy": block_legacy}
+          "legacy": block_legacy, "app_comments_followup": block_app_comments_followup}
 
 
 def update_document(results: dict, protocol: dict, doc: Path) -> list:
@@ -642,13 +674,16 @@ def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument("--run-id", required=True)
     parser.add_argument("--results-dir", default=str(BENCH_DIR / "results"))
+    parser.add_argument("--comments-run-id", help="Follow-up run of check_app_comments.py to include, if any")
     parser.add_argument("--doc", default=str(DOC))
     parser.add_argument("--figure", default=str(FIGURE))
     args = parser.parse_args()
     RUN_DIR = Path(args.results_dir) / args.run_id
     protocol = load_protocol()
     results = compute(RUN_DIR, protocol)
-    published = {k: v for k, v in results.items() if k != "manifest"}
+    if args.comments_run_id:
+        results["comments_followup"] = read_jsonl(Path(args.results_dir) / args.comments_run_id / "comments.jsonl")
+    published = {k: v for k, v in results.items() if k not in ("manifest", "comments_followup")}
     (RUN_DIR / "metrics.json").write_text(json.dumps(published, indent=1, ensure_ascii=False, default=str), "utf-8")
     write_summary_csv(results, RUN_DIR / "summary.csv")
     drawn = render_figure(results, protocol, Path(args.figure))
