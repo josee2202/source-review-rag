@@ -6,9 +6,12 @@ llm:
     name: nomic-embed-text
     batch_size: 32        # textos por petición a Ollama; lotes de ~250+ provocan errores en /tokenize
   text:
-    name: llama3.2:1b     # solo para el comentario opcional
-    max_tokens: 512       # límite de tokens generados por comentario; sin él, el modelo de 1B puede entrar en bucle
-    timeout_s: 300        # un comentario que no responde se registra como fallo y no bloquea el resto
+    name: qwen3.5:4b-q4_K_M  # solo para el análisis opcional, desactivado por defecto; no se descarga solo
+    max_tokens: 256       # como el juez evaluado; una salida cortada se muestra como resultado no validado
+    timeout_s: 120        # por fragmento, incluida la carga del modelo; se cancela y no se reintenta
+    num_ctx: 4096         # como el juez evaluado; ver juez.limite_tokens_prompt
+    keep_alive: 5m        # tiempo que Ollama mantiene el modelo cargado tras la última petición
+    # num_thread: 8       # sin definir, Ollama elige; ajústalo con LLM_NUM_THREAD si hace falta
 chunking:                 # forma parte de la huella del índice: cambiarlo fuerza una indexación nueva
   reference: {size: 800, overlap: 200}
   review: {size: 600, overlap: 200}

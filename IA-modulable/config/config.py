@@ -25,6 +25,8 @@ if os.getenv("LLM_MAX_TOKENS"):
     cfg_param['llm']['text']['max_tokens'] = int(os.getenv("LLM_MAX_TOKENS"))
 if os.getenv("LLM_TIMEOUT_S"):
     cfg_param['llm']['text']['timeout_s'] = int(os.getenv("LLM_TIMEOUT_S"))
+if os.getenv("LLM_NUM_THREAD"):
+    cfg_param['llm']['text']['num_thread'] = int(os.getenv("LLM_NUM_THREAD"))
 if os.getenv("QDRANT_LOCATION"):
     cfg_param['qdrant']['location'] = os.getenv("QDRANT_LOCATION")
 
