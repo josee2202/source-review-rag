@@ -28,6 +28,9 @@ jobs:
     name: Three modes with real embeddings (Ollama + embedded Qdrant, no LLM)
     runs-on: ubuntu-latest
     timeout-minutes: 20
+    defaults:
+      run:
+        shell: bash
     steps:
       - uses: actions/checkout@v5
       - uses: actions/setup-python@v6
@@ -36,17 +39,37 @@ jobs:
           cache: pip
           cache-dependency-path: requirements*.txt
       - run: pip install -r requirements.txt
-      - name: Install Ollama and the embedding model
+      - name: Install Ollama
+        run: curl -fsSL https://ollama.com/install.sh | OLLAMA_VERSION=0.40.11 sh
+      - name: Start Ollama
+        # The installer only starts a service when systemd is running, so it cannot be relied on here
         run: |
-          curl -fsSL https://ollama.com/install.sh | OLLAMA_VERSION=0.40.11 sh
-          for i in $(seq 1 30); do curl -sf localhost:11434/api/version && break; sleep 1; done
-          ollama pull nomic-embed-text
+          if ! curl -sf localhost:11434/api/version > /dev/null; then
+            nohup ollama serve > ollama.log 2>&1 &
+          fi
+          for i in $(seq 1 60); do
+            curl -sf localhost:11434/api/version && exit 0
+            sleep 1
+          done
+          echo "::error::Ollama did not answer on port 11434 within 60 s"
+          exit 1
+      - name: Download the embedding model
+        run: ollama pull nomic-embed-text
       - name: Start the API
         run: |
           nohup uvicorn api_rag:app --app-dir IA-modulable --port 8010 > api.log 2>&1 &
-          for i in $(seq 1 60); do curl -sf localhost:8010/colecciones && break; sleep 1; done
+          for i in $(seq 1 60); do
+            curl -sf localhost:8010/colecciones && exit 0
+            sleep 1
+          done
+          echo "::error::The API did not answer on port 8010 within 60 s"
+          exit 1
       - name: Run the end-to-end check
         run: python tests/smoke_e2e.py
-      - name: API log
+      - name: Service logs
         if: always()
-        run: cat api.log
+        run: |
+          for log in ollama.log api.log; do
+            echo "--- $log"
+            if [ -f "$log" ]; then cat "$log"; else echo "not created: this service was not started by this job"; fi
+          done
